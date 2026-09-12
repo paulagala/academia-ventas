@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/* ── Galador — dirección visual ──
+   Híbrida estructurada: consultora profesional + creadora de contenido.
+   Fondo claro (crema/sand), burdeos solo para acción, sage como escenario,
+   charcoal solo para texto. Titulares serif (Fraunces), cuerpo sans (Inter). */
+@theme {
+  /* Charcoal = texto y titulares (nunca fondo de sección) */
+  --color-primary: #2b2320;
+  --color-primary-light: #4a3f39;
+  --color-primary-dark: #2b2320;
+
+  /* Teal = sistema / diagnóstico / frescura. Secciones diferenciadas,
+     iconos, formas tras retratos y detalles de apoyo. */
+  --color-secondary: #529492;
+
+  /* Fondos claros */
+  --color-background: #f3ede3; /* crema */
+  --color-surface: #f9f5ee;    /* crema algo más claro para tarjetas */
+  --color-surface-muted: #e7ded0; /* sand */
+
+  /* Texto */
+  --color-text: #2b2320;        /* charcoal */
+  --color-text-muted: #6f6258;  /* charcoal suavizado */
+  --color-muted: #9b8d80;       /* charcoal muy suave / neutro */
+
+  /* Burdeos = acción (CTAs, cifras, citas). Uso escaso y deliberado */
+  --color-accent: #7a1828;
+  --color-accent-hover: #5f121f;
+
+  /* Líneas finas */
+  --color-border: #ddd2c2;
+  --color-line: #d2c6b5;
+
+  /* Esquinas editoriales, ni duras ni redondeadas */
+  --radius-card: 12px;
+  --radius-button: 8px;
+}
+
+/* Fuentes: se mantienen los nombres de variable usados en el código
+   (--font-dm-serif / --font-manrope) pero ahora apuntan a Fraunces / Inter. */
+@theme inline {
+  --font-sans: var(--font-manrope);
+  --font-serif: var(--font-dm-serif);
+}
+
+:root {
+  --shadow-soft: 0 14px 40px rgba(43, 35, 32, 0.07);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* ── Utilidades del sistema ──
+   Se conservan los nombres de clase (.label-mono / .num-mono / .bg-blueprint)
+   para no romper el markup, pero reinterpretados a un lenguaje editorial:
+   etiquetas en sans con mayúsculas y tracking, en lugar de monoespaciada. */
+
+.label-mono {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.num-mono {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+/* Antes era una retícula de plano; ahora neutra para un fondo limpio. */
+.bg-blueprint {
+  background-image: none;
+}
+
+.hairline {
+  border-color: var(--color-line);
+}
+
+/* Cinta de logos que se desplaza hacia la izquierda en bucle */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee-left {
+  animation: marquee-left 28s linear infinite;
+}
