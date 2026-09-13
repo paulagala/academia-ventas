@@ -1,71 +1,37 @@
 import Link from "next/link";
 
-const columns = [
-  {
-    title: "Formación",
-    links: [
-      { href: "/cursos", label: "Cursos" },
-      { href: "/formacion-ventas-b2b", label: "Ventas B2B" },
-      { href: "/formacion-ventas-b2c", label: "Ventas B2C" },
-      { href: "/formacion-ventas-para-closers", label: "Para Closers" },
-    ],
-  },
-  {
-    title: "Recursos",
-    links: [
-      { href: "/recursos", label: "Todos los recursos" },
-      { href: "/webinar/ventas-consultivas", label: "Masterclass" },
-      { href: "/newsletter", label: "Newsletter" },
-      { href: "/testimonios", label: "Testimonios" },
-    ],
-  },
-  {
-    title: "Estudio",
-    links: [
-      { href: "/sobre-mi", label: "Sobre mí" },
-      { href: "/contacto", label: "Contacto" },
-      { href: "/politica-privacidad", label: "Privacidad" },
-      { href: "/aviso-legal", label: "Aviso legal" },
-    ],
-  },
-];
-
 export default function Footer() {
   return (
-    <footer className="bg-secondary text-surface">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
+    <footer className="bg-background border-t border-line">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
           <div>
-            <div className="text-surface font-bold text-lg mb-2 font-[family-name:var(--font-dm-serif)]">
-              AcademiaVentas
+            <div className="text-lg font-semibold text-primary mb-3 font-[family-name:var(--font-dm-serif)]">
+              Paula Gallego
             </div>
-            <div className="label-mono text-surface/50 mb-4">est. consultiva</div>
-            <p className="text-sm leading-relaxed text-surface/70">
-              Venta consultiva con diagnóstico, estructura y criterio. Sin presión.
+            <p className="text-sm text-text-muted leading-relaxed">
+              Sistemas comerciales que escalan sin perder el foco en el cliente.
             </p>
           </div>
-          {columns.map((col) => (
-            <div key={col.title}>
-              <div className="label-mono text-surface/50 mb-4 pb-2 border-b border-surface/15">
-                {col.title}
-              </div>
-              <ul className="flex flex-col gap-2.5 text-sm text-surface/70">
-                {col.links.map((l) => (
-                  <li key={l.href}>
-                    <Link href={l.href} className="hover:text-surface transition">
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-[0.14em] text-muted mb-4">Navegación</div>
+            <ul className="flex flex-col gap-2.5 text-sm text-text-muted">
+              <li><Link href="/" className="hover:text-primary transition">Inicio</Link></li>
+              <li><Link href="/consultoria-comercial" className="hover:text-primary transition">Consultoría comercial</Link></li>
+              <li><Link href="/sistema-de-ventas" className="hover:text-primary transition">Sistema de ventas</Link></li>
+              <li><Link href="/entrenamiento-comercial" className="hover:text-primary transition">Entrenamiento comercial</Link></li>
+            </ul>
+          </div>
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-[0.14em] text-muted mb-4">Legal</div>
+            <ul className="flex flex-col gap-2.5 text-sm text-text-muted">
+              <li><Link href="/aviso-legal" className="hover:text-primary transition">Aviso legal</Link></li>
+              <li><Link href="/politica-privacidad" className="hover:text-primary transition">Política de privacidad</Link></li>
+            </ul>
+          </div>
         </div>
-        <div className="border-t border-surface/15 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <span className="label-mono text-surface/40">
-            © {new Date().getFullYear()} AcademiaVentas
-          </span>
-          <span className="label-mono text-surface/40">Madrid · Online</span>
+        <div className="border-t border-line pt-6 text-xs text-muted">
+          © {new Date().getFullYear()} Paula Gallego · Galador. Todos los derechos reservados.
         </div>
       </div>
     </footer>

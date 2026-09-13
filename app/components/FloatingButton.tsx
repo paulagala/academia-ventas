@@ -3,11 +3,11 @@ import Link from "next/link";
 export default function FloatingButton() {
   return (
     <Link
-      href="/contacto"
-      className="label-mono fixed bottom-6 right-6 bg-text text-surface px-5 py-3 rounded-[var(--radius-button)] shadow-[var(--shadow-soft)] hover:bg-accent transition flex items-center gap-2 z-40 border border-text"
+      href="/#formulario"
+      className="fixed bottom-6 right-6 bg-accent text-surface px-5 py-3 rounded-[var(--radius-button)] shadow-[var(--shadow-soft)] hover:bg-accent-hover transition flex items-center gap-2 text-sm font-semibold z-40"
     >
-      <span className="w-1.5 h-1.5 bg-accent rounded-full" />
-      Contactar
+      <span className="w-1.5 h-1.5 bg-surface/80 rounded-full" />
+      Solicitar diagnóstico
     </Link>
   );
 }
