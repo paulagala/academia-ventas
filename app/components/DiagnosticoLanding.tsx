@@ -456,7 +456,7 @@ function MiniFooter() {
             </ul>
           </div>
           <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.14em] text-[#7A6F66] mb-4">Recursos SEO</div>
+            <div className="text-xs font-semibold uppercase tracking-[0.14em] text-[#7A6F66] mb-4">Especialidades</div>
             <ul className="flex flex-col gap-2.5 text-sm text-[#7A6F66]">
               <li><a href="/consultoria-comercial" className="hover:text-[#2B231F] transition">Consultoría comercial</a></li>
               <li><a href="/sistema-de-ventas" className="hover:text-[#2B231F] transition">Sistema de ventas</a></li>
