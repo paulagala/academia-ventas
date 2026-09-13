@@ -1,11 +1,4 @@
-import type { Metadata } from "next";
 import LeadForm from "./LeadForm";
-
-export const metadata: Metadata = {
-  title: "Sistema comercial escalable para negocios de servicios online",
-  description:
-    "Ayudamos a negocios de servicios online que ya venden a construir un sistema comercial capaz de escalar sin perder calidad en la venta.",
-};
 
 // ── CTA reutilizable ──
 function Cta({
@@ -28,7 +21,6 @@ function Cta({
   );
 }
 
-// ── 1. Barra superior (filtro) ──
 function TopBanner() {
   return (
     <div className="bg-[#61948F] text-[#FAFAFA] text-center text-xs sm:text-sm px-4 py-2.5">
@@ -42,14 +34,13 @@ function TopBanner() {
   );
 }
 
-// ── 2. Navbar ──
 function Header() {
   return (
     <header className="sticky top-0 z-40 bg-[#F3EEE4]/90 backdrop-blur border-b border-[#DBD5C9]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <span className="text-lg font-semibold text-[#2B231F] font-[family-name:var(--font-dm-serif)]">
+        <a href="/" className="text-lg font-semibold text-[#2B231F] font-[family-name:var(--font-dm-serif)]">
           Paula Gallego
-        </span>
+        </a>
         <nav className="hidden md:flex items-center gap-8 text-sm text-[#7A6F66]">
           <a href="#servicios" className="hover:text-[#2B231F] transition">Servicios</a>
           <a href="#resultados" className="hover:text-[#2B231F] transition">Resultados</a>
@@ -64,7 +55,6 @@ function Header() {
   );
 }
 
-// ── 3. Hero ──
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-[#DBD5C9]">
@@ -89,7 +79,6 @@ function Hero() {
   );
 }
 
-// ── 4. Logos ──
 function Logos() {
   const empresas = [
     { nombre: "Hotlist", logo: "/logo-hotlist.svg" },
@@ -120,7 +109,6 @@ function Logos() {
   );
 }
 
-// ── 5. Resultados ──
 function Resultados() {
   const stats = [
     { big: "x3", label: "en facturación mensual", caso: "Hotlist", detalle: "de 5.000 € a +15.000 €/mes" },
@@ -163,7 +151,6 @@ function Resultados() {
   );
 }
 
-// ── 6. Servicios (3 pilares) ──
 function Servicios() {
   const pilares = [
     {
@@ -208,7 +195,6 @@ function Servicios() {
   );
 }
 
-// ── 7. Lo que no hacemos ──
 function NoHacemos() {
   const items = [
     "No llamamos a los leads por ti.",
@@ -238,12 +224,10 @@ function NoHacemos() {
   );
 }
 
-// ── 8. Quién hay detrás ──
 function QuienDetras() {
   return (
     <section id="sobre-paula" className="py-16 sm:py-24 border-b border-[#DBD5C9] scroll-mt-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        {/* Fotos: principal (vendiendo) grande + laboratorio pequeña */}
         <div className="relative">
           <div className="rounded-2xl overflow-hidden border border-[#DBD5C9] aspect-[4/5] bg-[#E3E5DC]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -298,7 +282,6 @@ function QuienDetras() {
   );
 }
 
-// ── 9. Vídeos / casos de éxito ──
 function Casos() {
   const casos = [
     {
@@ -364,9 +347,7 @@ function Casos() {
   );
 }
 
-// ── 10. Canal de YouTube ──
 function YouTube() {
-  // Sustituye url por el enlace real de cada vídeo cuando lo tengas.
   const canal = "#";
   const videos = [
     { titulo: "Cómo construir un sistema comercial que escale", url: "#" },
@@ -386,10 +367,7 @@ function YouTube() {
               Contenido sobre sistemas comerciales.
             </h2>
           </div>
-          <a
-            href={canal}
-            className="text-[#791E2A] font-semibold text-sm hover:underline whitespace-nowrap"
-          >
+          <a href={canal} className="text-[#791E2A] font-semibold text-sm hover:underline whitespace-nowrap">
             Ver el canal →
           </a>
         </div>
@@ -414,7 +392,6 @@ function YouTube() {
   );
 }
 
-// ── 11. Formulario / candidatura ──
 function FormSection() {
   return (
     <section id="formulario" className="py-16 sm:py-24 bg-[#F3EEE4] scroll-mt-16">
@@ -441,7 +418,6 @@ function FormSection() {
   );
 }
 
-// ── Barra CTA fija (móvil) ──
 function StickyCta() {
   return (
     <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#F3EEE4]/95 backdrop-blur border-t border-[#DBD5C9] px-4 py-3">
@@ -458,7 +434,6 @@ function StickyCta() {
   );
 }
 
-// ── 12. Footer ──
 function MiniFooter() {
   return (
     <footer className="bg-[#F9F5EF] border-t border-[#DBD5C9]">
@@ -481,17 +456,18 @@ function MiniFooter() {
             </ul>
           </div>
           <div>
+            <div className="text-xs font-semibold uppercase tracking-[0.14em] text-[#7A6F66] mb-4">Recursos SEO</div>
+            <ul className="flex flex-col gap-2.5 text-sm text-[#7A6F66]">
+              <li><a href="/consultoria-comercial" className="hover:text-[#2B231F] transition">Consultoría comercial</a></li>
+              <li><a href="/sistema-de-ventas" className="hover:text-[#2B231F] transition">Sistema de ventas</a></li>
+              <li><a href="/entrenamiento-comercial" className="hover:text-[#2B231F] transition">Entrenamiento comercial</a></li>
+            </ul>
+          </div>
+          <div>
             <div className="text-xs font-semibold uppercase tracking-[0.14em] text-[#7A6F66] mb-4">Legal</div>
             <ul className="flex flex-col gap-2.5 text-sm text-[#7A6F66]">
               <li><a href="/politica-privacidad" className="hover:text-[#2B231F] transition">Política de privacidad</a></li>
               <li><a href="/aviso-legal" className="hover:text-[#2B231F] transition">Aviso legal</a></li>
-              <li><a href="#" className="hover:text-[#2B231F] transition">Política de cookies</a></li>
-            </ul>
-          </div>
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.14em] text-[#7A6F66] mb-4">Contacto</div>
-            <ul className="flex flex-col gap-2.5 text-sm text-[#7A6F66]">
-              <li><a href="#formulario" className="hover:text-[#2B231F] transition">Solicitar diagnóstico</a></li>
             </ul>
           </div>
         </div>
@@ -506,7 +482,7 @@ function MiniFooter() {
   );
 }
 
-export default function DiagnosticoComercialPage() {
+export default function DiagnosticoLanding() {
   return (
     <div className="bg-[#F9F5EF] text-[#2B231F] pb-20 lg:pb-0">
       <TopBanner />
