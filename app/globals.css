@@ -13,16 +13,19 @@
   /* Teal = sistema / diagnóstico / frescura. Secciones diferenciadas,
      iconos, formas tras retratos y detalles de apoyo. */
   --color-secondary: #529492;
+  /* El teal claro solo vale como detalle o fondo con texto oscuro: con texto claro
+     encima se queda en 3.3:1. Todo fondo teal con texto claro usa el oscuro (6.9:1). */
+  --color-secondary-dark: #3f5e53;
 
   /* Fondos claros */
   --color-background: #f3ede3; /* crema */
-  --color-surface: #f9f5ee;    /* crema algo más claro para tarjetas */
+  --color-surface: #fffdf9;    /* blanco cálido: la tarjeta se despega del fondo crema */
   --color-surface-muted: #e7ded0; /* sand */
 
   /* Texto */
   --color-text: #2b2320;        /* charcoal */
-  --color-text-muted: #6f6258;  /* charcoal suavizado */
-  --color-muted: #9b8d80;       /* charcoal muy suave / neutro */
+  --color-text-muted: #5a4f48;  /* charcoal suavizado — 6.8:1 sobre crema (AA en texto pequeño) */
+  --color-muted: #6f6154;       /* neutro para etiquetas — el anterior (#9b8d80) se quedaba en 2.8:1 */
 
   /* Burdeos = acción (CTAs, cifras, citas). Uso escaso y deliberado */
   --color-accent: #7a1828;
@@ -46,6 +49,9 @@
 
 :root {
   --shadow-soft: 0 14px 40px rgba(43, 35, 32, 0.07);
+  /* Elevación de tarjeta: sm en reposo, md al pasar por encima. */
+  --shadow-sm: 0 1px 2px rgba(36, 29, 26, 0.06);
+  --shadow-md: 0 4px 16px rgba(36, 29, 26, 0.08);
 }
 
 body {
@@ -53,6 +59,15 @@ body {
   color: var(--color-text);
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ── Foco de teclado ──
+   Sin esto no se ve por dónde va el tabulador y la web es inmanejable
+   sin ratón. Solo aparece en navegación por teclado, no al hacer clic. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 h1, h2, h3, h4 {
@@ -70,7 +85,7 @@ h1, h2, h3, h4 {
   font-family: var(--font-sans), system-ui, sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  font-size: 0.72rem;
+  font-size: 0.8125rem;
   font-weight: 600;
 }
 
@@ -95,4 +110,39 @@ h1, h2, h3, h4 {
 }
 .animate-marquee-left {
   animation: marquee-left 28s linear infinite;
+}
+
+/* ── Saltar al contenido ──
+   Primer enlace de la página: invisible hasta que recibe foco, y entonces
+   aparece arriba a la izquierda. Permite esquivar la navegación con el teclado. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--color-accent);
+  color: #fafafa;
+  font-weight: 600;
+  border-bottom-right-radius: var(--radius-button);
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* ── Movimiento reducido ──
+   Quien lo tenga activado en el sistema (mareos, migrañas, vértigo) no debería
+   ver la cinta de logos desplazándose ni ninguna otra animación. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-marquee-left {
+    animation: none;
+  }
 }

@@ -1,33 +1,51 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { PROGRAM_CONFIG as C } from "./config";
 
+// ── El reloj, leído como lo que es: un sistema externo a React ──
+// Antes esto era un useEffect que hacía setState nada más montar, y eso
+// provoca un render en cascada (React lo avisa desde la 19). useSyncExternalStore
+// es la pieza pensada justo para esto: se suscribe al tic del reloj y el
+// componente lee la hora durante el render, sin estado intermedio.
+
+/** Un aviso por segundo. Devuelve la función para cancelar la suscripción. */
+function suscribirseAlReloj(avisar: () => void) {
+  const id = setInterval(avisar, 1000);
+  return () => clearInterval(id);
+}
+
+/** La hora redondeada al segundo: si se llama dos veces dentro del mismo
+ *  render tiene que devolver lo mismo, o React entra en bucle de renders. */
+function ahoraEnElCliente() {
+  return Math.floor(Date.now() / 1000) * 1000;
+}
+
+/** En el servidor no hay un «ahora» que valga: el HTML se genera una vez y se
+ *  sirve a todo el mundo. Devolviendo null, el primer pintado sale a cero en
+ *  servidor y en cliente —misma marca, sin desajuste de hidratación— y la
+ *  cuenta real aparece en cuanto la página cobra vida en el navegador. */
+function sinReloj() {
+  return null;
+}
+
+const PARADO = { days: 0, hours: 0, minutes: 0, seconds: 0, expired: false };
+
 function useCountdown(deadline: string | null) {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0, expired: false });
+  const ahora = useSyncExternalStore(suscribirseAlReloj, ahoraEnElCliente, sinReloj);
 
-  useEffect(() => {
-    if (!deadline) return;
-    const target = new Date(deadline).getTime();
+  if (!deadline || ahora === null) return PARADO;
 
-    function calc() {
-      const diff = target - Date.now();
-      if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0, expired: true };
-      return {
-        days: Math.floor(diff / 86400000),
-        hours: Math.floor((diff % 86400000) / 3600000),
-        minutes: Math.floor((diff % 3600000) / 60000),
-        seconds: Math.floor((diff % 60000) / 1000),
-        expired: false,
-      };
-    }
+  const diff = new Date(deadline).getTime() - ahora;
+  if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0, expired: true };
 
-    setTimeLeft(calc());
-    const interval = setInterval(() => setTimeLeft(calc()), 1000);
-    return () => clearInterval(interval);
-  }, [deadline]);
-
-  return timeLeft;
+  return {
+    days: Math.floor(diff / 86400000),
+    hours: Math.floor((diff % 86400000) / 3600000),
+    minutes: Math.floor((diff % 3600000) / 60000),
+    seconds: Math.floor((diff % 60000) / 1000),
+    expired: false,
+  };
 }
 
 function TopBanner() {

@@ -1,5 +1,16 @@
 import Link from "next/link";
 
+// Enlace de footer con 44px de área táctil (el texto solo ocupa ~20px de alto).
+function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <li>
+      <Link href={href} className="inline-flex items-center min-h-11 hover:text-primary transition">
+        {children}
+      </Link>
+    </li>
+  );
+}
+
 export default function Footer() {
   return (
     <footer className="bg-background border-t border-line">
@@ -7,31 +18,35 @@ export default function Footer() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
           <div>
             <div className="text-lg font-semibold text-primary mb-3 font-[family-name:var(--font-dm-serif)]">
-              Paula Gallego
+              Galador
             </div>
+            {/* El nombre propio se mantiene aquí: la marca es Galador, pero
+                «Paula Gallego» tiene recorrido de búsqueda y firma el servicio. */}
             <p className="text-sm text-text-muted leading-relaxed">
-              Sistemas comerciales que escalan sin perder el foco en el cliente.
+              Consultoría comercial de Paula Gallego. Sistemas comerciales que escalan sin perder el
+              foco en el cliente.
             </p>
           </div>
           <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.14em] text-muted mb-4">Navegación</div>
-            <ul className="flex flex-col gap-2.5 text-sm text-text-muted">
-              <li><Link href="/" className="hover:text-primary transition">Inicio</Link></li>
-              <li><Link href="/consultoria-comercial" className="hover:text-primary transition">Consultoría comercial</Link></li>
-              <li><Link href="/sistema-de-ventas" className="hover:text-primary transition">Sistema de ventas</Link></li>
-              <li><Link href="/entrenamiento-comercial" className="hover:text-primary transition">Entrenamiento comercial</Link></li>
+            <div className="text-sm font-semibold uppercase tracking-[0.14em] text-muted mb-2">Navegación</div>
+            <ul className="flex flex-col text-sm text-text-muted">
+              <FooterLink href="/">Inicio</FooterLink>
+              <FooterLink href="/consultoria-comercial">Consultoría comercial</FooterLink>
+              <FooterLink href="/sistema-de-ventas">Sistema de ventas</FooterLink>
+              <FooterLink href="/entrenamiento-comercial">Entrenamiento comercial</FooterLink>
+              <FooterLink href="/videos">Vídeos</FooterLink>
             </ul>
           </div>
           <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.14em] text-muted mb-4">Legal</div>
-            <ul className="flex flex-col gap-2.5 text-sm text-text-muted">
-              <li><Link href="/aviso-legal" className="hover:text-primary transition">Aviso legal</Link></li>
-              <li><Link href="/politica-privacidad" className="hover:text-primary transition">Política de privacidad</Link></li>
+            <div className="text-sm font-semibold uppercase tracking-[0.14em] text-muted mb-2">Legal</div>
+            <ul className="flex flex-col text-sm text-text-muted">
+              <FooterLink href="/aviso-legal">Aviso legal</FooterLink>
+              <FooterLink href="/politica-privacidad">Política de privacidad</FooterLink>
             </ul>
           </div>
         </div>
-        <div className="border-t border-line pt-6 text-xs text-muted">
-          © {new Date().getFullYear()} Paula Gallego · Galador. Todos los derechos reservados.
+        <div className="border-t border-line pt-6 text-sm text-text-muted">
+          © {new Date().getFullYear()} Galador. Todos los derechos reservados.
         </div>
       </div>
     </footer>
