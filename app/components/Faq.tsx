@@ -68,7 +68,7 @@ export default function Faq() {
             Lo que todo el mundo pregunta antes de escribirme.
           </h2>
           <p className="text-[#5A4F48] mt-5 leading-relaxed">
-            Si tu duda no está aquí, pregúntamela en el formulario: la respondo yo.
+            Si tu duda no está aquí, pregúntamela en la llamada de diagnóstico: la respondo yo.
           </p>
         </div>
 

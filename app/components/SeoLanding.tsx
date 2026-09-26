@@ -174,10 +174,10 @@ export default function SeoLanding({
 
           <div className="mt-9">
             <CtaButton className="w-full sm:w-auto px-7 py-4 text-base">
-              Pedir diagnóstico (30 min, sin coste)
+              Pedir diagnóstico (45 min, sin coste)
             </CtaButton>
             <p className="text-sm text-[#5A4F48] mt-4">
-              Lo revisa Paula personalmente, no un equipo de ventas. Respuesta en 24–48 h.
+              Reservas directamente en la agenda de Paula. La llamada la hace ella, no un equipo de ventas.
             </p>
           </div>
         </div>
@@ -349,7 +349,7 @@ export default function SeoLanding({
             href="/#formulario"
             className="inline-flex items-center justify-center gap-2 bg-[#FFFDF9] text-[#791E2A] font-semibold rounded-lg px-8 py-4 text-base hover:bg-white transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FFFDF9]"
           >
-            Pedir diagnóstico (30 min, sin coste)
+            Pedir diagnóstico (45 min, sin coste)
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
