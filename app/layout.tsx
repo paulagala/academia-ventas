@@ -30,14 +30,14 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.galador.es"),
   title: {
     // Título de cualquier página que no defina el suyo (los legales, por ejemplo).
-    default: "Galador | Consultoría comercial y sistemas de venta",
+    default: "Galador | Dirección comercial externa",
     // Sufijo de marca automático para las páginas hijas (las landings SEO).
     // Ojo: NO se aplica a app/page.tsx, que es el mismo segmento de ruta que
     // este layout, así que la home escribe su título completo.
     template: "%s | Galador",
   },
   description:
-    "Construimos tu sistema comercial completo: proceso, guiones, CRM y entrenamiento del equipo. Para negocios de servicios que ya venden y quieren escalar.",
+    "Dirección comercial externa para negocios que ya venden: dónde se escapan las ventas, oferta y precio, proceso y entrenamiento de quien vende con sus llamadas reales.",
   // La marca es Galador, pero el nombre propio tiene recorrido de búsqueda
   // y sigue siendo la señal de autoría del sitio.
   authors: [{ name: "Paula Gallego" }],

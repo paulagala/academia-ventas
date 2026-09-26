@@ -5,7 +5,7 @@ import { SECTORES } from "./sectores";
 const BASE = "https://www.galador.es";
 
 export const metadata: Metadata = {
-  title: "Consultoría comercial por sector",
+  title: "Dirección comercial por sector",
   description:
     "Cómo se vende en cada tipo de negocio con el que trabaja Galador: empresas de formación y externalización de RRHH. Dónde se cae la venta en cada uno.",
   alternates: { canonical: "/ventas-por-sector" },
@@ -15,7 +15,7 @@ export default function Page() {
   const datosEstructurados = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Consultoría comercial por sector",
+    name: "Dirección comercial por sector",
     itemListElement: SECTORES.map((s, i) => ({
       "@type": "ListItem",
       position: i + 1,

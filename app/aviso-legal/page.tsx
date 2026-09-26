@@ -5,7 +5,7 @@ export default function AvisoLegal() {
         <h1 className="text-3xl text-text mb-8 font-[family-name:var(--font-dm-serif)]">Aviso Legal</h1>
         <div className="flex flex-col gap-6 text-text-muted text-sm leading-relaxed">
           <h2 className="text-lg font-semibold text-text mt-4 font-[family-name:var(--font-dm-serif)]">1. Datos identificativos</h2>
-          <p>Este sitio web es propiedad de Galador. Email de contacto: hola@galador.es.</p>
+          <p>Este sitio web es propiedad de Galador. Email de contacto: paula@galador.es.</p>
 
           <h2 className="text-lg font-semibold text-text mt-4 font-[family-name:var(--font-dm-serif)]">2. Objeto</h2>
           <p>Este sitio web tiene como finalidad ofrecer información sobre servicios de formación en ventas y facilitar el contacto con posibles clientes.</p>
@@ -14,7 +14,7 @@ export default function AvisoLegal() {
           <p>Todos los contenidos de este sitio web (textos, imágenes, diseño, logotipos, código fuente) son propiedad de Galador o se utilizan con licencia. Queda prohibida su reproducción sin autorización.</p>
 
           <h2 className="text-lg font-semibold text-text mt-4 font-[family-name:var(--font-dm-serif)]">4. Limitación de responsabilidad</h2>
-          <p>Galador no garantiza resultados específicos derivados de la formación. Los testimonios reflejan experiencias individuales y los resultados pueden variar.</p>
+          <p>Galador no garantiza resultados específicos derivados de sus servicios. Los testimonios reflejan experiencias individuales y los resultados pueden variar.</p>
 
           <h2 className="text-lg font-semibold text-text mt-4 font-[family-name:var(--font-dm-serif)]">5. Enlaces externos</h2>
           <p>Este sitio puede contener enlaces a sitios de terceros. Galador no se hace responsable del contenido de esos sitios.</p>

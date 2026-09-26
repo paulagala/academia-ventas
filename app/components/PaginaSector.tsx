@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SeoLanding from "./SeoLanding";
 import { SECTORES, getSector } from "../ventas-por-sector/sectores";
+import { ENLACES_CLUSTER } from "./enlacesCluster";
 
 const BASE = "https://www.galador.es";
 
@@ -37,21 +38,9 @@ export default function PaginaSector({ slug }: { slug: string }) {
       texto: `Ventas para ${c.nombre.toLowerCase()}`,
       detalle: c.resumen,
     })),
-    {
-      href: "/consultoria-comercial",
-      texto: "Qué es una consultoría comercial",
-      detalle: "Qué incluye, qué no y para qué negocios tiene sentido.",
-    },
-    {
-      href: "/videos/objeciones-de-ventas",
-      texto: "Vídeo: objeciones de ventas",
-      detalle: "Por qué aparecen «es caro» y «me lo pienso», y cómo responderlas.",
-    },
-    {
-      href: "/ventas-por-sector",
-      texto: "Todos los sectores",
-      detalle: "Cómo se vende en cada tipo de negocio con el que trabajamos.",
-    },
+    ...ENLACES_CLUSTER.filter((e) =>
+      ["/direccion-comercial-externa", "/entrenamiento-comercial", "/ventas-por-sector"].includes(e.href),
+    ),
   ];
 
   const datosEstructurados = {
@@ -59,8 +48,8 @@ export default function PaginaSector({ slug }: { slug: string }) {
     "@graph": [
       {
         "@type": "Service",
-        name: `Consultoría comercial para ${s.nombre.toLowerCase()}`,
-        serviceType: "Consultoría comercial",
+        name: `Dirección comercial externa para ${s.nombre.toLowerCase()}`,
+        serviceType: "Dirección comercial externa",
         description: s.description,
         url,
         areaServed: "ES",

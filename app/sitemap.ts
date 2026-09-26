@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
   }> = [
     { path: "/", priority: 1, changeFrequency: "weekly" },
+    { path: "/direccion-comercial-externa", priority: 0.9, changeFrequency: "monthly" },
     { path: "/consultoria-comercial", priority: 0.8, changeFrequency: "monthly" },
     { path: "/sistema-de-ventas", priority: 0.8, changeFrequency: "monthly" },
     { path: "/entrenamiento-comercial", priority: 0.8, changeFrequency: "monthly" },

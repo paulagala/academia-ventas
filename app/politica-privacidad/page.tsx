@@ -10,19 +10,19 @@ export default function PoliticaPrivacidad() {
           </p>
 
           <h2 className="text-lg font-semibold text-text mt-4 font-[family-name:var(--font-dm-serif)]">1. Responsable del tratamiento</h2>
-          <p>El responsable del tratamiento es Galador, con email de contacto: hola@galador.es.</p>
+          <p>El responsable del tratamiento es Galador, con email de contacto: paula@galador.es.</p>
 
           <h2 className="text-lg font-semibold text-text mt-4 font-[family-name:var(--font-dm-serif)]">2. Datos que recogemos</h2>
-          <p>Recogemos los datos que nos proporcionas voluntariamente a través de formularios: nombre, email y mensaje. No recogemos datos de navegación con fines publicitarios.</p>
+          <p>Recogemos los datos que nos proporcionas voluntariamente en el formulario de diagnóstico: nombre, email, teléfono (opcional), empresa, facturación mensual aproximada, si tienes equipo comercial y la descripción de tu situación. No recogemos datos de navegación con fines publicitarios.</p>
 
           <h2 className="text-lg font-semibold text-text mt-4 font-[family-name:var(--font-dm-serif)]">3. Finalidad</h2>
-          <p>Usamos tus datos para: responder a tus consultas, enviarte información sobre cursos y recursos (si te suscribes), y mejorar nuestros servicios.</p>
+          <p>Usamos tus datos para valorar tu caso, responder a tu solicitud de diagnóstico y, si trabajamos juntos, gestionar la relación. Para enviar el formulario usamos Resend (envío de correo) y la web está alojada en Vercel, que tratan los datos solo para prestarnos ese servicio.</p>
 
           <h2 className="text-lg font-semibold text-text mt-4 font-[family-name:var(--font-dm-serif)]">4. Base legal</h2>
-          <p>El tratamiento se basa en tu consentimiento, que puedes retirar en cualquier momento escribiendo a hola@galador.es.</p>
+          <p>El tratamiento se basa en tu consentimiento, que puedes retirar en cualquier momento escribiendo a paula@galador.es.</p>
 
           <h2 className="text-lg font-semibold text-text mt-4 font-[family-name:var(--font-dm-serif)]">5. Tus derechos</h2>
-          <p>Tienes derecho a acceder, rectificar, suprimir y portar tus datos, así como a oponerte a su tratamiento. Para ejercer estos derechos, escríbenos a hola@galador.es.</p>
+          <p>Tienes derecho a acceder, rectificar, suprimir y portar tus datos, así como a oponerte a su tratamiento. Para ejercer estos derechos, escríbenos a paula@galador.es.</p>
 
           <h2 className="text-lg font-semibold text-text mt-4 font-[family-name:var(--font-dm-serif)]">6. Conservación</h2>
           <p>Conservamos tus datos mientras mantengas la relación con nosotros o hasta que solicites su eliminación.</p>

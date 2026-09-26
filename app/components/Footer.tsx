@@ -23,17 +23,19 @@ export default function Footer() {
             {/* El nombre propio se mantiene aquí: la marca es Galador, pero
                 «Paula Gallego» tiene recorrido de búsqueda y firma el servicio. */}
             <p className="text-sm text-text-muted leading-relaxed">
-              Consultoría comercial de Paula Gallego. Sistemas comerciales que escalan sin perder el
-              foco en el cliente.
+              Dirección comercial externa de Paula Gallego, para negocios que ya venden. Para que
+              vendáis porque sabéis vender.
             </p>
           </div>
           <div>
             <div className="text-sm font-semibold uppercase tracking-[0.14em] text-muted mb-2">Navegación</div>
             <ul className="flex flex-col text-sm text-text-muted">
               <FooterLink href="/">Inicio</FooterLink>
+              <FooterLink href="/direccion-comercial-externa">Dirección comercial externa</FooterLink>
               <FooterLink href="/consultoria-comercial">Consultoría comercial</FooterLink>
               <FooterLink href="/sistema-de-ventas">Sistema de ventas</FooterLink>
               <FooterLink href="/entrenamiento-comercial">Entrenamiento comercial</FooterLink>
+              <FooterLink href="/ventas-por-sector">Por sector</FooterLink>
               <FooterLink href="/videos">Vídeos</FooterLink>
             </ul>
           </div>

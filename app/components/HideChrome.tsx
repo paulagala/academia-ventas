@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 const HIDE_PREFIX = [
   "/diagnostico-comercial",
   "/consultoria-comercial",
+  "/direccion-comercial-externa",
   "/sistema-de-ventas",
   "/entrenamiento-comercial",
   "/ventas-para-",

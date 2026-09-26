@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SeoLanding from "../components/SeoLanding";
+import { enlacesMenos } from "../components/enlacesCluster";
 
 // Intención informativa: esta página explica qué es una consultoría comercial.
 // La consulta transaccional («consultoría comercial para negocios de servicios»)
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <SeoLanding
+      ruta="/consultoria-comercial"
       kicker="Consultoría comercial"
       h1="Qué es una consultoría comercial y cuándo merece la pena."
       intro="Es entrar en un negocio que ya vende, ver cómo vende de verdad —no cómo cree que vende— y dejar esa forma de vender convertida en algo que se pueda repetir, enseñar y medir. Ni formación, ni un informe con recomendaciones: un sistema en funcionamiento."
@@ -49,6 +51,7 @@ export default function Page() {
           h2: "Qué incluye y qué no",
           parrafos: [
             "Incluye lo que pasa desde que existe una oportunidad hasta que hay una decisión: a quién se dedica el tiempo, qué se pregunta en la llamada, cómo se explica el precio y qué se hace con quien dice «me lo pienso».",
+            "Y todo lo que influye en esa decisión aunque no pase dentro de la llamada: si la oferta se entiende, si el precio se sostiene y cómo diferenciarte para no competir solo por precio.",
             "No incluye captación. Ni campañas, ni contenido, ni anuncios, ni prospectar o llamar a tus leads por ti. Si el problema es que no entran oportunidades, una consultoría comercial no lo va a resolver y conviene saberlo antes de empezar.",
             "Tampoco se monta ni se administra un CRM, ni se cierran llamadas en tu nombre. El sistema es tuyo y lo ejecuta tu gente: ese es justamente el objetivo.",
           ],
@@ -58,6 +61,7 @@ export default function Page() {
           lista: [
             "Una auditoría de sus propias llamadas, con lo que funciona y el error que se repite.",
             "El mapa de fugas: en qué etapa se pierde cada oportunidad y por qué.",
+            "La oferta y el precio revisados, con cómo diferenciarse sin bajar precio.",
             "El proceso por etapas y los criterios de cualificación puestos por escrito.",
             "Guion de conversación y secuencia de seguimiento adaptados a lo que venden.",
             "Sus llamadas del trimestre revisadas y anotadas, una a una, con feedback por escrito.",
@@ -92,6 +96,7 @@ export default function Page() {
           r: "El proceso, los guiones, los criterios con los que se revisan las llamadas y el manual de venta, en manos de quien vende. La idea es exactamente esa: que siga funcionando sin nosotros dentro.",
         },
       ]}
+      relacionados={enlacesMenos("/consultoria-comercial")}
       cierre="¿Quieres saber en qué paso se está cayendo tu proceso comercial?"
     />
   );

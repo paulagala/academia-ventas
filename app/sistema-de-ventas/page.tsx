@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SeoLanding from "../components/SeoLanding";
+import { enlacesMenos } from "../components/enlacesCluster";
 
 // Intención informativa sobre el término «sistema de ventas».
 // El sufijo « | Galador» lo añade el template del layout.
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <SeoLanding
+      ruta="/sistema-de-ventas"
       kicker="Sistema de ventas"
       h1="Cómo construir un sistema de ventas que escale."
       intro="Un sistema de ventas es lo que hace que el resultado no dependa de quién coja el teléfono ni del día que tenga. Esta página explica de qué piezas se compone, cómo saber si te falta alguna y en qué orden se construyen."
@@ -32,6 +34,12 @@ export default function Page() {
             "Estructura de conversación: el orden de la llamada y las preguntas de indagación. No un texto para recitar, sino un mapa para no dejarse lo importante.",
             "Seguimiento: qué se manda, cuándo y con qué motivo, después de cada conversación que no cierra en el momento.",
             "Métricas: cuatro o cinco números que enseñan en qué etapa se pierde la gente. No un panel de treinta indicadores que nadie mira.",
+          ],
+        },
+        {
+          h2: "Antes del sistema: una oferta que se entienda",
+          parrafos: [
+            "Un sistema perfecto no salva una oferta que el cliente no entiende o un precio que nadie sabe defender. Si en tus llamadas el problema aparece siempre al hablar de dinero, o si te comparan con otros y eliges bajar el precio, hay que mirar eso primero. El proceso se construye encima.",
           ],
         },
         {
@@ -82,6 +90,20 @@ export default function Page() {
           r: "Pasa cuando se confunde sistema con guion cerrado. La estructura marca qué hay que cubrir en una conversación, no las palabras exactas. Bien hecho, da más margen: quien no tiene que improvisar el orden puede concentrarse en escuchar.",
         },
       ]}
+      caso={{
+        etiqueta: "Caso real · Farma Leaders Talento, formación",
+        titulo: "De vender por el producto a vender porque saben vender.",
+        cifras: [
+          { valor: "8 %", texto: "Conversión al empezar" },
+          { valor: "10 %", texto: "Conversión con el sistema" },
+          { valor: "40.000 €", texto: "Netos más" },
+        ],
+        parrafos: [
+          "Farma Leaders Talento vendía bien gracias a un buen producto, pero sin sistema detrás, justo cuando iba a ampliar el equipo comercial. Se construyó el guion de ventas, un protocolo de seguimiento y la revisión de las llamadas de cada comercial, también de quien empezaba en ventas desde cero.",
+          "«Hemos pasado de vender porque tenemos un buen producto a vender porque realmente sabemos vender», explica José, su responsable de ventas.",
+        ],
+      }}
+      relacionados={enlacesMenos("/sistema-de-ventas")}
       cierre="¿Miramos qué piezas te faltan en tu sistema de ventas?"
     />
   );

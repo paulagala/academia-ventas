@@ -363,7 +363,7 @@ export default function LeadForm() {
               onBlur={() => alSalir("problema")}
               aria-invalid={errores.problema ? true : undefined}
               aria-describedby={errores.problema ? "lead-problema-error" : undefined}
-              placeholder="Qué está pasando en tus llamadas y qué has intentado ya. Por ejemplo: se lo piensan y no vuelven, la mitad no aparece a la cita, o cada uno vende de una manera."
+              placeholder="Qué está pasando en tus llamadas y qué has intentado ya. Por ejemplo: se lo piensan y no vuelven, nos comparan por precio, o cada uno vende de una manera."
             />
             {errores.problema && <p id="lead-problema-error" className={ayuda}>{errores.problema}</p>}
           </div>

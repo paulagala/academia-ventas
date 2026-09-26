@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SeoLanding from "../components/SeoLanding";
+import { enlacesMenos } from "../components/enlacesCluster";
 
 // La consulta menos disputada de las tres y la mejor diferenciada del resto
 // del sitio. El sufijo « | Galador» lo añade el template del layout.
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <SeoLanding
+      ruta="/entrenamiento-comercial"
       kicker="Entrenamiento comercial"
       h1="Entrenamiento comercial sobre las llamadas reales de tu equipo."
       intro="Tu equipo ya sabe vender: el problema es que cada uno vende distinto y solo tú sabes por qué unas llamadas salen bien. El entrenamiento comercial trabaja sobre sus conversaciones grabadas, una a una y anotadas contra un banco de criterios, hasta que ese criterio deja de ser tuyo y pasa a ser del equipo."
@@ -84,6 +86,19 @@ export default function Page() {
           r: "Las primeras semanas, a veces. Se pasa en cuanto ven que las anotaciones señalan momentos concretos y no personas, y que la primera que se revisa a fondo es una que salió bien. Si se usa como herramienta de control en vez de como entrenamiento, no funciona: eso conviene tenerlo claro antes de empezar.",
         },
       ]}
+      caso={{
+        etiqueta: "Dos casos reales",
+        titulo: "Del bloqueo en las objeciones a doblar los ingresos.",
+        cifras: [
+          { valor: "x2", texto: "Ingresos recurrentes de Hotlist" },
+          { valor: "+10.000 €", texto: "Al mes, desde marzo de 2026" },
+        ],
+        parrafos: [
+          "Lucía, CEO de Hotlist, vendía sola y llevaba dos meses sin cerrar ningún cliente. Analizando sus reuniones una a una hasta dar con un guion que funcionaba, pasó de 5.000 € a más de 10.000 € de ingresos recurrentes al mes. «Te mete caña, te dice las cosas a la cara», cuenta.",
+          "Mario entró en ventas desde cero en Farma Leaders Talento. «Entraba a las llamadas a improvisar. Cuando venían las objeciones no sabía cómo reaccionar, me ponía nervioso y muchas veces me bloqueaba.» Con un guion claro y la revisión de cada una de sus llamadas, dejó de improvisar. «Está en el día a día contigo, como si fuera una más de tu equipo.»",
+        ],
+      }}
+      relacionados={enlacesMenos("/entrenamiento-comercial")}
       cierre="¿Escuchamos juntos un par de llamadas de tu equipo?"
     />
   );

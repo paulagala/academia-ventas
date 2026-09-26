@@ -25,8 +25,11 @@ export type SeoLandingProps = {
   relacionados?: { href: string; texto: string; detalle?: string }[];
   /** Título del bloque de enlaces. Por defecto, «Sigue leyendo». */
   relacionadosTitulo?: string;
-  /** Datos estructurados propios de la página (FAQPage, BreadcrumbList…). */
+  /** Datos estructurados propios de la página. Si no se pasan, se generan
+   *  solos: FAQPage con las preguntas y BreadcrumbList con `ruta`. */
   datosEstructurados?: object;
+  /** Ruta de la página («/sistema-de-ventas»), para las migas de pan. */
+  ruta?: string;
   cierre: string;
 };
 
@@ -88,15 +91,45 @@ export default function SeoLanding({
   relacionados,
   relacionadosTitulo = "Sigue leyendo",
   datosEstructurados,
+  ruta,
   cierre,
 }: SeoLandingProps) {
+  const BASE = "https://www.galador.es";
+  const ld =
+    datosEstructurados ??
+    (ruta
+      ? {
+          "@context": "https://schema.org",
+          "@graph": [
+            ...(faq
+              ? [
+                  {
+                    "@type": "FAQPage",
+                    mainEntity: faq.map((f) => ({
+                      "@type": "Question",
+                      name: f.p,
+                      acceptedAnswer: { "@type": "Answer", text: f.r },
+                    })),
+                  },
+                ]
+              : []),
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Inicio", item: BASE },
+                { "@type": "ListItem", position: 2, name: kicker, item: `${BASE}${ruta}` },
+              ],
+            },
+          ],
+        }
+      : undefined);
   return (
     <div className="bg-[#F9F5EF] text-[#2B231F]">
-      {datosEstructurados && (
+      {ld && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(datosEstructurados).replace(/</g, "\\u003c"),
+            __html: JSON.stringify(ld).replace(/</g, "\\u003c"),
           }}
         />
       )}
@@ -334,6 +367,7 @@ export default function SeoLanding({
             Galador
           </Link>
           <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-[#5A4F48]">
+            <Link href="/direccion-comercial-externa" className={`inline-flex items-center min-h-11 hover:text-[#2B231F] transition ${FOCUS}`}>Dirección comercial externa</Link>
             <Link href="/consultoria-comercial" className={`inline-flex items-center min-h-11 hover:text-[#2B231F] transition ${FOCUS}`}>Consultoría comercial</Link>
             <Link href="/sistema-de-ventas" className={`inline-flex items-center min-h-11 hover:text-[#2B231F] transition ${FOCUS}`}>Sistema de ventas</Link>
             <Link href="/entrenamiento-comercial" className={`inline-flex items-center min-h-11 hover:text-[#2B231F] transition ${FOCUS}`}>Entrenamiento comercial</Link>
