@@ -190,7 +190,7 @@ function Logos() {
     <section className="py-12 sm:py-14 bg-[#F9F5EF] border-b border-[#DBD5C9]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="text-center text-sm font-semibold uppercase tracking-[0.14em] text-[#5A4F48] mb-8">
-          Clientes con los que hemos trabajado
+          Algunas de las empresas con las que he trabajado
         </p>
         <div className="flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-14 gap-y-6">
           {empresas.map((e) => (
