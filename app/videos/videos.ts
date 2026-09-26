@@ -1,22 +1,44 @@
 /**
  * ── Los vídeos de YouTube de la web ──
  *
- * Esta es la ÚNICA lista que hay que tocar para publicar un vídeo nuevo.
- * Con añadir un objeto aquí arriba aparece solo en tres sitios:
+ * Los datos viven en videos.json, y es el ÚNICO sitio que hay que tocar para
+ * publicar un vídeo. Normalmente ni eso: el robot de .github/workflows/
+ * videos-a-articulos.yml detecta cada vídeo nuevo del canal, escribe su
+ * artículo y abre un PR que añade la entrada aquí (ver VIDEOS-AUTOMATICOS.md).
+ *
+ * Con una entrada en la lista, el vídeo aparece solo en:
  *   · el bloque «En YouTube» de la home (los 3 primeros),
  *   · el índice /videos,
- *   · su propia página /videos/{slug}, con su ficha para Google.
- * Y entra en el sitemap sin tocar nada más.
+ *   · su propia página /videos/{slug}: reproductor + artículo, con su ficha
+ *     para Google,
+ *   · el bloque «Sigue leyendo» de los artículos del mismo tema,
+ *   · el sitemap.
  *
- * CÓMO SACAR EL youtubeId: en https://www.youtube.com/watch?v=1Mb5B6FHrW4
- * es lo que va después de «v=» → 1Mb5B6FHrW4. Si lo compartes desde el móvil
- * te dará https://youtu.be/1Mb5B6FHrW4: el id es la parte final. Pega solo ese
- * trozo, nunca la URL entera (y quita el «&t=1s» si lo lleva).
+ * Si añades uno a mano, el youtubeId es lo que va después de «v=» en
+ * https://www.youtube.com/watch?v=1Mb5B6FHrW4 → 1Mb5B6FHrW4 (o la parte final
+ * de https://youtu.be/1Mb5B6FHrW4). Nunca la URL entera.
  *
- * Los vídeos se pintan en el orden de esta lista: el más nuevo, arriba.
+ * Los vídeos se pintan en el orden de la lista: el más nuevo, arriba.
  */
 
+import datos from "./videos.json";
+
 export const CANAL_YOUTUBE = "https://www.youtube.com/@paulagallegoventas";
+
+/**
+ * Los párrafos admiten enlaces internos con la sintaxis [texto](/ruta).
+ * Solo rutas de la propia web: el generador descarta cualquier otra.
+ */
+export type Articulo = {
+  /** Búsqueda principal a la que responde el artículo, en minúsculas. */
+  palabraClave: string;
+  /** <title> para Google si el título de YouTube no sirve (máx. ~60 caracteres). */
+  tituloSeo?: string;
+  /** Párrafos antes de la primera sección. */
+  intro: string[];
+  secciones: { titulo: string; parrafos: string[] }[];
+  faq: { pregunta: string; respuesta: string }[];
+};
 
 export type Video = {
   /** Id del vídeo en YouTube. Sin él la ficha no se publica. */
@@ -25,7 +47,7 @@ export type Video = {
   slug: string;
   /** Título tal cual sale en YouTube. Es el h1 de la página. */
   titulo: string;
-  /** Etiqueta de tema. Agrupa visualmente el índice. */
+  /** Etiqueta de tema. Agrupa visualmente el índice y decide los relacionados. */
   tema: string;
   /** Dos o tres frases. Es lo que Google enseña bajo el título en el buscador. */
   descripcion: string;
@@ -33,34 +55,43 @@ export type Video = {
   fecha: string;
   /** Duración en formato ISO 8601: PT6M38S = 6 minutos y 38 segundos. */
   duracion: string;
+  /** Conceptos que trata. Dos vídeos que comparten etiquetas se enlazan entre sí. */
+  etiquetas: string[];
   /** Lo que se lleva quien lo vea. Se pinta como lista bajo el reproductor. */
   puntos: string[];
+  /** El artículo escrito a partir de la transcripción. Opcional. */
+  articulo?: Articulo;
 };
 
-export const VIDEOS: Video[] = [
-  {
-    youtubeId: "1Mb5B6FHrW4",
-    slug: "objeciones-de-ventas",
-    titulo: "Objeciones de ventas: por qué aparecen y cómo responderlas",
-    tema: "Objeciones",
-    descripcion:
-      "«Es caro», «me lo tengo que pensar», «mándame la propuesta». Por qué aparecen esas frases —casi siempre porque la indagación se quedó corta— y cómo resolverlas preguntando en lugar de justificándote, con ejemplos de llamadas reales.",
-    fecha: "2026-09-13",
-    duracion: "PT6M38S",
-    puntos: [
-      "Por qué una objeción casi nunca empieza en el momento en que la escuchas, sino mucho antes en la conversación.",
-      "La diferencia entre contestar a la palabra que dice el cliente y entender qué hay detrás de ella.",
-      "Cómo responder con una pregunta en vez de con un argumento, sin que suene a técnica.",
-      "Ejemplos sacados de llamadas reales, no de un caso de manual.",
-    ],
-  },
-];
+export const VIDEOS: Video[] = datos as Video[];
 
 /** Los vídeos publicados, en orden. Un id vacío no se pinta: nunca un hueco roto. */
 export const videosPublicados = VIDEOS.filter((v) => v.youtubeId);
 
 export function getVideo(slug: string): Video | undefined {
   return videosPublicados.find((v) => v.slug === slug);
+}
+
+/**
+ * Los artículos que se enlazan al final de cada página. Se calculan al
+ * publicar, así que cuando entra un artículo nuevo los antiguos del mismo tema
+ * empiezan a enlazarlo sin tocarlos. Pesa más compartir tema que etiqueta;
+ * a igualdad, gana el más reciente (la lista ya viene ordenada así).
+ */
+export function relacionados(video: Video, cuantos = 3): Video[] {
+  const etiquetas = new Set(video.etiquetas.map((e) => e.toLowerCase()));
+  return videosPublicados
+    .filter((v) => v.slug !== video.slug)
+    .map((v, orden) => ({
+      v,
+      orden,
+      puntos:
+        (v.tema === video.tema ? 3 : 0) +
+        v.etiquetas.filter((e) => etiquetas.has(e.toLowerCase())).length,
+    }))
+    .sort((a, b) => b.puntos - a.puntos || a.orden - b.orden)
+    .slice(0, cuantos)
+    .map((x) => x.v);
 }
 
 /** Miniatura de YouTube. hqdefault existe siempre; maxres no, en vídeos antiguos. */
