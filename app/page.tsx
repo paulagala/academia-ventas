@@ -4,9 +4,9 @@ import { CANAL_YOUTUBE } from "./videos/videos";
 
 // La home escribe su título entero: el `template` del layout solo se aplica a
 // los segmentos hijos, no a la página del mismo segmento de ruta.
-const titulo = "Consultoría comercial para negocios de servicios | Galador";
+const titulo = "Dirección comercial externa para negocios que ya venden | Galador";
 const descripcion =
-  "Diseñamos y entrenamos el sistema comercial de negocios que ya venden: proceso, guiones, CRM y métricas. Consultoría de Paula Gallego. Pide tu diagnóstico.";
+  "Dirección comercial externa de Paula Gallego: auditoría del embudo, oferta y precio, proceso y entrenamiento de quien vende con sus llamadas reales. Pide tu diagnóstico.";
 
 export const metadata: Metadata = {
   title: titulo,
@@ -31,7 +31,7 @@ const datosEstructurados = {
   name: "Galador",
   url: "https://www.galador.es",
   description:
-    "Consultoría comercial para negocios de servicios: diagnóstico del proceso de venta, construcción del sistema comercial y entrenamiento del equipo.",
+    "Dirección comercial externa para negocios que ya venden: auditoría del embudo, estrategia comercial (oferta, precio, diferenciación), proceso de venta y entrenamiento de quien vende sobre sus llamadas reales.",
   founder: {
     "@type": "Person",
     name: "Paula Gallego",
@@ -45,6 +45,7 @@ const datosEstructurados = {
   areaServed: "ES",
   availableLanguage: "es",
   serviceType: [
+    "Dirección comercial externa",
     "Consultoría comercial",
     "Sistema de ventas",
     "Entrenamiento comercial",

@@ -7,7 +7,7 @@ const BASE = "https://www.galador.es";
 export const metadata: Metadata = {
   title: "Consultoría comercial por sector",
   description:
-    "Cómo se vende en cada tipo de negocio con el que trabaja Galador: externalización de RRHH, infoproductores, agencias y más. Dónde se cae la venta en cada uno.",
+    "Cómo se vende en cada tipo de negocio con el que trabaja Galador: empresas de formación y externalización de RRHH. Dónde se cae la venta en cada uno.",
   alternates: { canonical: "/ventas-por-sector" },
 };
 
@@ -28,7 +28,7 @@ export default function Page() {
     <SeoLanding
       kicker="Por sector"
       h1="Cada sector pierde la venta en un sitio distinto."
-      intro="El método es el mismo: escuchar llamadas reales, encontrar dónde se cae la venta y dejar un proceso que se pueda repetir. Lo que cambia es quién compra, qué le frena y qué objeción va a salir. Aquí está cómo se vende en cada tipo de negocio con el que trabajamos."
+      intro="El método es el mismo: escuchar llamadas reales, encontrar dónde se cae la venta y dejar un proceso que se pueda repetir. Lo que cambia es quién compra, qué le frena y qué objeción va a salir. Aquí está cómo se vende en los sectores donde tenemos casos reales."
       bloques={[
         {
           h2: "Lo que tienen en común",

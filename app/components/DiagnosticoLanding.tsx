@@ -70,7 +70,7 @@ function Badge({ children }: { children: React.ReactNode }) {
 function TopBanner() {
   return (
     <div className="hidden md:block bg-[#3F5E53] text-[#FFFDF9] text-center text-sm px-4 py-2.5">
-      <span>Consultoría comercial para negocios de servicios que ya venden y quieren dejar de improvisar</span>{" "}
+      <span>Dirección comercial externa para negocios que ya venden y quieren dejar de improvisar</span>{" "}
       <a
         href="#formulario"
         className="font-semibold underline underline-offset-2 hover:opacity-80 whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FFFDF9]"
@@ -83,7 +83,7 @@ function TopBanner() {
 
 function Header() {
   const enlaces = [
-    { href: "#servicios", texto: "Servicios" },
+    { href: "#servicios", texto: "Cómo trabajo" },
     { href: "#proceso", texto: "Proceso" },
     { href: "#casos", texto: "Casos" },
     { href: "#faq", texto: "Preguntas" },
@@ -128,16 +128,17 @@ function Hero() {
     <section className="border-b border-[#DBD5C9]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <div>
-          <Badge>CONSULTORÍA DE SISTEMA COMERCIAL</Badge>
+          <Badge>DIRECCIÓN COMERCIAL EXTERNA</Badge>
           <h1 className="text-[2.1rem] leading-[1.08] sm:text-5xl lg:text-[3.6rem] lg:leading-[1.05] text-balance text-[#2B231F] mt-6 mb-6 font-[family-name:var(--font-dm-serif)]">
-            Si cada llamada es distinta, tu facturación es{" "}
-            <span className="text-[#791E2A]">una lotería</span>.
+            Tu producto es bueno. Tu forma de venderlo,{" "}
+            <span className="text-[#791E2A]">todavía no</span>.
           </h1>
           <p className="text-lg sm:text-xl text-[#5A4F48] max-w-xl mb-8 leading-relaxed">
-            Sin un proceso detrás, unos meses cierras y otros no, y nunca sabes del todo por qué. En
-            tres meses escuchamos tus llamadas reales, convertimos lo que ya te funciona en un método
-            que se puede repetir y entrenamos a quien vende —tú o tu equipo— hasta que lo ejecuta
-            igual de bien.
+            Hoy vendes porque lo que ofreces funciona. Pero unos meses cierras y otros no, y nadie
+            sabe explicar por qué. Entro en tu negocio como tu dirección comercial: encuentro dónde
+            se escapan las ventas, ajusto lo que no tiene sentido —oferta, precio, proceso— y entreno
+            a quien vende, tú o tu equipo, con sus llamadas reales. Para que vendáis porque sabéis
+            vender.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
             <Cta className="px-7 py-4 text-base">Pedir diagnóstico (30 min, sin coste)</Cta>
@@ -232,12 +233,12 @@ function Problema() {
       ),
     },
     {
-      t: "«La mitad no aparece»",
-      d: "Reuniones agendadas que nadie atiende. Ese problema no empieza en la llamada, empieza antes.",
+      t: "«Me comparan por precio»",
+      d: "El cliente te pone al lado de otros tres y elige el más barato. No sabe ver qué te hace distinto, porque nadie se lo ha enseñado.",
       icono: (
         <>
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7h16v13H4zM8 3v4M16 3v4M4 11h16" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 14.5l4 3.5M14 14.5l-4 3.5" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v18M4 7h16" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7l-2 6h4zM20 7l-2 6h4z" />
         </>
       ),
     },
@@ -254,9 +255,11 @@ function Problema() {
       ),
     },
     {
-      t: "«Cierro clientes que no puedo cobrar bien»",
-      d: "Entras en llamadas que no tenían que haber pasado el filtro, y el ticket medio se queda donde está.",
-      icono: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 5h16l-6 7v6l-4 2v-8z" />,
+      t: "«Vamos a crecer y no hay proceso»",
+      d: "Entra gente nueva al equipo y cada una vende a su manera. Formar a alguien es sentarlo a tu lado y esperar que aprenda.",
+      icono: (
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 11a3 3 0 100-6 3 3 0 000 6zM16 11a3 3 0 100-6 3 3 0 000 6zM3 20c0-3 2.5-5 5-5s5 2 5 5M13 20c0-3 1.5-5 3-5 2.5 0 5 2 5 5" />
+      ),
     },
   ];
   return (
@@ -265,7 +268,7 @@ function Problema() {
         <div className="text-center max-w-2xl mx-auto mb-12">
           <Badge>EL PUNTO DE PARTIDA</Badge>
           <h2 className="text-3xl sm:text-4xl text-[#2B231F] mt-5 font-[family-name:var(--font-dm-serif)]">
-            Si algo de esto te suena, no es falta de esfuerzo. Es falta de sistema.
+            Si algo de esto te suena, no es falta de esfuerzo. Es falta de dirección comercial.
           </h2>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -295,29 +298,29 @@ function Servicios() {
       n: "01",
       plazo: "Semanas 1–2",
       t: "Diagnosticar",
-      d: "Escuchamos tus llamadas reales y localizamos en qué punto exacto se caen las oportunidades.",
-      entregables: ["Auditoría de llamadas reales", "Mapa de fugas del embudo", "Informe de prioridades"],
+      d: "Miramos tu negocio entero: números, embudo, oferta y llamadas reales. Sales sabiendo en qué punto exacto se te escapan las ventas.",
+      entregables: ["Auditoría del embudo y de tus llamadas reales", "Mapa de fugas: dónde y por qué se pierde cada venta", "Prioridades: qué se arregla primero"],
     },
     {
       n: "02",
       plazo: "Semanas 3–6",
-      t: "Construir",
-      d: "Escribimos tu proceso de principio a fin: de cómo entra un lead a cómo se firma.",
+      t: "Decidir y construir",
+      d: "Ajustamos lo que no tiene sentido y escribimos cómo se vende en tu negocio, de cómo entra un lead a cómo se firma.",
       entregables: [
-        "Proceso y criterios de cualificación",
-        "Guiones de llamada, árbol de objeciones y seguimiento",
-        "Qué debe registrar tu CRM y el cuadro de métricas para dirigir",
+        "Oferta y precio revisados, y cómo diferenciarte sin bajar precio",
+        "Proceso, criterios de cualificación, guion, objeciones y seguimiento",
+        "Las pocas métricas que hay que mirar para dirigir con datos",
       ],
     },
     {
       n: "03",
       plazo: "Semanas 7–12",
       t: "Entrenar",
-      d: "El entrenamiento comercial no es una charla: escuchamos las llamadas que tenéis esa misma semana y te las devolvemos anotadas.",
+      d: "Entreno a quien vende sobre sus propias llamadas de esa semana. Qué ha hecho bien, qué no y qué frase exacta cambia la venta.",
       entregables: [
-        "Revisión de tus llamadas grabadas, anotadas una a una",
-        "Sesiones de entrenamiento sobre esas mismas llamadas",
-        "Manual de venta del negocio",
+        "Revisión de llamadas reales con feedback directo",
+        "Sesiones de entrenamiento y role play de objeciones",
+        "Manual de venta para formar a cada persona nueva del equipo",
       ],
     },
   ];
@@ -326,14 +329,14 @@ function Servicios() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row lg:items-end gap-6 lg:gap-12 mb-12">
           <div className="flex-1">
-            <Badge>SERVICIOS</Badge>
+            <Badge>CÓMO TRABAJO</Badge>
             <h2 className="text-3xl sm:text-4xl text-[#2B231F] mt-5 font-[family-name:var(--font-dm-serif)]">
-              Tres meses, tres fases y una forma de vender que se puede repetir.
+              De vender por intuición a vender con dirección.
             </h2>
           </div>
           <p className="lg:max-w-sm text-[#5A4F48] leading-relaxed">
-            Un proyecto de tres meses con entregables concretos en cada fase. No partimos de teoría:
-            partimos de tus llamadas grabadas y de lo que de verdad pasa dentro de ellas.
+            Tres meses para dejarlo funcionando, con entregables concretos en cada fase. No partimos de
+            teoría: partimos de tus números y de lo que de verdad pasa dentro de tus llamadas.
           </p>
         </div>
         {/* Ancla del enlace «Proceso» del menú */}
@@ -375,8 +378,8 @@ function CtaBanda() {
     <section className="py-12 sm:py-14 bg-[#E3E5DC] border-b border-[#DBD5C9]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-10">
         <p className="flex-1 text-lg sm:text-xl text-[#2B231F] leading-relaxed font-[family-name:var(--font-dm-serif)]">
-          El diagnóstico dura 30 minutos, no tiene coste y sales de él sabiendo en qué punto se te
-          están cayendo las oportunidades. Trabajemos juntos o no.
+          El diagnóstico dura 30 minutos, no tiene coste y sales de él sabiendo dónde se te están
+          escapando las ventas. Trabajemos juntos o no.
         </p>
         <Cta className="px-7 py-4 text-base flex-shrink-0">Pedir diagnóstico</Cta>
       </div>
@@ -386,10 +389,10 @@ function CtaBanda() {
 
 function SiNo() {
   const si = [
-    "Escuchamos tus llamadas grabadas y te las devolvemos anotadas, una a una.",
-    "Trabajamos el proceso comercial completo, no solo el cierre.",
-    "Entrenamos a quien vende, seas tú o tu equipo, hasta que ejecuta el sistema solo.",
-    "Partimos de lo que ya te funciona, no de fórmulas de gurú.",
+    "Miramos el negocio entero: números, embudo, oferta, precio y llamadas.",
+    "Te decimos las cosas a la cara, también las que no apetece oír.",
+    "Estamos en el día a día, como una más de tu equipo.",
+    "Entrenamos a quien vende, seas tú o tu equipo, sobre sus llamadas reales.",
     "Entrenamos para escuchar y recomendar, no para presionar.",
   ];
   const no = [
@@ -443,45 +446,45 @@ function SiNo() {
 
 // ── Resultados y casos, fusionados: cada cifra encabeza su propio caso ──
 function Prueba() {
+  // Cifras y citas literales de los vídeos de caso de éxito de cada cliente
+  // (transcripciones en «Claude - Galador/Casos de éxito - transcripciones»).
+  // No cambiar una cifra sin que el cliente la haya dicho o autorizado.
   const casos = [
     {
       // Pega aquí el ID del vídeo de YouTube (la parte después de v=) y el vídeo aparecerá solo
       youtubeId: "",
-      // Cita literal del cliente. Mientras esté vacía no se publica nada.
-      cita: "",
-      autor: "",
+      cita: "Me ha hecho un por dos, Paula. Te mete caña, te dice las cosas a la cara.",
+      autor: "Lucía, CEO de Hotlist",
       empresa: "Hotlist",
-      cifra: "x3",
-      label: "en facturación mensual",
-      partida: "5.000 €/mes. El resultado dependía demasiado de cada persona del equipo.",
-      sistema: "Ordenamos la estructura de llamada, el diagnóstico, la cualificación y el seguimiento.",
-      resultado: "Más de 15.000 €/mes, con todo el equipo cerrando con el mismo proceso.",
+      cifra: "x2",
+      label: "en ingresos recurrentes",
+      partida: "5.000 €/mes y ningún cliente nuevo en enero y febrero. La CEO vendía sola, sin guion.",
+      sistema: "Analizamos sus reuniones de venta una a una y construimos un guion que funciona, con feedback directo cada semana.",
+      resultado: "Más de 10.000 €/mes recurrentes desde marzo de 2026.",
     },
     {
       // Pega aquí el ID del vídeo de YouTube (la parte después de v=) y el vídeo aparecerá solo
       youtubeId: "",
-      // Cita literal del cliente. Mientras esté vacía no se publica nada.
-      cita: "",
-      autor: "",
+      cita: "Hemos pasado de vender porque tenemos un buen producto a vender porque realmente sabemos vender.",
+      autor: "José, responsable de ventas de Farma Leaders Talento",
       empresa: "Farma Leaders",
-      cifra: "+60 %",
-      label: "en tasa de conversión",
-      partida: "5 % de conversión. Buenas oportunidades que no acababan de convertir.",
-      sistema: "Trabajamos la indagación, la comunicación de valor y el orden de la conversación.",
-      resultado: "Del 5 % al 8 % de conversión, con el mismo volumen de leads.",
+      cifra: "+40.000 €",
+      label: "netos, con la misma demanda",
+      partida: "Buen producto y buenas ventas, pero sin sistema, justo cuando el equipo comercial iba a crecer.",
+      sistema: "Guion de ventas, protocolo de seguimiento y revisión de las llamadas de cada comercial, también de quien empezaba desde cero.",
+      resultado: "La conversión pasó del 8 % al 10 %: unos 40.000 € netos más.",
     },
     {
       // Pega aquí el ID del vídeo de YouTube (la parte después de v=) y el vídeo aparecerá solo
       youtubeId: "",
-      // Cita literal del cliente. Mientras esté vacía no se publica nada.
-      cita: "",
-      autor: "",
+      cita: "Nos ha permitido quitarle el techo que teníamos, que era de dirección comercial.",
+      autor: "Samuel Acera, CEO de ISYFU",
       empresa: "ISYFU",
-      cifra: "+102 %",
-      label: "en facturación",
-      partida: "91.000 €. Un proceso comercial sin un sistema claro detrás.",
-      sistema: "Construimos proceso, guiones, seguimiento y métricas.",
-      resultado: "De 91.000 € a 183.700 € de facturación.",
+      cifra: "x4",
+      label: "en facturación anual",
+      partida: "60.000 € al año, compitiendo por precio en un sector donde todo el mundo lo hace.",
+      sistema: "Dos años de dirección comercial: oferta, precio, cómo diferenciarse y un sistema para formar a cada persona nueva.",
+      resultado: "Unos 250.000 € al año, sin techo comercial.",
     },
   ];
   return (
@@ -574,9 +577,10 @@ function QuienDetras() {
             funciona.
           </h2>
           <p className="text-[#5A4F48] leading-relaxed">
-            Hoy entro en empresas que ya venden, escucho sus llamadas reales, encuentro en qué punto
-            se caen las oportunidades y dejo el sistema montado y al equipo entrenado para que deje
-            de pasar. Detrás de Galador estoy yo: cada diagnóstico lo hago en persona.
+            Hoy entro en empresas que ya venden y hago de su dirección comercial: miro los números,
+            encuentro dónde se escapan las ventas, cambio lo que no tiene sentido y entreno a quien
+            vende hasta que lo hace sin mí. Detrás de Galador estoy yo: cada diagnóstico lo hago en
+            persona.
           </p>
           <p className="text-[#2B231F] font-semibold text-lg my-6 font-[family-name:var(--font-dm-serif)]">
             Analizo. Estructuro. Entreno.
@@ -720,14 +724,14 @@ function MiniFooter() {
               Galador
             </div>
             <p className="text-sm text-[#5A4F48] leading-relaxed">
-              Consultoría comercial para negocios de servicios que ya venden. Sistemas que escalan
-              sin perder el foco en el cliente.
+              Dirección comercial externa para negocios que ya venden. Para que vendáis porque sabéis
+              vender.
             </p>
           </div>
           <div>
             <div className="text-sm font-semibold uppercase tracking-[0.14em] text-[#5A4F48] mb-4">Navegación</div>
             <ul className="flex flex-col gap-2.5 text-sm text-[#5A4F48]">
-              <li><a href="#servicios" className={`inline-flex items-center py-1.5 hover:text-[#2B231F] transition ${FOCUS}`}>Servicios</a></li>
+              <li><a href="#servicios" className={`inline-flex items-center py-1.5 hover:text-[#2B231F] transition ${FOCUS}`}>Cómo trabajo</a></li>
               <li><a href="#casos" className={`inline-flex items-center py-1.5 hover:text-[#2B231F] transition ${FOCUS}`}>Casos</a></li>
               <li><a href="#faq" className={`inline-flex items-center py-1.5 hover:text-[#2B231F] transition ${FOCUS}`}>Preguntas</a></li>
               <li><a href="#sobre-paula" className={`inline-flex items-center py-1.5 hover:text-[#2B231F] transition ${FOCUS}`}>Sobre mí</a></li>

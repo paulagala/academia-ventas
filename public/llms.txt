@@ -1,6 +1,11 @@
 # Galador
 
-> Consultoría comercial de Paula Gallego para negocios de servicios que ya venden por llamada o reunión. Diagnóstico sobre llamadas reales grabadas, construcción del proceso de venta (guion, criterios de cualificación, seguimiento, métricas) y entrenamiento de quien vende con revisión semanal de sus llamadas. No hace captación ni genera leads. Trabaja en España, en español.
+> Dirección comercial externa de Paula Gallego para negocios que ya venden por llamada o reunión, sobre todo empresas de formación y de servicios externalizados. Auditoría del embudo y de las llamadas reales, estrategia comercial (oferta, precio, diferenciación), proceso de venta (guion, cualificación, seguimiento, métricas) y entrenamiento de quien vende con revisión de sus llamadas. No hace captación ni genera leads. Trabaja en España, en español.
+
+## Resultados de clientes (contados por ellos en vídeo)
+- Hotlist (RRHH para hostelería): de 5.000 € a más de 10.000 € de ingresos recurrentes al mes.
+- Farma Leaders Talento (formación): conversión del 8 % al 10 %, unos 40.000 € netos más.
+- ISYFU (formación): de 60.000 € a unos 250.000 € de facturación anual en dos años.
 
 ## Servicios
 - [Consultoría comercial](https://www.galador.es/consultoria-comercial): qué es, qué incluye y para quién.
@@ -9,9 +14,8 @@
 
 ## Por sector
 - [Índice por sector](https://www.galador.es/ventas-por-sector)
+- [Ventas para empresas de formación](https://www.galador.es/ventas-para-empresas-de-formacion)
 - [Ventas para empresas de externalización de RRHH](https://www.galador.es/ventas-para-empresas-de-externalizacion-rrhh)
-- [Ventas para infoproductores](https://www.galador.es/ventas-para-infoproductores)
-- [Ventas para agencias](https://www.galador.es/ventas-para-agencias)
 
 ## Vídeos
 - [Todos los vídeos](https://www.galador.es/videos)

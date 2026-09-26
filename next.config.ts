@@ -12,6 +12,7 @@ const nextConfig: NextConfig = {
       "/formacion-ventas-b2c",
       "/formacion-ventas-para-closers",
       "/formacion-ventas-para-equipos-comerciales",
+      "/formacion-ventas-para-infoproductores",
       "/formacion-ventas-para-servicios",
       "/recursos",
       "/recursos/:path*",
@@ -23,13 +24,6 @@ const nextConfig: NextConfig = {
       "/webinar/lista-espera",
     ];
     return [
-      // La antigua página de infoproductores tiene ya su sucesora en el clúster
-      // por sector: mejor mandarla ahí que a la home.
-      {
-        source: "/formacion-ventas-para-infoproductores",
-        destination: "/ventas-para-infoproductores",
-        permanent: true,
-      },
       ...toHome.map((source) => ({
         source,
         destination: "/",

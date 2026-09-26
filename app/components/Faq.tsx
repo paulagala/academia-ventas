@@ -17,6 +17,13 @@ const preguntas = [
     ],
   },
   {
+    q: "¿Solo revisas llamadas o también miras el negocio?",
+    a: [
+      "Las llamadas son donde se ve el problema, pero muchas veces no es donde nace. Si se pierden ventas porque la oferta no se entiende, porque el precio no se sostiene o porque compites con otros por precio, eso se trabaja también.",
+      "Lo que queda fuera es la captación: no hago marketing ni genero leads. Empiezo donde la oportunidad ya existe.",
+    ],
+  },
+  {
     q: "¿Cuánto cuesta una consultoría comercial?",
     a: [
       "No publico tarifas porque el alcance cambia mucho de un negocio a otro: no es lo mismo ordenar la venta de una persona que la de un equipo de seis, ni un ciclo de venta que se resuelve en una llamada que otro de cuatro meses.",
@@ -36,6 +43,7 @@ const preguntas = [
     a: [
       "Un sistema que solo sabe ejecutar quien lo diseñó no es un sistema, es una dependencia. Por eso las seis últimas semanas son de entrenamiento y no de entrega: tú o tu equipo lleváis las llamadas con el proceso nuevo mientras yo las reviso contra el banco de criterios y corrijo, hasta que el criterio está en las personas y no en un documento.",
       "Terminas con el manual de venta y con un cuadro de métricas que te avisa si algo se desvía antes de que lo notes en la facturación.",
+      "Y si quieres que siga a tu lado, sigo: hay clientes con los que llevo dos años dirigiendo la parte comercial.",
     ],
   },
   {
