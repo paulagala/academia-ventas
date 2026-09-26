@@ -181,9 +181,9 @@ function Hero() {
 function Logos() {
   const empresas = [
     { nombre: "Hotlist", logo: "/logo-hotlist.svg" },
-    { nombre: "Spanish is Cool", logo: "/logo-spanishiscool.png" },
-    { nombre: "ADBI Tech", logo: "/logo-adbi.png" },
-    { nombre: "ISYFU", logo: "/logo-isyfu.png" },
+    { nombre: "Spanish is Cool", logo: "/logo-spanishiscool-limpio.png" },
+    { nombre: "ADBI Tech", logo: "/logo-adbi-limpio.png" },
+    { nombre: "ISYFU", logo: "/logo-isyfu-limpio.png" },
     { nombre: "Farma Leaders Talento", logo: "/logo-farmaleaders.svg" },
   ];
   return (
