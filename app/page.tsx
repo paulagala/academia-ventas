@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import DiagnosticoLanding from "./components/DiagnosticoLanding";
+import { CANAL_YOUTUBE } from "./videos/videos";
 
 // La home escribe su título entero: el `template` del layout solo se aplica a
 // los segmentos hijos, no a la página del mismo segmento de ruta.
@@ -35,7 +36,12 @@ const datosEstructurados = {
     "@type": "Person",
     name: "Paula Gallego",
     jobTitle: "Consultora comercial",
+    // Perfiles que confirman que es la misma persona en todas partes: es lo
+    // que usan Google y los asistentes de IA para unir la marca con su autora.
+    // Pendiente: añadir la URL del perfil de LinkedIn.
+    sameAs: [CANAL_YOUTUBE],
   },
+  sameAs: [CANAL_YOUTUBE],
   areaServed: "ES",
   availableLanguage: "es",
   serviceType: [

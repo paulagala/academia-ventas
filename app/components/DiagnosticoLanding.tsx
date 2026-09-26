@@ -740,6 +740,7 @@ function MiniFooter() {
               <li><a href="/consultoria-comercial" className={`inline-flex items-center py-1.5 hover:text-[#2B231F] transition ${FOCUS}`}>Consultoría comercial</a></li>
               <li><a href="/sistema-de-ventas" className={`inline-flex items-center py-1.5 hover:text-[#2B231F] transition ${FOCUS}`}>Sistema de ventas</a></li>
               <li><a href="/entrenamiento-comercial" className={`inline-flex items-center py-1.5 hover:text-[#2B231F] transition ${FOCUS}`}>Entrenamiento comercial</a></li>
+              <li><a href="/ventas-por-sector" className={`inline-flex items-center py-1.5 hover:text-[#2B231F] transition ${FOCUS}`}>Por sector</a></li>
             </ul>
           </div>
           <div>

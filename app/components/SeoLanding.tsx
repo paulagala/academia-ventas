@@ -19,7 +19,24 @@ export type SeoLandingProps = {
   bloques: SeoBloque[];
   /** Preguntas propias de cada página: es lo que hace que no sean la misma página repetida. */
   faq?: { p: string; r: string }[];
+  /** Caso real, anonimizado. Solo hechos: cifras que constan, nada inventado. */
+  caso?: SeoCaso;
+  /** Enlaces internos del clúster: servicios, otros sectores, vídeos. */
+  relacionados?: { href: string; texto: string; detalle?: string }[];
+  /** Título del bloque de enlaces. Por defecto, «Sigue leyendo». */
+  relacionadosTitulo?: string;
+  /** Datos estructurados propios de la página (FAQPage, BreadcrumbList…). */
+  datosEstructurados?: object;
   cierre: string;
+};
+
+export type SeoCaso = {
+  etiqueta: string;
+  titulo: string;
+  parrafos: string[];
+  cifras?: { valor: string; texto: string }[];
+  /** Qué falta por contar (p. ej. el resultado de un caso en curso). */
+  nota?: string;
 };
 
 const FOCUS =
@@ -67,10 +84,22 @@ export default function SeoLanding({
   fases,
   bloques,
   faq,
+  caso,
+  relacionados,
+  relacionadosTitulo = "Sigue leyendo",
+  datosEstructurados,
   cierre,
 }: SeoLandingProps) {
   return (
     <div className="bg-[#F9F5EF] text-[#2B231F]">
+      {datosEstructurados && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(datosEstructurados).replace(/</g, "\\u003c"),
+          }}
+        />
+      )}
       {/* Header */}
       <header className="sticky top-0 z-40 bg-[#F3EEE4]/90 backdrop-blur border-b border-[#DBD5C9]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-14 md:h-16 flex items-center justify-between">
@@ -180,6 +209,42 @@ export default function SeoLanding({
         </div>
       </section>
 
+      {/* Caso real */}
+      {caso && (
+        <section className="pb-14 sm:pb-20">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-[#FFFDF9] border border-[#DBD5C9] rounded-2xl p-6 sm:p-9">
+              <span className="text-sm font-semibold tracking-[0.06em] text-[#791E2A]">
+                {caso.etiqueta}
+              </span>
+              <h2 className="text-2xl sm:text-3xl text-[#2B231F] mt-2 mb-5 font-[family-name:var(--font-dm-serif)]">
+                {caso.titulo}
+              </h2>
+              {caso.cifras && (
+                <dl className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+                  {caso.cifras.map((c) => (
+                    <div key={c.texto} className="bg-[#F3EEE4] rounded-xl p-4">
+                      <dt className="text-sm text-[#5A4F48] leading-snug">{c.texto}</dt>
+                      <dd className="text-2xl text-[#2B231F] mt-1 font-[family-name:var(--font-dm-serif)]">
+                        {c.valor}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+              <div className="space-y-4 text-[#5A4F48] leading-relaxed">
+                {caso.parrafos.map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </div>
+              {caso.nota && (
+                <p className="mt-5 text-sm text-[#5A4F48] italic">{caso.nota}</p>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Preguntas propias de esta página */}
       {faq && (
         <section className="pb-14 sm:pb-20">
@@ -215,6 +280,32 @@ export default function SeoLanding({
         </section>
       )}
 
+      {/* Enlaces del clúster */}
+      {relacionados && (
+        <section className="pb-14 sm:pb-20">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl sm:text-3xl text-[#2B231F] mb-6 font-[family-name:var(--font-dm-serif)]">
+              {relacionadosTitulo}
+            </h2>
+            <ul className="grid sm:grid-cols-2 gap-3 list-none p-0 m-0">
+              {relacionados.map((r) => (
+                <li key={r.href}>
+                  <Link
+                    href={r.href}
+                    className={`block h-full bg-[#FFFDF9] border border-[#DBD5C9] rounded-xl px-5 py-4 hover:border-[#791E2A] transition ${FOCUS}`}
+                  >
+                    <span className="font-semibold text-[#2B231F]">{r.texto}</span>
+                    {r.detalle && (
+                      <span className="block text-sm text-[#5A4F48] mt-1 leading-snug">{r.detalle}</span>
+                    )}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
       {/* CTA final */}
       <section className="py-16 sm:py-20 bg-[#3F5E53]">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -246,6 +337,7 @@ export default function SeoLanding({
             <Link href="/consultoria-comercial" className={`inline-flex items-center min-h-11 hover:text-[#2B231F] transition ${FOCUS}`}>Consultoría comercial</Link>
             <Link href="/sistema-de-ventas" className={`inline-flex items-center min-h-11 hover:text-[#2B231F] transition ${FOCUS}`}>Sistema de ventas</Link>
             <Link href="/entrenamiento-comercial" className={`inline-flex items-center min-h-11 hover:text-[#2B231F] transition ${FOCUS}`}>Entrenamiento comercial</Link>
+            <Link href="/ventas-por-sector" className={`inline-flex items-center min-h-11 hover:text-[#2B231F] transition ${FOCUS}`}>Por sector</Link>
             <Link href="/aviso-legal" className={`inline-flex items-center min-h-11 hover:text-[#2B231F] transition ${FOCUS}`}>Aviso legal</Link>
             <Link href="/politica-privacidad" className={`inline-flex items-center min-h-11 hover:text-[#2B231F] transition ${FOCUS}`}>Privacidad</Link>
           </div>

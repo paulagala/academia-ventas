@@ -9,6 +9,8 @@ const HIDE_PREFIX = [
   "/consultoria-comercial",
   "/sistema-de-ventas",
   "/entrenamiento-comercial",
+  "/ventas-para-",
+  "/ventas-por-sector",
   "/webinar/ventas-consultivas",
 ];
 
