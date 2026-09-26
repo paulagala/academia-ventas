@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import TextoConEnlaces, { textoPlano } from "../../components/TextoConEnlaces";
 import VideoYoutube from "../../components/VideoYoutube";
 import {
   CANAL_YOUTUBE,
@@ -8,6 +9,7 @@ import {
   fechaLegible,
   getVideo,
   miniatura,
+  relacionados,
   videosPublicados,
 } from "../videos";
 
@@ -29,7 +31,7 @@ export async function generateMetadata({
   if (!video) return {};
 
   return {
-    title: video.titulo,
+    title: video.articulo?.tituloSeo ?? video.titulo,
     description: video.descripcion,
     alternates: { canonical: `/videos/${slug}` },
     openGraph: {
@@ -55,12 +57,14 @@ export default async function VideoPage({
   const video = getVideo(slug);
   if (!video) notFound();
 
-  const otros = videosPublicados.filter((v) => v.slug !== slug).slice(0, 3);
+  const articulo = video.articulo;
+  const otros = relacionados(video);
+  const url = `https://www.galador.es/videos/${video.slug}`;
 
   // Ficha de vídeo para Google. Solo datos verificables del propio vídeo:
   // título, descripción, miniatura, fecha y duración. Sin visualizaciones ni
   // valoraciones, que cambian cada día y aquí quedarían desactualizadas.
-  const datosEstructurados = {
+  const fichaVideo = {
     "@context": "https://schema.org",
     "@type": "VideoObject",
     name: video.titulo,
@@ -69,7 +73,7 @@ export default async function VideoPage({
     uploadDate: video.fecha,
     duration: video.duracion,
     embedUrl: `https://www.youtube-nocookie.com/embed/${video.youtubeId}`,
-    url: `https://www.galador.es/videos/${video.slug}`,
+    url,
     publisher: {
       "@type": "Organization",
       name: "Galador",
@@ -82,6 +86,37 @@ export default async function VideoPage({
     },
     inLanguage: "es",
   };
+
+  // Con artículo, la página es también un artículo para Google, con su vídeo
+  // dentro y sus preguntas frecuentes. Sin artículo, solo la ficha del vídeo.
+  const datosEstructurados: object[] = [fichaVideo];
+  if (articulo) {
+    datosEstructurados.push({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: video.titulo,
+      description: video.descripcion,
+      keywords: [articulo.palabraClave, ...video.etiquetas].join(", "),
+      image: [miniatura(video.youtubeId)],
+      datePublished: video.fecha,
+      mainEntityOfPage: url,
+      video: { "@type": "VideoObject", name: video.titulo, embedUrl: fichaVideo.embedUrl },
+      author: { "@type": "Person", name: "Paula Gallego", url: "https://www.galador.es" },
+      publisher: fichaVideo.publisher,
+      inLanguage: "es",
+    });
+    if (articulo.faq.length > 0) {
+      datosEstructurados.push({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: articulo.faq.map((f) => ({
+          "@type": "Question",
+          name: f.pregunta,
+          acceptedAnswer: { "@type": "Answer", text: textoPlano(f.respuesta) },
+        })),
+      });
+    }
+  }
 
   return (
     <>
@@ -111,7 +146,17 @@ export default async function VideoPage({
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <VideoYoutube youtubeId={video.youtubeId} titulo={video.titulo} prioridad />
 
-          <p className="text-text-muted leading-relaxed mt-8">{video.descripcion}</p>
+          {articulo ? (
+            <div className="mt-8 flex flex-col gap-5">
+              {articulo.intro.map((p) => (
+                <p key={p} className="text-text leading-relaxed text-lg">
+                  <TextoConEnlaces texto={p} />
+                </p>
+              ))}
+            </div>
+          ) : (
+            <p className="text-text-muted leading-relaxed mt-8">{video.descripcion}</p>
+          )}
 
           {video.puntos.length > 0 && (
             <>
@@ -135,6 +180,42 @@ export default async function VideoPage({
             </>
           )}
 
+          {articulo?.secciones.map((sec) => (
+            <section key={sec.titulo}>
+              <h2 className="text-2xl text-primary mt-12 mb-5">{sec.titulo}</h2>
+              <div className="flex flex-col gap-5">
+                {sec.parrafos.map((p) => (
+                  <p key={p} className="text-text-muted leading-relaxed">
+                    <TextoConEnlaces texto={p} />
+                  </p>
+                ))}
+              </div>
+            </section>
+          ))}
+
+          {articulo && articulo.faq.length > 0 && (
+            <>
+              <h2 className="text-2xl text-primary mt-12 mb-5">Preguntas frecuentes</h2>
+              {/* <details> nativo, como el FAQ de la home: sin JavaScript e indexable. */}
+              <div className="flex flex-col gap-3">
+                {articulo.faq.map((f) => (
+                  <details
+                    key={f.pregunta}
+                    className="group rounded-[var(--radius-card)] border border-border bg-surface p-5"
+                  >
+                    <summary className="cursor-pointer font-medium text-primary list-none flex justify-between gap-4">
+                      {f.pregunta}
+                      <span aria-hidden="true" className="text-accent transition group-open:rotate-45">+</span>
+                    </summary>
+                    <p className="text-text-muted leading-relaxed mt-3">
+                      <TextoConEnlaces texto={f.respuesta} />
+                    </p>
+                  </details>
+                ))}
+              </div>
+            </>
+          )}
+
           <div className="mt-12 bg-surface rounded-[var(--radius-card)] p-8 border border-border">
             <h2 className="text-xl text-primary mb-3">¿Y en tu negocio?</h2>
             <p className="text-text-muted text-sm mb-6 leading-relaxed">
@@ -155,7 +236,7 @@ export default async function VideoPage({
 
           {otros.length > 0 && (
             <div className="mt-14 border-t border-line pt-8">
-              <h2 className="text-xl text-primary mb-5">Más vídeos</h2>
+              <h2 className="text-xl text-primary mb-5">Sigue leyendo</h2>
               <ul className="flex flex-col gap-3">
                 {otros.map((v) => (
                   <li key={v.slug}>
