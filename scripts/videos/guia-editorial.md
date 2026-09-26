@@ -53,6 +53,9 @@ Reencuadres que Paula sostiene (úsalos solo si el vídeo va de eso):
 - Sin muletillas de IA: nada de «en el mundo actual», «en definitiva», «es crucial»,
   «descubre», «sin más preámbulos», «¡vamos allá!». Nada de preguntas retóricas en cadena.
 - El reencuadre es un alivio, no una acusación: no culpes al lector.
+- No des por hecho el género de quien lee: nada de «juntas», «cansada» o «seguro»
+  referidos al lector. Reformula en neutro («lo revisamos», «si llegas sin energía»).
+  Cuando Paula habla de sí misma, en femenino.
 
 ## SEO
 
@@ -61,8 +64,8 @@ Reencuadres que Paula sostiene (úsalos solo si el vídeo va de eso):
   el primer párrafo de la intro y en al menos un título de sección.
 - `tituloSeo`: el <title> para Google, 45–60 caracteres, con la palabra clave al
   principio. Si el título de YouTube ya cumple eso, devuelve cadena vacía.
-- `descripcion`: la meta description, 140–160 caracteres, que prometa lo que el lector
-  se lleva. Sin comillas dobles.
+- `descripcion`: la meta description, entre 140 y 155 caracteres (cuéntalos: por encima
+  de 160 Google la corta), que prometa lo que el lector se lleva. Sin comillas dobles.
 - Estructura: intro de 2–3 párrafos cortos que nombran el síntoma y adelantan el
   reencuadre; 4–6 secciones con títulos que sean frases o preguntas que alguien buscaría
   (no «Introducción» ni «Conclusión»); cada sección 2–4 párrafos. Entre 1.000 y 1.600
