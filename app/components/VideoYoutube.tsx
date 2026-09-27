@@ -17,19 +17,24 @@ export default function VideoYoutube({
   youtubeId,
   titulo,
   prioridad = false,
+  vertical = false,
 }: {
   youtubeId: string;
   titulo: string;
   /** true en la página del propio vídeo: la miniatura es la imagen principal. */
   prioridad?: boolean;
+  /** true para un Short: el reproductor pasa a formato vertical. */
+  vertical?: boolean;
 }) {
   const [reproduciendo, setReproduciendo] = useState(false);
 
   if (!youtubeId) return null;
 
+  const formato = vertical ? "aspect-[9/16] max-w-sm mx-auto" : "aspect-video";
+
   if (reproduciendo) {
     return (
-      <div className="aspect-video rounded-xl overflow-hidden bg-[#2B231F]">
+      <div className={`${formato} rounded-xl overflow-hidden bg-[#2B231F]`}>
         <iframe
           src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1`}
           title={titulo}
@@ -46,7 +51,7 @@ export default function VideoYoutube({
       type="button"
       onClick={() => setReproduciendo(true)}
       aria-label={`Reproducir: ${titulo}`}
-      className="group relative block w-full aspect-video rounded-xl overflow-hidden bg-[#2B231F] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#791E2A]"
+      className={`group relative block w-full ${formato} rounded-xl overflow-hidden bg-[#2B231F] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#791E2A]`}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img

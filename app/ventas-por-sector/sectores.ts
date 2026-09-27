@@ -180,6 +180,7 @@ export const SECTORES: Sector[] = [
         "Trabajamos con mentorías y seguimiento semanal, analizando sus reuniones de venta una a una hasta dar con un guion que funcionaba. Desde que lo aplica, en marzo de 2026, ha pasado de unos 5.000 € a más de 10.000 € de ingresos recurrentes al mes.",
         "«Como emprendedora parece que tienes que saber de todos los palos, pero no eres especialista en nada. Yo sigo sin ser especialista en ventas, pero tengo a Paula, que me ayuda para ello.»",
       ],
+      enlace: { href: "/casos/hotlist", texto: "Leer el caso completo de Hotlist" },
     },
     faq: [
       {

@@ -33,6 +33,7 @@ import { fileURLToPath } from "node:url";
 const AQUI = path.dirname(fileURLToPath(import.meta.url));
 const RAIZ = path.resolve(AQUI, "../..");
 const RUTA_VIDEOS = "app/videos/videos.json";
+const RUTA_CASOS = "app/casos/casos.json";
 const GUIA = fs.readFileSync(path.join(AQUI, "guia-editorial.md"), "utf8");
 
 /** Alias de Claude Code: el Opus más reciente que incluya la suscripción. */
@@ -62,6 +63,21 @@ const LANDINGS = [
     titulo: "Cómo construir un sistema de ventas que escale",
     resumen:
       "Proceso, cualificación, guiones, seguimiento y métricas para que la venta no dependa de quién coja el teléfono.",
+  },
+  {
+    ruta: "/direccion-comercial-externa",
+    titulo: "Dirección comercial externa: qué es y cuándo la necesitas",
+    resumen: "El servicio principal: dirección comercial para negocios pequeños sin director comercial propio.",
+  },
+  {
+    ruta: "/ventas-para-empresas-de-formacion",
+    titulo: "Ventas para empresas de formación",
+    resumen: "Cómo se vende una formación: miedo a no terminar, decisión compartida. Casos ISYFU y Farma Leaders.",
+  },
+  {
+    ruta: "/ventas-para-empresas-de-externalizacion-rrhh",
+    titulo: "Ventas para empresas de externalización de RRHH",
+    resumen: "Cuota mensual, venta de confianza y «ya lo lleva la gestoría». Caso Hotlist.",
   },
   {
     ruta: "/entrenamiento-comercial",
@@ -222,6 +238,11 @@ async function escribirArticulo(video, textoTranscripcion, publicados) {
     ...publicados
       .filter((v) => v.youtubeId !== video.youtubeId)
       .map((v) => ({ ruta: `/videos/${v.slug}`, titulo: v.titulo, resumen: v.descripcion, tema: v.tema })),
+    ...JSON.parse(fs.readFileSync(path.join(RAIZ, RUTA_CASOS), "utf8")).map((c) => ({
+      ruta: `/casos/${c.slug}`,
+      titulo: `Caso de éxito: ${c.titulo}`,
+      resumen: c.resumen,
+    })),
     ...LANDINGS,
   ];
   const temas = [...new Set(publicados.map((v) => v.tema))];
@@ -455,11 +476,13 @@ async function main() {
   const token = await tokenGoogle();
   const candidatos = await ultimosVideos(token, forzado ? [forzado] : undefined);
   const yaEnWeb = new Set(publicados.map((v) => v.youtubeId));
+  // Los testimonios de clientes tienen su propia página en /casos: no son artículos de vídeo.
+  const deCasos = new Set(JSON.parse(fs.readFileSync(path.join(RAIZ, RUTA_CASOS), "utf8")).map((c) => c.youtubeId));
 
   const pendientes = candidatos
     .filter((v) => {
       if (forzado) return true;
-      if (!v.publico || yaEnWeb.has(v.youtubeId) || v.fecha < DESDE) return false;
+      if (!v.publico || yaEnWeb.has(v.youtubeId) || deCasos.has(v.youtubeId) || v.fecha < DESDE) return false;
       if (segundos(v.duracion) < DURACION_MINIMA_S) return false;
       // Ya propuesto antes: abierto, aprobado o descartado.
       return prsDelVideo(v.youtubeId).length === 0;
