@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Logo, { Simbolo } from "./Logo";
 
 // Bloque de contenido: o párrafos, o lista, o ambos. Tener las dos formas
 // evita lo que pasaba antes, que había listas escritas como párrafos sueltos.
@@ -140,9 +141,9 @@ export default function SeoLanding({
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-14 md:h-16 flex items-center justify-between">
           <Link
             href="/"
-            className={`text-lg font-semibold text-[#2B231F] font-[family-name:var(--font-dm-serif)] ${FOCUS}`}
+            className={`inline-flex items-center min-h-11 ${FOCUS}`}
           >
-            Galador
+            <Logo className="h-6 sm:h-7 w-auto text-[#791E2A]" />
           </Link>
           <CtaButton className="px-4 sm:px-5 py-2.5 text-sm">
             <span className="sm:hidden">Diagnóstico</span>
@@ -155,7 +156,7 @@ export default function SeoLanding({
       <section className="border-b border-[#DBD5C9]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
           <span className="inline-flex items-center gap-2 bg-[#E3E5DC] text-[#3F5E53] text-sm font-semibold tracking-[0.06em] px-3.5 py-1.5 rounded-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#3F5E53]" aria-hidden="true" />
+            <Simbolo className="w-3.5 h-3.5" />
             {kicker}
           </span>
           <h1 className="text-[2rem] leading-[1.1] sm:text-5xl sm:leading-[1.08] text-balance text-[#2B231F] mt-6 mb-6 font-[family-name:var(--font-dm-serif)]">
@@ -369,9 +370,9 @@ export default function SeoLanding({
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <Link
             href="/"
-            className={`text-sm font-semibold text-[#2B231F] font-[family-name:var(--font-dm-serif)] ${FOCUS}`}
+            className={`inline-flex items-center min-h-11 ${FOCUS}`}
           >
-            Galador
+            <Logo className="h-6 w-auto text-[#791E2A]" />
           </Link>
           <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-[#5A4F48]">
             <Link href="/direccion-comercial-externa" className={`inline-flex items-center min-h-11 hover:text-[#2B231F] transition ${FOCUS}`}>Dirección comercial externa</Link>

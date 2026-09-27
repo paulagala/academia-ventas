@@ -1,6 +1,7 @@
 [
   {
     "slug": "hotlist",
+    "cifraDestacada": "x2",
     "empresa": "Hotlist",
     "persona": "Lucía",
     "cargo": "CEO de Hotlist",
@@ -107,6 +108,7 @@
   },
   {
     "slug": "farma-leaders",
+    "cifraDestacada": "+40.000 €",
     "empresa": "Farma Leaders Talento",
     "persona": "José y Mario",
     "cargo": "responsable de ventas y SDR de Farma Leaders Talento",
@@ -221,6 +223,7 @@
   },
   {
     "slug": "isyfu",
+    "cifraDestacada": "x4",
     "empresa": "ISYFU",
     "persona": "Samuel Acera",
     "cargo": "CEO de ISYFU",

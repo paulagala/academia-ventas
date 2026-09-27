@@ -31,6 +31,13 @@ const datosEstructurados = {
   "@type": "ProfessionalService",
   name: "Galador",
   url: "https://www.galador.es",
+  // Logo oficial (el vertical de Paula sobre blanco), para Google.
+  logo: "https://www.galador.es/logo-galador.png",
+  image: "https://www.galador.es/logo-galador.png",
+  // Logo que Google puede mostrar junto a la marca en los resultados:
+  // cuadrado y sobre blanco, como pide su guía para logotipos.
+  logo: "https://www.galador.es/logo-galador.png",
+  image: "https://www.galador.es/logo-galador.png",
   description:
     "Dirección comercial externa para negocios que ya venden: auditoría del embudo, estrategia comercial (oferta, precio, diferenciación), proceso de venta y entrenamiento de quien vende sobre sus llamadas reales.",
   founder: {

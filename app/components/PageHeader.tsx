@@ -1,3 +1,5 @@
+import { Simbolo } from "./Logo";
+
 export default function PageHeader({
   tag,
   title,
@@ -18,7 +20,12 @@ export default function PageHeader({
         <div className="flex items-center gap-3 mb-6">
           <span className="label-mono text-accent">{tag ?? "Índice"}</span>
           <span className="flex-1 h-px bg-line" />
-          {marca && <span className="label-mono text-muted">{marca}</span>}
+          {/* Sin marca de texto, la línea acaba en el símbolo de Galador */}
+          {marca ? (
+            <span className="label-mono text-muted">{marca}</span>
+          ) : (
+            <Simbolo className="w-4 h-4 text-accent" />
+          )}
         </div>
         <h1 className="text-4xl sm:text-5xl text-primary max-w-3xl">{title}</h1>
         {description && (

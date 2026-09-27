@@ -4,6 +4,7 @@ import CalReserva from "./CalReserva";
 import Faq from "./Faq";
 import VideoTestimonio from "./VideoTestimonio";
 import { getCaso, retrato } from "../casos/casos";
+import Logo, { Simbolo, SimboloFase } from "./Logo";
 import {
   CANAL_YOUTUBE,
   duracionLegible,
@@ -62,7 +63,7 @@ function Cta({
 function Badge({ children }: { children: React.ReactNode }) {
   return (
     <span className="inline-flex items-center gap-2 bg-[#E3E5DC] text-[#3F5E53] text-sm font-semibold tracking-[0.06em] px-3.5 py-1.5 rounded-full">
-      <span className="w-1.5 h-1.5 rounded-full bg-[#3F5E53]" aria-hidden="true" />
+      <Simbolo className="w-3.5 h-3.5" />
       {children}
     </span>
   );
@@ -95,9 +96,9 @@ function Header() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-14 md:h-16 flex items-center justify-between">
         <Link
           href="/"
-          className={`text-lg font-semibold text-[#2B231F] font-[family-name:var(--font-dm-serif)] ${FOCUS}`}
+          className={`inline-flex items-center min-h-11 ${FOCUS}`}
         >
-          Galador
+          <Logo className="h-6 sm:h-7 w-auto text-[#791E2A]" />
         </Link>
         <nav aria-label="Principal" className="hidden md:flex items-center gap-7 text-sm text-[#5A4F48]">
           {enlaces.map((e) => {
@@ -343,10 +344,13 @@ function Servicios() {
         {/* Ancla del enlace «Proceso» del menú */}
         <span id="proceso" className="block scroll-mt-24" />
         <div className="grid md:grid-cols-3 gap-6">
-          {pilares.map((p) => (
+          {pilares.map((p, i) => (
             <div key={p.n} className="bg-[#FFFDF9] border border-[#DBD5C9] rounded-2xl p-8">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-2xl text-[#791E2A] font-[family-name:var(--font-dm-serif)]">{p.n}</span>
+                <span className="flex items-center gap-3 text-2xl text-[#791E2A] font-[family-name:var(--font-dm-serif)]">
+                  <SimboloFase fase={(i + 1) as 1 | 2 | 3} />
+                  {p.n}
+                </span>
                 <span className="text-sm font-semibold text-[#791E2A] bg-[#F2E4E4] px-3 py-1 rounded-md">
                   {p.plazo}
                 </span>
@@ -733,9 +737,7 @@ function MiniFooter() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           <div>
-            <div className="text-lg font-semibold text-[#2B231F] mb-3 font-[family-name:var(--font-dm-serif)]">
-              Galador
-            </div>
+            <Logo className="h-7 w-auto text-[#791E2A] mb-4" />
             <p className="text-sm text-[#5A4F48] leading-relaxed">
               Dirección comercial externa para negocios que ya venden. Para que vendáis porque sabéis
               vender.
