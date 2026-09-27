@@ -452,7 +452,7 @@ function Prueba() {
   const casos = [
     {
       // Pega aquí el ID del vídeo de YouTube (la parte después de v=) y el vídeo aparecerá solo
-      youtubeId: "",
+      youtubeId: "wpoeCcRjiBk",
       cita: "Me ha hecho un por dos, Paula. Te mete caña, te dice las cosas a la cara.",
       autor: "Lucía, CEO de Hotlist",
       empresa: "Hotlist",

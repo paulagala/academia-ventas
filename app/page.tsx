@@ -38,10 +38,9 @@ const datosEstructurados = {
     jobTitle: "Consultora comercial",
     // Perfiles que confirman que es la misma persona en todas partes: es lo
     // que usan Google y los asistentes de IA para unir la marca con su autora.
-    // Pendiente: añadir la URL del perfil de LinkedIn.
-    sameAs: [CANAL_YOUTUBE],
+    sameAs: [CANAL_YOUTUBE, "https://www.linkedin.com/in/paula-gallego-ventas"],
   },
-  sameAs: [CANAL_YOUTUBE],
+  sameAs: [CANAL_YOUTUBE, "https://www.linkedin.com/in/paula-gallego-ventas"],
   areaServed: "ES",
   availableLanguage: "es",
   serviceType: [
