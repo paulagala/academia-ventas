@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import TextoConEnlaces, { textoPlano } from "../../components/TextoConEnlaces";
-import VideoYoutube from "../../components/VideoYoutube";
-import { miniatura, videosPublicados } from "../../videos/videos";
-import { CASOS, getCaso } from "../casos";
+import VideoTestimonio from "../../components/VideoTestimonio";
+import { duracionLegible, videosPublicados } from "../../videos/videos";
+import { CASOS, getCaso, portada, retrato } from "../casos";
 
 // Todas las páginas de caso se generan en el build: son contenido fijo.
 export function generateStaticParams() {
@@ -32,7 +32,7 @@ export async function generateMetadata({
       siteName: "Galador",
       locale: "es_ES",
       type: "article",
-      images: [{ url: miniatura(caso.youtubeId), width: 480, height: 360 }],
+      images: [{ url: portada(caso), width: 720, height: 1280 }],
     },
   };
 }
@@ -60,14 +60,17 @@ export default async function CasoPage({ params }: { params: Promise<{ slug: str
       headline: caso.titulo,
       description: caso.descripcion,
       keywords: [articulo.palabraClave, ...caso.etiquetas].join(", "),
-      image: [miniatura(caso.youtubeId)],
+      image: [`https://www.galador.es${portada(caso)}`],
       datePublished: caso.fecha,
       mainEntityOfPage: url,
       about: { "@type": "Organization", name: caso.empresa },
       video: {
         "@type": "VideoObject",
         name: caso.titulo,
-        thumbnailUrl: [miniatura(caso.youtubeId)],
+        description: caso.descripcion,
+        thumbnailUrl: [`https://www.galador.es${portada(caso)}`],
+        uploadDate: caso.fecha,
+        duration: caso.duracion,
         embedUrl: `https://www.youtube-nocookie.com/embed/${caso.youtubeId}`,
       },
       author: { "@type": "Person", name: "Paula Gallego", url: "https://www.galador.es" },
@@ -135,11 +138,12 @@ export default async function CasoPage({ params }: { params: Promise<{ slug: str
           </dl>
 
           <div className="mt-10 grid gap-8 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] items-start">
-            <VideoYoutube
+            <VideoTestimonio
               youtubeId={caso.youtubeId}
-              titulo={`Testimonio de ${caso.persona}, ${caso.cargo}`}
-              vertical={caso.vertical}
-              prioridad
+              cita={caso.cita}
+              autor={`${caso.persona}, ${caso.cargo}`}
+              retrato={retrato(caso)}
+              duracion={duracionLegible(caso.duracion)}
             />
             <div className="bg-surface border border-border rounded-[var(--radius-card)] p-6">
               <h2 className="text-lg text-primary mb-4">Este caso es para ti si…</h2>

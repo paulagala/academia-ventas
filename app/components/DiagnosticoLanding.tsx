@@ -3,6 +3,7 @@ import Link from "next/link";
 import CalReserva from "./CalReserva";
 import Faq from "./Faq";
 import VideoTestimonio from "./VideoTestimonio";
+import { getCaso, retrato } from "../casos/casos";
 import {
   CANAL_YOUTUBE,
   duracionLegible,
@@ -451,9 +452,8 @@ function Prueba() {
   // No cambiar una cifra sin que el cliente la haya dicho o autorizado.
   const casos = [
     {
-      // Pega aquí el ID del vídeo de YouTube (la parte después de v=) y el vídeo aparecerá solo
-      youtubeId: "",
-      // El caso completo en /casos/{slug}. Vacío mientras no esté escrito.
+      // El caso completo en /casos/{slug}. De ahí salen también el vídeo, su
+      // portada y su duración (app/casos/casos.json).
       caso: "hotlist",
       cita: "Me ha hecho un por dos, Paula. Te mete caña, te dice las cosas a la cara.",
       autor: "Lucía, CEO de Hotlist",
@@ -465,8 +465,6 @@ function Prueba() {
       resultado: "Más de 10.000 €/mes recurrentes desde marzo de 2026.",
     },
     {
-      // Pega aquí el ID del vídeo de YouTube (la parte después de v=) y el vídeo aparecerá solo
-      youtubeId: "",
       caso: "farma-leaders",
       cita: "Hemos pasado de vender porque tenemos un buen producto a vender porque realmente sabemos vender.",
       autor: "José, responsable de ventas de Farma Leaders Talento",
@@ -478,8 +476,6 @@ function Prueba() {
       resultado: "La conversión pasó del 8 % al 10 %: unos 40.000 € netos más.",
     },
     {
-      // Pega aquí el ID del vídeo de YouTube (la parte después de v=) y el vídeo aparecerá solo
-      youtubeId: "",
       caso: "isyfu",
       cita: "Nos ha permitido quitarle el techo que teníamos, que era de dirección comercial.",
       autor: "Samuel Acera, CEO de ISYFU",
@@ -506,13 +502,15 @@ function Prueba() {
         <div className="grid md:grid-cols-3 gap-6">
           {casos.map((c) => (
             <div key={c.empresa} className="bg-[#FFFDF9] border border-[#DBD5C9] rounded-2xl p-8 flex flex-col gap-5">
-              <div className="flex items-baseline justify-between gap-3">
-                <span className="text-5xl text-[#791E2A] leading-none num-mono font-[family-name:var(--font-dm-serif)]">
+              {/* Empresa arriba y cifra en una sola línea: así las tres cabeceras
+                  miden lo mismo aunque una cifra sea más larga («+40.000 €»). */}
+              <div>
+                <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-[#5A4F48]">{c.empresa}</h3>
+                <div className="mt-3 whitespace-nowrap text-4xl lg:text-5xl text-[#791E2A] leading-none num-mono font-[family-name:var(--font-dm-serif)]">
                   {c.cifra}
-                </span>
-                <h3 className="text-base font-semibold text-[#2B231F]">{c.empresa}</h3>
+                </div>
+                <div className="mt-3 text-[#5A4F48]">{c.label}</div>
               </div>
-              <div className="text-[#5A4F48]">{c.label}</div>
               <div className="border-t border-[#DBD5C9]" />
               <div>
                 <div className="text-sm font-semibold uppercase tracking-[0.12em] text-[#5A4F48] mb-1.5">
@@ -533,21 +531,26 @@ function Prueba() {
                 <p className="text-sm text-[#2B231F] leading-relaxed">{c.resultado}</p>
               </div>
 
-              <VideoTestimonio youtubeId={c.youtubeId} empresa={c.empresa} />
-
-              {"caso" in c && c.caso && (
+              {/* El vídeo va al fondo de la tarjeta (mt-auto) para que los tres
+                  queden a la misma altura aunque los textos midan distinto. */}
+              <div className="mt-auto pt-2 flex flex-col gap-4">
+                {(() => {
+                  const caso = getCaso(c.caso);
+                  if (!caso?.youtubeId) return null;
+                  return (
+                    <VideoTestimonio
+                      youtubeId={caso.youtubeId}
+                      cita={c.cita}
+                      autor={c.autor}
+                      retrato={retrato(caso)}
+                      duracion={duracionLegible(caso.duracion)}
+                    />
+                  );
+                })()}
                 <Link href={`/casos/${c.caso}`} className={`text-sm font-semibold text-[#791E2A] hover:underline ${FOCUS}`}>
                   Leer el caso completo →
                 </Link>
-              )}
-
-              {/* La cita solo se publica cuando existe de verdad (ver el array de casos) */}
-              {c.cita && (
-                <figure className="mt-auto pt-2 m-0 text-sm text-[#5A4F48] leading-relaxed">
-                  <blockquote className="m-0 italic text-[#2B231F]">«{c.cita}»</blockquote>
-                  {c.autor && <figcaption className="mt-1 not-italic">{c.autor}</figcaption>}
-                </figure>
-              )}
+              </div>
             </div>
           ))}
         </div>

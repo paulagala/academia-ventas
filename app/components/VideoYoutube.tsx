@@ -9,7 +9,7 @@ import { useState } from "react";
  * (≈1 MB de JavaScript de terceros) se monta únicamente cuando alguien pulsa
  * play, así que un vídeo incrustado no penaliza la velocidad de la página.
  *
- * Hermano de VideoTestimonio, que hace lo mismo para los casos de la home.
+ * Hermano de VideoTestimonio, que hace lo mismo para los vídeos de los casos.
  * Están separados a propósito: aquel lleva el texto pensado para testimonios
  * («Ver el testimonio de X») y este el de una pieza de contenido.
  */
