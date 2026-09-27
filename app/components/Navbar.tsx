@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Logo from "./Logo";
 
 export default function Navbar() {
   return (
@@ -9,9 +10,9 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         <Link
           href="/"
-          className="inline-flex items-center min-h-11 text-lg font-semibold text-primary font-[family-name:var(--font-dm-serif)]"
+          className="inline-flex items-center min-h-11"
         >
-          Galador
+          <Logo className="h-6 sm:h-7 w-auto text-[#791E2A]" />
         </Link>
         <div className="flex items-center gap-6 text-sm text-text-muted">
           {/* min-h-11 = 44px de área táctil, aunque el texto ocupe menos. */}
@@ -28,7 +29,8 @@ export default function Navbar() {
             href="/#formulario"
             className="inline-flex items-center min-h-11 bg-accent text-surface px-5 rounded-[var(--radius-button)] font-semibold hover:bg-accent-hover transition"
           >
-            Solicitar diagnóstico
+            <span className="sm:hidden">Diagnóstico</span>
+            <span className="hidden sm:inline">Solicitar diagnóstico</span>
           </Link>
         </div>
       </div>

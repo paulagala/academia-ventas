@@ -1,3 +1,5 @@
+import { Simbolo } from "./Logo";
+
 // Acordeón de preguntas frecuentes con <details>/<summary> nativos:
 // funciona sin JavaScript, es navegable por teclado y Google lo indexa como texto.
 const preguntas = [
@@ -61,7 +63,7 @@ export default function Faq() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[360px_1fr] gap-10 lg:gap-16">
         <div>
           <div className="inline-flex items-center gap-2 bg-[#E3E5DC] text-[#3F5E53] text-sm font-semibold tracking-[0.06em] px-3.5 py-1.5 rounded-full mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#3F5E53]" aria-hidden="true" />
+            <Simbolo className="w-3.5 h-3.5" />
             Preguntas frecuentes
           </div>
           <h2 className="text-3xl sm:text-4xl text-[#2B231F] font-[family-name:var(--font-dm-serif)] leading-tight">

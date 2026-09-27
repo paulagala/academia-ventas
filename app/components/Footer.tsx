@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Logo from "./Logo";
 
 // Enlace de footer con 44px de área táctil (el texto solo ocupa ~20px de alto).
 function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
@@ -17,9 +18,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
           <div>
-            <div className="text-lg font-semibold text-primary mb-3 font-[family-name:var(--font-dm-serif)]">
-              Galador
-            </div>
+            <Logo className="h-7 w-auto text-[#791E2A] mb-4" />
             {/* El nombre propio se mantiene aquí: la marca es Galador, pero
                 «Paula Gallego» tiene recorrido de búsqueda y firma el servicio. */}
             <p className="text-sm text-text-muted leading-relaxed">

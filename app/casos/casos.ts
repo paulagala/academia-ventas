@@ -32,6 +32,8 @@ export type Caso = {
   descripcion: string;
   /** Una frase para la tarjeta del índice. */
   resumen: string;
+  /** La cifra grande de la tarjeta en /casos y en la home (una de `cifras`). */
+  cifraDestacada: string;
   cifras: { valor: string; texto: string }[];
   cita: string;
   /** Conceptos que trata: enlaza con los vídeos que comparten etiqueta. */

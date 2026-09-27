@@ -57,7 +57,7 @@ export default function CasosPage() {
                   className="group flex flex-col gap-4 h-full bg-surface border border-border rounded-[var(--radius-card)] p-7 hover:border-secondary/30 hover:shadow-[var(--shadow-sm)] transition"
                 >
                   <div className="flex items-baseline justify-between gap-3">
-                    <span className="text-4xl text-accent num-mono">{c.cifras[c.cifras.length - 1].valor}</span>
+                    <span className="text-4xl text-accent num-mono whitespace-nowrap">{c.cifraDestacada}</span>
                     <span className="text-xs bg-secondary/10 text-secondary-dark px-2.5 py-1 rounded-full font-medium">
                       {c.sector.nombre}
                     </span>

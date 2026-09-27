@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Simbolo } from "./Logo";
 
 export default function FloatingButton() {
   return (
@@ -6,7 +7,7 @@ export default function FloatingButton() {
       href="/#formulario"
       className="fixed bottom-6 right-6 min-h-12 bg-accent text-surface px-5 py-3 rounded-[var(--radius-button)] shadow-[var(--shadow-soft)] hover:bg-accent-hover transition flex items-center gap-2 text-sm font-semibold z-40"
     >
-      <span className="w-1.5 h-1.5 bg-surface/80 rounded-full" aria-hidden="true" />
+      <Simbolo className="w-3.5 h-3.5 text-surface/85" />
       Solicitar diagnóstico
     </Link>
   );
