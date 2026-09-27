@@ -5,23 +5,46 @@
     "persona": "Lucía",
     "cargo": "CEO de Hotlist",
     "queHace": "Startup de recursos humanos para hostelería",
-    "sector": { "href": "/ventas-para-empresas-de-externalizacion-rrhh", "nombre": "Externalización de RRHH" },
-    "servicio": { "href": "/direccion-comercial-externa", "nombre": "Dirección comercial externa" },
+    "sector": {
+      "href": "/ventas-para-empresas-de-externalizacion-rrhh",
+      "nombre": "Externalización de RRHH"
+    },
+    "servicio": {
+      "href": "/direccion-comercial-externa",
+      "nombre": "Dirección comercial externa"
+    },
     "youtubeId": "wpoeCcRjiBk",
     "vertical": true,
     "fecha": "2026-09-27",
     "titulo": "De 5.000 a más de 10.000 € al mes vendiendo ella sola: el caso de Hotlist",
     "tituloSeo": "Caso Hotlist: de 5.000 a 10.000 €/mes vendiendo sola",
     "descripcion": "Lucía, CEO de Hotlist, llevaba dos meses sin cerrar un cliente y vendía sin guion. Cómo duplicó sus ingresos recurrentes sin equipo comercial.",
-    "resumen": "La CEO vendía sola y sin guion. Dos meses sin cerrar un cliente nuevo. Hoy factura el doble.",
+    "resumen": "La CEO vendía sola y sin guion, y llevaba dos meses sin cerrar un cliente. Hoy factura el doble y ya tiene un comercial.",
     "cifras": [
-      { "valor": "0", "texto": "clientes nuevos en enero y febrero de 2026" },
-      { "valor": "5.000 €", "texto": "de ingresos recurrentes al mes, al empezar" },
-      { "valor": "+10.000 €", "texto": "de ingresos recurrentes al mes desde marzo" },
-      { "valor": "x2", "texto": "en facturación recurrente" }
+      {
+        "valor": "0",
+        "texto": "clientes nuevos en enero y febrero de 2026"
+      },
+      {
+        "valor": "5.000 €",
+        "texto": "de ingresos recurrentes al mes, al empezar"
+      },
+      {
+        "valor": "+10.000 €",
+        "texto": "de ingresos recurrentes al mes desde marzo"
+      },
+      {
+        "valor": "x2",
+        "texto": "en facturación recurrente"
+      }
     ],
     "cita": "Me ha hecho un por dos, Paula. Te mete caña, te dice las cosas a la cara.",
-    "etiquetas": ["guion de ventas", "llamada de venta", "cierre de ventas", "vender sin equipo comercial"],
+    "etiquetas": [
+      "guion de ventas",
+      "llamada de venta",
+      "cierre de ventas",
+      "vender sin equipo comercial"
+    ],
     "paraQuien": [
       "Fundaste el negocio y las reuniones de venta las haces tú, sin equipo comercial.",
       "Vendes un servicio con cuota mensual, así que cada cliente que no cierras se nota todo el año.",
@@ -54,7 +77,7 @@
           "titulo": "El resultado: de 5.000 € a más de 10.000 € recurrentes al mes",
           "parrafos": [
             "Lucía empezó a aplicar el guion en marzo de 2026. Desde entonces ha pasado de unos 5.000 € a más de 10.000 € de ingresos recurrentes al mes. En sus palabras: «Me ha hecho un por dos».",
-            "El servicio era el mismo y los clientes potenciales también. Lo que cambió fue la conversación. Y lo más importante para un negocio que empieza: lo que funciona ahora está escrito. El día que Lucía contrate a alguien para vender, tendrá un guion y un proceso que entregarle, en lugar de tener que explicarle cómo vende ella."
+            "El servicio era el mismo y los clientes potenciales también. Lo que cambió fue la conversación. Y como lo que funciona quedó escrito, el negocio ya no depende de cómo venda Lucía cada día: hoy Hotlist tiene un comercial y la facturación sigue subiendo."
           ]
         },
         {
@@ -68,7 +91,7 @@
       "faq": [
         {
           "pregunta": "¿Se puede mejorar la venta si todavía no tengo equipo comercial?",
-          "respuesta": "Sí, y es el mejor momento. Si vendes tú, el trabajo se hace sobre tus propias reuniones: se ve qué funciona, se escribe y se convierte en un guion. Cuando contrates, esa persona tendrá con qué empezar desde el primer día."
+          "respuesta": "Sí, y es el mejor momento. Si vendes tú, el trabajo se hace sobre tus propias reuniones: se ve qué funciona, se escribe y se convierte en un guion. Cuando contrates, esa persona tendrá con qué empezar. Es lo que ha pasado en Hotlist, que ya tiene un comercial."
         },
         {
           "pregunta": "¿Cuánto tardan en notarse los resultados?",
