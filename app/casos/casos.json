@@ -216,5 +216,117 @@
         }
       ]
     }
+  },
+  {
+    "slug": "isyfu",
+    "empresa": "ISYFU",
+    "persona": "Samuel Acera",
+    "cargo": "CEO de ISYFU",
+    "queHace": "Instituto Seguridad y Futuro: empresa de educación",
+    "sector": {
+      "href": "/ventas-para-empresas-de-formacion",
+      "nombre": "Empresas de formación"
+    },
+    "servicio": {
+      "href": "/direccion-comercial-externa",
+      "nombre": "Dirección comercial externa"
+    },
+    "youtubeId": "Rw_HfSFU4rs",
+    "vertical": true,
+    "fecha": "2026-09-27",
+    "titulo": "De 60.000 € a 250.000 € al año sin competir por precio: el caso de ISYFU",
+    "tituloSeo": "Caso ISYFU: de 60.000 € a 250.000 € al año",
+    "descripcion": "ISYFU, una empresa de educación, competía por precio y tenía un techo comercial. Cómo multiplicó por cuatro su facturación en dos años con dirección comercial.",
+    "resumen": "Atendían bien a sus alumnos, pero nadie dirigía la parte comercial y competían por precio. En dos años, la facturación se multiplicó por cuatro.",
+    "cifras": [
+      {
+        "valor": "60.000 €",
+        "texto": "de facturación anual al empezar, en 2024"
+      },
+      {
+        "valor": "250.000 €",
+        "texto": "de facturación anual, aproximadamente, dos años después"
+      },
+      {
+        "valor": "x4",
+        "texto": "en facturación anual"
+      },
+      {
+        "valor": "2 años",
+        "texto": "de dirección comercial mano a mano"
+      }
+    ],
+    "cita": "Nos ha permitido quitarle el techo que teníamos, que era de dirección comercial.",
+    "etiquetas": [
+      "dirección comercial",
+      "oferta y precio",
+      "competir por precio",
+      "equipo comercial"
+    ],
+    "paraQuien": [
+      "Tu negocio funciona y tus clientes están contentos, pero la facturación lleva tiempo sin despegar.",
+      "En tu sector todo el mundo compite por precio y te cuesta explicar por qué vales más.",
+      "Nadie en la empresa se dedica a dirigir la parte comercial: se vende, pero no se decide cómo.",
+      "Quieres crecer con más gente vendiendo y no tienes forma de formarla."
+    ],
+    "articulo": {
+      "palabraClave": "dirección comercial externa",
+      "intro": [
+        "ISYFU, Instituto Seguridad y Futuro, es una empresa de educación. Empezamos a trabajar juntos en 2024, cuando facturaba unos 60.000 € al año. Hoy factura unos 250.000 €.",
+        "Lo interesante de este caso no es solo la cifra, sino dónde estaba el problema. No era el producto ni la atención al alumno: eso lo hacían bien. Era que nadie dirigía la parte comercial. Si tu negocio funciona pero lleva tiempo sin crecer, puede que te pase lo mismo."
+      ],
+      "secciones": [
+        {
+          "titulo": "El punto de partida: buen servicio, pero sin dirección comercial",
+          "parrafos": [
+            "Samuel Acera, su CEO, lo cuenta con mucha gracia: «A nivel comercial, la verdad es que éramos una panda de hippies. No teníamos mucha idea de cómo teníamos que hacerlo». Sabían atender al cliente y darle lo que necesitaba. Lo que no sabían era cómo dirigir el área comercial.",
+            "Y eso tiene un síntoma claro: un techo. El negocio vende, los clientes están contentos, pero la facturación no pasa de cierta cifra por mucho que se trabaje. Samuel lo define así: el techo que tenían «era de dirección comercial»."
+          ]
+        },
+        {
+          "titulo": "El problema de fondo: competir por precio",
+          "parrafos": [
+            "Cuando lo analizamos, el techo tenía varias capas: la oferta, el precio y, sobre todo, cómo distinguirse de los demás. En educación pasa mucho. Como explica Samuel, «todo parece que se tiene que competir por el precio».",
+            "Si lo único que el alumno puede comparar es el temario y lo que cuesta, siempre gana el más barato, y bajar precios para ganar ese juego es la forma más rápida de quedarte sin margen. Lo desarrollo en [cómo se vende en las empresas de formación](/ventas-para-empresas-de-formacion): el precio deja de ser el tema cuando la oferta y la conversación dan otra cosa que comparar."
+          ]
+        },
+        {
+          "titulo": "Qué hicimos: dos años de dirección comercial mano a mano",
+          "parrafos": [
+            "No fue un curso ni una formación puntual. Fue trabajar mano a mano durante dos años, dando sentido a la dirección comercial: revisar la oferta, el precio y cómo diferenciarse más allá del precio. En palabras de Samuel, «hay formas desde la dirección comercial de romper con eso y diferenciarte».",
+            "La otra mitad del trabajo fue que el crecimiento no dependiera de unas pocas personas. Montamos sistemas de onboarding y sistemas de formación dentro de la empresa, para poder formar tanto a las personas del equipo como a las que llegan de fuera a ayudar. Es lo que convierte la forma de vender en un [sistema de ventas](/sistema-de-ventas) que se puede enseñar.",
+            "Y aprovechamos la inteligencia artificial para mejorar los procesos, algo que Samuel también destaca en su vídeo."
+          ]
+        },
+        {
+          "titulo": "El resultado: de 60.000 € a unos 250.000 € al año",
+          "parrafos": [
+            "En dos años, la facturación pasó de unos 60.000 € a unos 250.000 € anuales: algo más de cuatro veces. Pero lo que Samuel valora no es solo la cifra: «Ahora mismo no sentimos que a nivel comercial tengamos un techo. Quizá en otras áreas tenemos que mejorar, pero tenemos una dirección comercial con recorrido, que era lo que buscábamos».",
+            "Ese es el matiz importante. Un pico de ventas se puede conseguir de muchas formas. Tener una dirección comercial con recorrido significa que el crecimiento puede continuar, porque la oferta está clara y hay forma de formar a cada persona nueva que entra a vender."
+          ]
+        },
+        {
+          "titulo": "Qué puedes aplicar de este caso a tu negocio",
+          "parrafos": [
+            "Si tu facturación lleva tiempo estancada, antes de invertir en más captación hazte tres preguntas. ¿Tu oferta explica por qué vales lo que cuestas, o solo describe lo que incluye? ¿Alguien de tu equipo tiene como trabajo decidir cómo se vende, o se vende como va saliendo? ¿Si mañana entra una persona nueva a vender, tienes con qué formarla?",
+            "Si alguna respuesta es no, probablemente tu techo también es de dirección comercial. Es lo que hago en la [dirección comercial externa](/direccion-comercial-externa): dirigir la parte comercial de tu negocio sin que tengas que contratar a un director en plantilla. Si lo que te preocupa es preparar al equipo para crecer, el [caso de Farma Leaders](/casos/farma-leaders) cuenta cómo; y si todavía vendes tú en solitario, empieza por el [caso de Hotlist](/casos/hotlist)."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "pregunta": "¿Qué es una dirección comercial externa?",
+          "respuesta": "Es tener a alguien que dirige la parte comercial de tu negocio sin estar en plantilla: decide la oferta y el precio, cómo diferenciarte y cómo se forma a quien vende. En ISYFU fue un trabajo mano a mano durante dos años."
+        },
+        {
+          "pregunta": "¿Cómo se deja de competir por precio en educación?",
+          "respuesta": "Trabajando la oferta y la diferenciación para que el alumno tenga algo más que comparar que el temario y el precio. Es lo que permitió a ISYFU crecer en un sector donde, como dice su CEO, todo parece que se tiene que competir por el precio."
+        },
+        {
+          "pregunta": "¿Cuánto se tarda en ver resultados así?",
+          "respuesta": "Un cambio de esta escala no es inmediato. En ISYFU la facturación pasó de unos 60.000 € a unos 250.000 € al año en dos años. Las primeras mejoras llegan antes, pero multiplicar por cuatro requiere trabajar oferta, precio y equipo a la vez."
+        }
+      ]
+    }
   }
 ]

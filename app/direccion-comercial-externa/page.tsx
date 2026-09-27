@@ -78,6 +78,7 @@ export default function Page() {
           "En dos años se trabajó la oferta, el precio, cómo diferenciarse más allá del precio y un sistema para formar tanto al equipo interno como a quien entra nuevo. La facturación pasó de unos 60.000 € a unos 250.000 € al año.",
           "«Nos ha permitido quitarle el techo que teníamos, que era de dirección comercial», resume su CEO, Samuel Acera.",
         ],
+        enlace: { href: "/casos/isyfu", texto: "Leer el caso completo de ISYFU" },
       }}
       faq={[
         {

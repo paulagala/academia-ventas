@@ -480,6 +480,7 @@ function Prueba() {
     {
       // Pega aquí el ID del vídeo de YouTube (la parte después de v=) y el vídeo aparecerá solo
       youtubeId: "",
+      caso: "isyfu",
       cita: "Nos ha permitido quitarle el techo que teníamos, que era de dirección comercial.",
       autor: "Samuel Acera, CEO de ISYFU",
       empresa: "ISYFU",
