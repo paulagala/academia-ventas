@@ -3,6 +3,7 @@ import Link from "next/link";
 import CalReserva from "./CalReserva";
 import Faq from "./Faq";
 import VideoTestimonio from "./VideoTestimonio";
+import { getCaso, portada } from "../casos/casos";
 import {
   CANAL_YOUTUBE,
   duracionLegible,
@@ -451,9 +452,8 @@ function Prueba() {
   // No cambiar una cifra sin que el cliente la haya dicho o autorizado.
   const casos = [
     {
-      // Pega aquí el ID del vídeo de YouTube (la parte después de v=) y el vídeo aparecerá solo
-      youtubeId: "",
-      // El caso completo en /casos/{slug}. Vacío mientras no esté escrito.
+      // El caso completo en /casos/{slug}. De ahí salen también el vídeo, su
+      // portada y su duración (app/casos/casos.json).
       caso: "hotlist",
       cita: "Me ha hecho un por dos, Paula. Te mete caña, te dice las cosas a la cara.",
       autor: "Lucía, CEO de Hotlist",
@@ -465,8 +465,6 @@ function Prueba() {
       resultado: "Más de 10.000 €/mes recurrentes desde marzo de 2026.",
     },
     {
-      // Pega aquí el ID del vídeo de YouTube (la parte después de v=) y el vídeo aparecerá solo
-      youtubeId: "",
       caso: "farma-leaders",
       cita: "Hemos pasado de vender porque tenemos un buen producto a vender porque realmente sabemos vender.",
       autor: "José, responsable de ventas de Farma Leaders Talento",
@@ -478,8 +476,6 @@ function Prueba() {
       resultado: "La conversión pasó del 8 % al 10 %: unos 40.000 € netos más.",
     },
     {
-      // Pega aquí el ID del vídeo de YouTube (la parte después de v=) y el vídeo aparecerá solo
-      youtubeId: "",
       caso: "isyfu",
       cita: "Nos ha permitido quitarle el techo que teníamos, que era de dirección comercial.",
       autor: "Samuel Acera, CEO de ISYFU",
@@ -533,9 +529,21 @@ function Prueba() {
                 <p className="text-sm text-[#2B231F] leading-relaxed">{c.resultado}</p>
               </div>
 
-              <VideoTestimonio youtubeId={c.youtubeId} empresa={c.empresa} />
+              {(() => {
+                const caso = getCaso(c.caso);
+                if (!caso?.youtubeId) return null;
+                return (
+                  <VideoTestimonio
+                    youtubeId={caso.youtubeId}
+                    empresa={c.empresa}
+                    persona={c.autor.split(/[ ,]/)[0]}
+                    portada={portada(caso)}
+                    duracion={duracionLegible(caso.duracion)}
+                  />
+                );
+              })()}
 
-              {"caso" in c && c.caso && (
+              {c.caso && (
                 <Link href={`/casos/${c.caso}`} className={`text-sm font-semibold text-[#791E2A] hover:underline ${FOCUS}`}>
                   Leer el caso completo →
                 </Link>

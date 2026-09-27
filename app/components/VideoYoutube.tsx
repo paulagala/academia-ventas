@@ -18,6 +18,7 @@ export default function VideoYoutube({
   titulo,
   prioridad = false,
   vertical = false,
+  portada,
 }: {
   youtubeId: string;
   titulo: string;
@@ -25,6 +26,8 @@ export default function VideoYoutube({
   prioridad?: boolean;
   /** true para un Short: el reproductor pasa a formato vertical. */
   vertical?: boolean;
+  /** Imagen propia en lugar de la miniatura de YouTube (p. ej. la de un caso). */
+  portada?: string;
 }) {
   const [reproduciendo, setReproduciendo] = useState(false);
 
@@ -55,7 +58,7 @@ export default function VideoYoutube({
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={`https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`}
+        src={portada ?? `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`}
         alt=""
         loading={prioridad ? "eager" : "lazy"}
         fetchPriority={prioridad ? "high" : "auto"}

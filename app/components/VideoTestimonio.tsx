@@ -3,39 +3,44 @@
 import { useState } from "react";
 
 /**
- * Testimonio en vídeo alojado en YouTube.
+ * Testimonio en vídeo de un caso, para las tarjetas de la home.
  *
- * CÓMO SACAR EL ID DE UN VÍDEO:
- * abre el vídeo en YouTube y mira la barra de direcciones. En
- * https://www.youtube.com/watch?v=dQw4w9WgXcQ el id es lo que va
- * después de "v=", es decir: dQw4w9WgXcQ. Si lo compartes desde el móvil
- * te dará algo como https://youtu.be/dQw4w9WgXcQ: el id es la parte final.
- * Pega solo ese trozo (sin la URL entera) en la lista de casos.
+ * Los datos (id de YouTube, portada, duración) salen de app/casos/casos.json:
+ * la home no guarda ids propios, así que un vídeo nuevo aparece aquí solo con
+ * añadirlo al caso.
  *
- * Mientras no haya id, el componente no pinta nada: así la web nunca
- * muestra un hueco roto por un vídeo que todavía no existe.
+ * La portada es un fotograma elegido a mano (ver `portada()` en casos.ts), no
+ * la miniatura de YouTube, que en los Shorts sale encajonada entre franjas
+ * borrosas. Se recorta a 4:5 por arriba para que la tarjeta no crezca de más;
+ * al pulsar play el reproductor pasa al formato vertical completo.
  *
- * Al cargar la página solo se descarga la miniatura. El reproductor de
- * YouTube (≈1 MB de JavaScript de terceros) se monta únicamente cuando
- * alguien pulsa play.
+ * Al cargar la página solo se descarga la portada. El reproductor de YouTube
+ * (≈1 MB de JavaScript de terceros) se monta únicamente cuando alguien pulsa
+ * play.
  */
 export default function VideoTestimonio({
   youtubeId,
   empresa,
+  persona,
+  portada,
+  duracion,
 }: {
-  youtubeId?: string;
+  youtubeId: string;
   empresa: string;
+  /** Quien habla en el vídeo, solo el nombre: «Lucía». */
+  persona: string;
+  portada: string;
+  /** Ya legible: «2:19». */
+  duracion: string;
 }) {
   const [reproduciendo, setReproduciendo] = useState(false);
 
-  if (!youtubeId) return null;
-
   if (reproduciendo) {
     return (
-      <div className="aspect-video rounded-xl overflow-hidden bg-[#2B231F]">
+      <div className="aspect-[9/16] rounded-xl overflow-hidden bg-[#2B231F]">
         <iframe
           src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1`}
-          title={`Testimonio de ${empresa}`}
+          title={`Testimonio de ${persona}, de ${empresa}`}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
           className="w-full h-full"
@@ -48,21 +53,29 @@ export default function VideoTestimonio({
     <button
       type="button"
       onClick={() => setReproduciendo(true)}
-      aria-label={`Ver el testimonio de ${empresa}`}
-      className="group relative block w-full aspect-video rounded-xl overflow-hidden bg-[#2B231F] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#791E2A]"
+      aria-label={`Ver el testimonio de ${persona}, de ${empresa} (${duracion})`}
+      className="group relative block w-full aspect-[4/5] rounded-xl overflow-hidden bg-[#2B231F] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#791E2A]"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={`https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`}
+        src={portada}
         alt=""
         loading="lazy"
-        className="absolute inset-0 w-full h-full object-cover transition group-hover:opacity-90"
+        width={720}
+        height={1280}
+        className="absolute inset-0 w-full h-full object-cover object-top transition duration-500 group-hover:scale-[1.03]"
       />
-      <span className="absolute inset-0 flex items-center justify-center">
-        <span className="w-16 h-16 rounded-full bg-[#791E2A] flex items-center justify-center text-[#FAFAFA] shadow-lg transition group-hover:scale-110">
-          <svg aria-hidden="true" className="w-7 h-7 ml-1" fill="currentColor" viewBox="0 0 24 24">
+      {/* Degradado para que el texto se lea sobre cualquier fotograma */}
+      <span className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#2B231F]/85 to-transparent" />
+      <span className="absolute left-4 right-4 bottom-4 flex items-center gap-3 text-left">
+        <span className="w-12 h-12 flex-shrink-0 rounded-full bg-[#791E2A] flex items-center justify-center text-[#FAFAFA] shadow-lg transition group-hover:scale-110">
+          <svg aria-hidden="true" className="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M8 5v14l11-7z" />
           </svg>
+        </span>
+        <span className="text-[#FAFAFA] leading-tight">
+          <span className="block text-sm font-semibold">{persona} lo cuenta</span>
+          <span className="block text-xs opacity-80 num-mono">{duracion} min</span>
         </span>
       </span>
     </button>

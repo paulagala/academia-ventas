@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import DiagnosticoLanding from "./components/DiagnosticoLanding";
+import { CASOS, portada } from "./casos/casos";
 import { CANAL_YOUTUBE } from "./videos/videos";
 
 // La home escribe su título entero: el `template` del layout solo se aplica a
@@ -52,13 +53,28 @@ const datosEstructurados = {
   ],
 };
 
+// Los vídeos de los casos que se ven en la home, para que Google los asocie
+// también a esta página (cada uno tiene además su propia página en /casos).
+const videosCasos = CASOS.filter((c) => c.youtubeId).map((c) => ({
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  name: `Testimonio de ${c.empresa}: ${c.titulo}`,
+  description: c.descripcion,
+  thumbnailUrl: [`https://www.galador.es${portada(c)}`],
+  uploadDate: c.fecha,
+  duration: c.duracion,
+  embedUrl: `https://www.youtube-nocookie.com/embed/${c.youtubeId}`,
+  url: `https://www.galador.es/casos/${c.slug}`,
+  inLanguage: "es",
+}));
+
 export default function HomePage() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(datosEstructurados).replace(/</g, "\\u003c"),
+          __html: JSON.stringify([datosEstructurados, ...videosCasos]).replace(/</g, "\\u003c"),
         }}
       />
       <DiagnosticoLanding />
