@@ -502,13 +502,15 @@ function Prueba() {
         <div className="grid md:grid-cols-3 gap-6">
           {casos.map((c) => (
             <div key={c.empresa} className="bg-[#FFFDF9] border border-[#DBD5C9] rounded-2xl p-8 flex flex-col gap-5">
-              <div className="flex items-baseline justify-between gap-3">
-                <span className="text-5xl text-[#791E2A] leading-none num-mono font-[family-name:var(--font-dm-serif)]">
+              {/* Empresa arriba y cifra en una sola línea: así las tres cabeceras
+                  miden lo mismo aunque una cifra sea más larga («+40.000 €»). */}
+              <div>
+                <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-[#5A4F48]">{c.empresa}</h3>
+                <div className="mt-3 whitespace-nowrap text-4xl lg:text-5xl text-[#791E2A] leading-none num-mono font-[family-name:var(--font-dm-serif)]">
                   {c.cifra}
-                </span>
-                <h3 className="text-base font-semibold text-[#2B231F]">{c.empresa}</h3>
+                </div>
+                <div className="mt-3 text-[#5A4F48]">{c.label}</div>
               </div>
-              <div className="text-[#5A4F48]">{c.label}</div>
               <div className="border-t border-[#DBD5C9]" />
               <div>
                 <div className="text-sm font-semibold uppercase tracking-[0.12em] text-[#5A4F48] mb-1.5">
