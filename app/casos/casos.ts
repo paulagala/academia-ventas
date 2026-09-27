@@ -57,7 +57,11 @@ export function portada(caso: Caso): string {
   return `/casos/${caso.slug}.jpg`;
 }
 
-/** Retrato cuadrado (240×240) recortado de la portada, para el círculo del testimonio. */
+/**
+ * Retrato cuadrado (240×240) para el círculo del testimonio. Sale de la
+ * portada del vídeo en YouTube (https://i.ytimg.com/vi/{id}/maxresdefault.jpg),
+ * recortando la cara por encima del rótulo «Caso de éxito».
+ */
 export function retrato(caso: Caso): string {
   return `/casos/${caso.slug}-retrato.jpg`;
 }
