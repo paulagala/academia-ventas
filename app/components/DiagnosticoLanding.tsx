@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import LeadForm from "./LeadForm";
+import CalReserva from "./CalReserva";
 import Faq from "./Faq";
 import VideoTestimonio from "./VideoTestimonio";
 import {
@@ -141,13 +141,13 @@ function Hero() {
             vender.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
-            <Cta className="px-7 py-4 text-base">Pedir diagnóstico (30 min, sin coste)</Cta>
+            <Cta className="px-7 py-4 text-base">Pedir diagnóstico (45 min, sin coste)</Cta>
             <Cta href="#casos" variant="secundario" className="px-7 py-4 text-base">
               Ver casos reales
             </Cta>
           </div>
           <p className="text-sm text-[#5A4F48] mt-4">
-            Lo reviso yo, no un equipo de ventas. Respuesta en 24–48 h.
+            Reservas directamente en mi agenda. La llamada la hago yo, no un equipo de ventas.
           </p>
         </div>
 
@@ -378,7 +378,7 @@ function CtaBanda() {
     <section className="py-12 sm:py-14 bg-[#E3E5DC] border-b border-[#DBD5C9]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-10">
         <p className="flex-1 text-lg sm:text-xl text-[#2B231F] leading-relaxed font-[family-name:var(--font-dm-serif)]">
-          El diagnóstico dura 30 minutos, no tiene coste y sales de él sabiendo dónde se te están
+          El diagnóstico dura 45 minutos, no tiene coste y sales de él sabiendo dónde se te están
           escapando las ventas. Trabajemos juntos o no.
         </p>
         <Cta className="px-7 py-4 text-base flex-shrink-0">Pedir diagnóstico</Cta>
@@ -452,7 +452,9 @@ function Prueba() {
   const casos = [
     {
       // Pega aquí el ID del vídeo de YouTube (la parte después de v=) y el vídeo aparecerá solo
-      youtubeId: "wpoeCcRjiBk",
+      youtubeId: "",
+      // El caso completo en /casos/{slug}. Vacío mientras no esté escrito.
+      caso: "hotlist",
       cita: "Me ha hecho un por dos, Paula. Te mete caña, te dice las cosas a la cara.",
       autor: "Lucía, CEO de Hotlist",
       empresa: "Hotlist",
@@ -530,6 +532,12 @@ function Prueba() {
               </div>
 
               <VideoTestimonio youtubeId={c.youtubeId} empresa={c.empresa} />
+
+              {"caso" in c && c.caso && (
+                <Link href={`/casos/${c.caso}`} className={`text-sm font-semibold text-[#791E2A] hover:underline ${FOCUS}`}>
+                  Leer el caso completo →
+                </Link>
+              )}
 
               {/* La cita solo se publica cuando existe de verdad (ver el array de casos) */}
               {c.cita && (
@@ -612,19 +620,19 @@ function QuienDetras() {
 function FormSection() {
   return (
     <section id="formulario" className="py-16 sm:py-24 bg-[#F9F5EF] border-b border-[#DBD5C9] scroll-mt-24">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <Badge>CANDIDATURA</Badge>
+          <Badge>RESERVA TU DIAGNÓSTICO</Badge>
           <h2 className="text-3xl sm:text-4xl text-[#2B231F] mt-5 mb-4 font-[family-name:var(--font-dm-serif)]">
             Veamos si tiene sentido trabajar juntos
           </h2>
           <p className="text-[#5A4F48] text-lg max-w-xl mx-auto leading-relaxed">
-            Cuéntame en qué punto está tu negocio y cómo vendéis hoy. Reviso tu caso personalmente y
-            te digo en qué paso se te están cayendo las oportunidades, trabajemos juntos o no.
+            Elige el día y la hora que te vengan bien y responde cinco preguntas rápidas. Las leo antes
+            de la llamada, así los 45 minutos los dedicamos a tu caso y no a ponernos en contexto.
           </p>
         </div>
-        <div className="bg-[#FFFDF9] border border-[#DBD5C9] rounded-2xl p-6 sm:p-9">
-          <LeadForm />
+        <div className="bg-[#FFFDF9] border border-[#DBD5C9] rounded-2xl p-2 sm:p-4">
+          <CalReserva />
         </div>
       </div>
     </section>

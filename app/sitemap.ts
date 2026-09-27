@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { CASOS } from "./casos/casos";
 import { videosPublicados } from "./videos/videos";
 import { SECTORES } from "./ventas-por-sector/sectores";
 
@@ -52,5 +53,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...fijas, ...videos];
+  const casos = [
+    { url: `${BASE}/casos`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.7 },
+    ...CASOS.map((c) => ({
+      url: `${BASE}/casos/${c.slug}`,
+      lastModified: new Date(`${c.fecha}T12:00:00Z`),
+      changeFrequency: "yearly" as const,
+      priority: 0.7,
+    })),
+  ];
+
+  return [...fijas, ...casos, ...videos];
 }

@@ -1,0 +1,65 @@
+# Cada mañana mira si hay vídeos nuevos en el canal de YouTube y, por cada
+# uno, abre un PR con su artículo para revisar. Todo lo hace
+# scripts/videos/publicar-videos.mjs; aquí solo se decide cuándo se ejecuta.
+# Instrucciones y secretos necesarios: VIDEOS-AUTOMATICOS.md.
+
+name: Vídeos de YouTube → artículos
+
+on:
+  schedule:
+    # 06:00 UTC = 8:00 en España en verano, 7:00 en invierno.
+    - cron: "0 6 * * *"
+  # Botón «Run workflow» en la pestaña Actions de GitHub.
+  workflow_dispatch:
+    inputs:
+      video_id:
+        description: "Id de un vídeo concreto (opcional). Si ya está en la web, regenera su artículo."
+        required: false
+  # Al aprobar un vídeo, los demás PRs de vídeo pendientes se ponen al día
+  # para que no choquen entre sí.
+  push:
+    branches: [main]
+    paths: [app/videos/videos.json]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+# Nunca dos a la vez: se pisarían las ramas.
+concurrency:
+  group: videos-a-articulos
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      # Claude Code: escribe los artículos con la suscripción de Paula.
+      - run: npm install -g @anthropic-ai/claude-code
+
+      - name: Buscar vídeos nuevos y abrir sus PRs
+        run: |
+          git config user.name "galador-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          node scripts/videos/publicar-videos.mjs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          VIDEO_ID: ${{ inputs.video_id }}
+          SOLO_REBASE: ${{ github.event_name == 'push' && '1' || '' }}
