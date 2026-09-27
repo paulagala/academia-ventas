@@ -96,6 +96,7 @@ export const SECTORES: Sector[] = [
         "ISYFU, una empresa de formación, facturaba unos 60.000 € al año compitiendo por precio, como el resto de su sector. Tras dos años trabajando la dirección comercial —oferta, precio, cómo diferenciarse y un sistema para formar a cada persona nueva del equipo— factura unos 250.000 € al año. «Nos ha permitido quitarle el techo que teníamos, que era de dirección comercial», explica su CEO, Samuel Acera.",
         "Farma Leaders Talento, un centro de formación para profesionales del sector salud, vendía bien gracias a su producto, pero sin sistema, justo cuando iba a ampliar el equipo. Con guion, protocolo de seguimiento y revisión de las llamadas de cada comercial, la conversión subió del 8 % al 10 %: unos 40.000 € netos más. «Hemos pasado de vender porque tenemos un buen producto a vender porque realmente sabemos vender», resume José, su responsable de ventas.",
       ],
+      enlace: { href: "/casos/farma-leaders", texto: "Leer el caso completo de Farma Leaders" },
     },
     faq: [
       {

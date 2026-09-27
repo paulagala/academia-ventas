@@ -467,6 +467,7 @@ function Prueba() {
     {
       // Pega aquí el ID del vídeo de YouTube (la parte después de v=) y el vídeo aparecerá solo
       youtubeId: "",
+      caso: "farma-leaders",
       cita: "Hemos pasado de vender porque tenemos un buen producto a vender porque realmente sabemos vender.",
       autor: "José, responsable de ventas de Farma Leaders Talento",
       empresa: "Farma Leaders",

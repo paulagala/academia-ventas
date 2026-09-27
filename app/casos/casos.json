@@ -84,7 +84,7 @@
           "titulo": "Qué puedes aplicar de este caso a tu negocio",
           "parrafos": [
             "Si vendes tú y los meses sin cierres se repiten, no empieces por más marketing ni por bajar precios. Empieza por tus últimas reuniones sin cierre: ¿el cliente te contó con sus palabras su problema y su urgencia antes de que le hablaras de tu servicio? ¿Seguiste siempre la misma estructura o cada reunión fue distinta? ¿Qué hiciste cuando salió la primera [objeción](/videos/objeciones-de-ventas)?",
-            "Como dice Lucía, no hace falta convertirse en especialista en ventas ni contratar a un perfil senior que todavía no te puedes permitir. Hace falta tener a alguien que escuche tus reuniones, te ayude a construir el guion y te diga con claridad qué mejorar. Es lo que hago en la [dirección comercial externa](/direccion-comercial-externa)."
+            "Como dice Lucía, no hace falta convertirse en especialista en ventas ni contratar a un perfil senior que todavía no te puedes permitir. Hace falta tener a alguien que escuche tus reuniones, te ayude a construir el guion y te diga con claridad qué mejorar. Es lo que hago en la [dirección comercial externa](/direccion-comercial-externa). Y cuando llegue el momento de ampliar el equipo, el [caso de Farma Leaders](/casos/farma-leaders) cuenta cómo prepararlo."
           ]
         }
       ],
@@ -100,6 +100,119 @@
         {
           "pregunta": "¿El guion no hace que la reunión suene poco natural?",
           "respuesta": "No, porque no es un texto para leer, sino una estructura. Saber qué viene después quita la presión de improvisar y deja espacio para escuchar al cliente. La naturalidad sale de esa tranquilidad."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "farma-leaders",
+    "empresa": "Farma Leaders Talento",
+    "persona": "José y Mario",
+    "cargo": "responsable de ventas y SDR de Farma Leaders Talento",
+    "queHace": "Centro de formación para profesionales del sector salud, que conecta talento con la industria pharma, biotech y medtech",
+    "sector": {
+      "href": "/ventas-para-empresas-de-formacion",
+      "nombre": "Empresas de formación"
+    },
+    "servicio": {
+      "href": "/entrenamiento-comercial",
+      "nombre": "Entrenamiento comercial"
+    },
+    "youtubeId": "1RO6tGw5Awo",
+    "vertical": true,
+    "fecha": "2026-09-27",
+    "titulo": "Del 8 % al 10 % de conversión antes de ampliar el equipo: el caso de Farma Leaders",
+    "tituloSeo": "Caso Farma Leaders: del 8 % al 10 % de conversión",
+    "descripcion": "Farma Leaders vendía bien por su producto, pero sin sistema, justo cuando iba a crecer. Cómo subió la conversión y preparó a comerciales desde cero.",
+    "resumen": "Buen producto y buenas ventas, pero sin sistema justo antes de ampliar el equipo. Dos puntos más de conversión: unos 40.000 € netos.",
+    "cifras": [
+      {
+        "valor": "8 %",
+        "texto": "de conversión al empezar"
+      },
+      {
+        "valor": "10 %",
+        "texto": "de conversión con el sistema"
+      },
+      {
+        "valor": "+40.000 €",
+        "texto": "netos, según su responsable de ventas"
+      },
+      {
+        "valor": "0",
+        "texto": "experiencia en ventas de Mario al entrar en el equipo"
+      }
+    ],
+    "cita": "Hemos pasado de vender porque tenemos un buen producto a vender porque realmente sabemos vender.",
+    "etiquetas": [
+      "equipo comercial",
+      "guion de ventas",
+      "seguimiento",
+      "objeciones",
+      "revisión de llamadas"
+    ],
+    "paraQuien": [
+      "Hasta ahora vendía una sola persona y vais a ampliar el equipo comercial.",
+      "Tenéis buen producto y buenas conversiones, pero ningún proceso que se pueda enseñar.",
+      "Vais a incorporar a gente que empieza en ventas desde cero.",
+      "Queréis que alguien experto en ventas revise las llamadas de cada comercial."
+    ],
+    "articulo": {
+      "palabraClave": "cómo ampliar el equipo de ventas",
+      "intro": [
+        "Farma Leaders Talento es un centro de formación para profesionales del sector salud: conecta talento con empresas de la industria pharma, biotech y medtech. Cuando empezamos a trabajar juntos no tenían un problema de ventas, al menos en apariencia. Tenían un producto muy bueno y convertían bien.",
+        "El problema estaba a punto de llegar. Hasta entonces vendía una sola persona, José, su responsable de ventas, y el equipo iba a crecer. Si alguna vez has pensado en ampliar tu equipo comercial, sabes lo que eso significa: lo que funciona en la cabeza de quien vende hay que convertirlo en algo que otra persona pueda aprender."
+      ],
+      "secciones": [
+        {
+          "titulo": "El punto de partida: buen producto, buenas ventas y ningún sistema",
+          "parrafos": [
+            "José lo explica así: «Nos llegamos a un momento que estaba yo solo, fuimos a ampliar el equipo y empezamos a pensar: no tenemos procesos. Tenemos un muy buen producto, estamos haciendo buenas conversiones, pero realmente no tenemos un sistema».",
+            "Es una situación más frecuente de lo que parece y más arriesgada de lo que suena. Mientras vende una persona con experiencia y conoce el producto de memoria, la falta de sistema no se nota. Se nota el día que entra alguien nuevo y no hay nada que entregarle: ni guion, ni criterios, ni forma de saber si lo está haciendo bien. Es lo que llamo contratar antes de tener el [sistema de ventas](/sistema-de-ventas) escrito."
+          ]
+        },
+        {
+          "titulo": "Lo que vive quien empieza en ventas desde cero",
+          "parrafos": [
+            "Mario entró en el equipo como SDR prácticamente sin experiencia en ventas, justo cuando empezamos a trabajar juntos. Su descripción de aquellos primeros días es muy honesta: «Entraba a las llamadas a improvisar. Cuando venían las [objeciones](/videos/objeciones-de-ventas) no sabía cómo reaccionar, me ponía nervioso y muchas veces me bloqueaba».",
+            "No era un problema de Mario. Es lo que le pasa a cualquiera a quien se le da un teléfono y un buen producto sin nada más. Como dice él: «No es lo mismo que el producto se venda porque es bueno que saber vender realmente»."
+          ]
+        },
+        {
+          "titulo": "Qué hicimos: guion, seguimiento y revisión de cada llamada",
+          "parrafos": [
+            "Construimos tres piezas. Un guion de ventas claro y estructurado, hecho a partir de lo que ya funcionaba en las llamadas de José. Un protocolo de seguimiento, para que ninguna oportunidad se enfriara por olvido. Y la revisión de las llamadas de cada comercial, también de quien empezaba desde cero.",
+            "Esa revisión es la parte que más valoran los dos. José: «Tenemos un feedback real de una persona que realmente es experta. Nosotros tenemos expertise en el producto, pero nos faltaba esa pieza de expertise en ventas». Mario: «Revisa mis llamadas y me dice exactamente qué es lo que tengo que cambiar y qué he hecho mal y bien en cada una de ellas». Es la base del [entrenamiento comercial sobre llamadas reales](/entrenamiento-comercial): se aprende de las conversaciones propias, no de un manual.",
+            "Además de las llamadas, revisamos el proceso completo de venta para encontrar dónde se atascaban las oportunidades y decidir cómo actuar en cada punto."
+          ]
+        },
+        {
+          "titulo": "El resultado: del 8 % al 10 % de conversión",
+          "parrafos": [
+            "La conversión pasó del 8 % al 10 %. Dos puntos parecen poco hasta que se traducen en dinero: según José, unos 40.000 € netos más. Y con un equipo más grande, sin depender de que venda una sola persona.",
+            "José lo resume en una frase que me gusta especialmente: «Hemos pasado de vender porque tenemos un buen producto a vender porque realmente sabemos vender». Para Mario, el cambio fue personal: «Para mí fue un antes y un después»."
+          ]
+        },
+        {
+          "titulo": "Qué puedes aplicar si vas a ampliar tu equipo de ventas",
+          "parrafos": [
+            "Si vas a contratar a tu primer o segundo comercial, empieza por escribir cómo se vende antes de que la persona entre: la estructura de la llamada, las objeciones que salen siempre y cómo se responde a cada una, y qué pasa con quien no decide en la primera conversación. Sin eso, cada persona nueva tendrá que adivinar.",
+            "Y ten previsto quién va a escuchar sus llamadas las primeras semanas. Es lo que más acelera a alguien que empieza. Si tu negocio es de formación, en [cómo se vende en las empresas de formación](/ventas-para-empresas-de-formacion) tienes las objeciones más típicas del sector. Y si todavía vendes tú en solitario, el [caso de Hotlist](/casos/hotlist) es el paso anterior a este."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "pregunta": "¿Cuándo es el momento de crear un sistema de ventas?",
+          "respuesta": "Antes de ampliar el equipo. Mientras vende una persona con experiencia, la falta de sistema no se nota. Se nota el día que entra alguien nuevo y no hay nada que entregarle."
+        },
+        {
+          "pregunta": "¿Se puede formar a alguien que empieza en ventas desde cero?",
+          "respuesta": "Sí, si tiene un guion claro y alguien que revise sus llamadas. Es el caso de Mario en Farma Leaders: entró sin experiencia, improvisaba y se bloqueaba con las objeciones, y la revisión llamada a llamada fue lo que marcó la diferencia."
+        },
+        {
+          "pregunta": "¿Cuánto supone subir la conversión dos puntos?",
+          "respuesta": "Depende del volumen y del precio de lo que vendas. En Farma Leaders, pasar del 8 % al 10 % supuso unos 40.000 € netos más, según su responsable de ventas, con el mismo producto."
         }
       ]
     }
