@@ -40,6 +40,8 @@ export type SeoCaso = {
   cifras?: { valor: string; texto: string }[];
   /** Qué falta por contar (p. ej. el resultado de un caso en curso). */
   nota?: string;
+  /** El caso completo en /casos/{slug}, si ya está publicado. */
+  enlace?: { href: string; texto: string };
 };
 
 const FOCUS =
@@ -272,6 +274,11 @@ export default function SeoLanding({
               </div>
               {caso.nota && (
                 <p className="mt-5 text-sm text-[#5A4F48] italic">{caso.nota}</p>
+              )}
+              {caso.enlace && (
+                <Link href={caso.enlace.href} className={`inline-flex mt-5 text-sm font-semibold text-[#791E2A] hover:underline ${FOCUS}`}>
+                  {caso.enlace.texto} →
+                </Link>
               )}
             </div>
           </div>

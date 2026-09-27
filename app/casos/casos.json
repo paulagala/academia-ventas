@@ -1,0 +1,84 @@
+[
+  {
+    "slug": "hotlist",
+    "empresa": "Hotlist",
+    "persona": "Lucía",
+    "cargo": "CEO de Hotlist",
+    "queHace": "Startup de recursos humanos para hostelería",
+    "sector": { "href": "/ventas-para-empresas-de-externalizacion-rrhh", "nombre": "Externalización de RRHH" },
+    "servicio": { "href": "/direccion-comercial-externa", "nombre": "Dirección comercial externa" },
+    "youtubeId": "wpoeCcRjiBk",
+    "vertical": true,
+    "fecha": "2026-09-27",
+    "titulo": "De 5.000 a más de 10.000 € al mes vendiendo ella sola: el caso de Hotlist",
+    "tituloSeo": "Caso Hotlist: de 5.000 a 10.000 €/mes vendiendo sola",
+    "descripcion": "Lucía, CEO de Hotlist, llevaba dos meses sin cerrar un cliente y vendía sin guion. Cómo duplicó sus ingresos recurrentes sin equipo comercial.",
+    "resumen": "La CEO vendía sola y sin guion. Dos meses sin cerrar un cliente nuevo. Hoy factura el doble.",
+    "cifras": [
+      { "valor": "0", "texto": "clientes nuevos en enero y febrero de 2026" },
+      { "valor": "5.000 €", "texto": "de ingresos recurrentes al mes, al empezar" },
+      { "valor": "+10.000 €", "texto": "de ingresos recurrentes al mes desde marzo" },
+      { "valor": "x2", "texto": "en facturación recurrente" }
+    ],
+    "cita": "Me ha hecho un por dos, Paula. Te mete caña, te dice las cosas a la cara.",
+    "etiquetas": ["guion de ventas", "llamada de venta", "cierre de ventas", "vender sin equipo comercial"],
+    "paraQuien": [
+      "Fundaste el negocio y las reuniones de venta las haces tú, sin equipo comercial.",
+      "Vendes un servicio con cuota mensual, así que cada cliente que no cierras se nota todo el año.",
+      "Unos meses cierras y otros no, y no sabrías explicar la diferencia.",
+      "No puedes permitirte contratar un perfil de ventas senior, pero necesitas vender mejor ya."
+    ],
+    "articulo": {
+      "palabraClave": "vender sin equipo comercial",
+      "intro": [
+        "Lucía es la CEO de Hotlist, una startup de recursos humanos para hostelería. Cuando empezamos a trabajar juntas facturaba unos 5.000 € recurrentes al mes y llevaba dos meses, enero y febrero de 2026, sin cerrar ni un solo cliente nuevo.",
+        "No tenía equipo de ventas. Las reuniones, las llamadas y todo el proceso comercial los llevaba ella. Si fundaste tu negocio y vendes tú, seguramente te suena: sabes de lo tuyo mejor que nadie, pero nadie te enseñó a vender, y cuando las reuniones no se cierran es difícil saber por qué."
+      ],
+      "secciones": [
+        {
+          "titulo": "El punto de partida: vender sin equipo comercial y sin guion",
+          "parrafos": [
+            "Lucía no tenía un problema de producto ni de clientes potenciales. Hablaba con empresas que tenían justo el problema que Hotlist resuelve. Lo que no tenía era una forma de llevar la reunión que pudiera repetir: improvisaba, y el resultado dependía de cómo llegara ese día. Si ya llevaba tres reuniones encima, llegaba sin energía y se quedaba sin palabras justo cuando más las necesitaba.",
+            "Ella misma lo resume mejor que yo: «Como emprendedora, como CEO, parece que tienes que saber de todos los palos, pero no eres especialista en nada». Es lo que me encuentro en casi todos los negocios donde vende quien los fundó. No es que se venda mal: es que se vende sin un sistema, y así es imposible saber qué funciona."
+          ]
+        },
+        {
+          "titulo": "Qué hicimos: escuchar sus reuniones y construir un guion que funcionara",
+          "parrafos": [
+            "Trabajamos con mentorías y seguimiento semanal. La base fue escuchar sus reuniones de venta reales, una a una, y ver qué pasaba en las que cerraba y en las que no. Con eso fuimos construyendo un [guion de ventas](/sistema-de-ventas) a su medida y lo ajustamos reunión a reunión, hasta que dimos con uno que funcionaba.",
+            "Un guion no es un texto para leer. Es saber en qué punto de la conversación estás y qué viene después, para dedicar la energía a escuchar en lugar de a pensar qué decir. Es lo que explico en [por qué no cierras tus reuniones de venta aunque tengas leads](/videos/por-que-no-cierro-ventas): casi nunca es el precio, sino cómo transcurre la llamada.",
+            "Y feedback directo. Lucía lo cuenta así: «Te mete caña, te dice las cosas a la cara. Cuando se tiene que mejorar algo, te lo dice claramente». Cuando revisas tus propias reuniones con alguien que escucha llamadas todos los días, los fallos que no veías aparecen enseguida."
+          ]
+        },
+        {
+          "titulo": "El resultado: de 5.000 € a más de 10.000 € recurrentes al mes",
+          "parrafos": [
+            "Lucía empezó a aplicar el guion en marzo de 2026. Desde entonces ha pasado de unos 5.000 € a más de 10.000 € de ingresos recurrentes al mes. En sus palabras: «Me ha hecho un por dos».",
+            "El servicio era el mismo y los clientes potenciales también. Lo que cambió fue la conversación. Y lo más importante para un negocio que empieza: lo que funciona ahora está escrito. El día que Lucía contrate a alguien para vender, tendrá un guion y un proceso que entregarle, en lugar de tener que explicarle cómo vende ella."
+          ]
+        },
+        {
+          "titulo": "Qué puedes aplicar de este caso a tu negocio",
+          "parrafos": [
+            "Si vendes tú y los meses sin cierres se repiten, no empieces por más marketing ni por bajar precios. Empieza por tus últimas reuniones sin cierre: ¿el cliente te contó con sus palabras su problema y su urgencia antes de que le hablaras de tu servicio? ¿Seguiste siempre la misma estructura o cada reunión fue distinta? ¿Qué hiciste cuando salió la primera [objeción](/videos/objeciones-de-ventas)?",
+            "Como dice Lucía, no hace falta convertirse en especialista en ventas ni contratar a un perfil senior que todavía no te puedes permitir. Hace falta tener a alguien que escuche tus reuniones, te ayude a construir el guion y te diga con claridad qué mejorar. Es lo que hago en la [dirección comercial externa](/direccion-comercial-externa)."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "pregunta": "¿Se puede mejorar la venta si todavía no tengo equipo comercial?",
+          "respuesta": "Sí, y es el mejor momento. Si vendes tú, el trabajo se hace sobre tus propias reuniones: se ve qué funciona, se escribe y se convierte en un guion. Cuando contrates, esa persona tendrá con qué empezar desde el primer día."
+        },
+        {
+          "pregunta": "¿Cuánto tardan en notarse los resultados?",
+          "respuesta": "En las conversaciones, en las primeras semanas. En la facturación, cuando pasa un ciclo de venta completo con el guion funcionando. En el caso de Hotlist, Lucía empezó a aplicarlo en marzo de 2026 y desde entonces factura el doble."
+        },
+        {
+          "pregunta": "¿El guion no hace que la reunión suene poco natural?",
+          "respuesta": "No, porque no es un texto para leer, sino una estructura. Saber qué viene después quita la presión de improvisar y deja espacio para escuchar al cliente. La naturalidad sale de esa tranquilidad."
+        }
+      ]
+    }
+  }
+]

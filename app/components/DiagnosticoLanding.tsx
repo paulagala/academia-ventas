@@ -453,6 +453,8 @@ function Prueba() {
     {
       // Pega aquí el ID del vídeo de YouTube (la parte después de v=) y el vídeo aparecerá solo
       youtubeId: "",
+      // El caso completo en /casos/{slug}. Vacío mientras no esté escrito.
+      caso: "hotlist",
       cita: "Me ha hecho un por dos, Paula. Te mete caña, te dice las cosas a la cara.",
       autor: "Lucía, CEO de Hotlist",
       empresa: "Hotlist",
@@ -530,6 +532,12 @@ function Prueba() {
               </div>
 
               <VideoTestimonio youtubeId={c.youtubeId} empresa={c.empresa} />
+
+              {"caso" in c && c.caso && (
+                <Link href={`/casos/${c.caso}`} className={`text-sm font-semibold text-[#791E2A] hover:underline ${FOCUS}`}>
+                  Leer el caso completo →
+                </Link>
+              )}
 
               {/* La cita solo se publica cuando existe de verdad (ver el array de casos) */}
               {c.cita && (

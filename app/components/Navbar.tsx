@@ -18,6 +18,9 @@ export default function Navbar() {
           <Link href="/" className="hidden sm:inline-flex items-center min-h-11 hover:text-primary transition">
             Inicio
           </Link>
+          <Link href="/casos" className="hidden sm:inline-flex items-center min-h-11 hover:text-primary transition">
+            Casos
+          </Link>
           <Link href="/videos" className="hidden sm:inline-flex items-center min-h-11 hover:text-primary transition">
             Vídeos
           </Link>

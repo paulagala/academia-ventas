@@ -28,6 +28,11 @@ export const ENLACES_CLUSTER = [
     detalle: "Cómo se vende en formación y en externalización de RRHH.",
   },
   {
+    href: "/casos",
+    texto: "Casos de éxito",
+    detalle: "De dónde partían, qué construimos y qué cambió en sus números.",
+  },
+  {
     href: "/videos",
     texto: "Vídeos",
     detalle: "Objeciones, llamadas y proceso de venta, explicados en abierto.",

@@ -36,6 +36,7 @@ export default function Footer() {
               <FooterLink href="/sistema-de-ventas">Sistema de ventas</FooterLink>
               <FooterLink href="/entrenamiento-comercial">Entrenamiento comercial</FooterLink>
               <FooterLink href="/ventas-por-sector">Por sector</FooterLink>
+              <FooterLink href="/casos">Casos de éxito</FooterLink>
               <FooterLink href="/videos">Vídeos</FooterLink>
             </ul>
           </div>
