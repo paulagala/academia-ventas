@@ -9,7 +9,7 @@ import { useState } from "react";
  * (≈1 MB de JavaScript de terceros) se monta únicamente cuando alguien pulsa
  * play, así que un vídeo incrustado no penaliza la velocidad de la página.
  *
- * Hermano de VideoTestimonio, que hace lo mismo para los casos de la home.
+ * Hermano de VideoTestimonio, que hace lo mismo para los vídeos de los casos.
  * Están separados a propósito: aquel lleva el texto pensado para testimonios
  * («Ver el testimonio de X») y este el de una pieza de contenido.
  */
@@ -18,7 +18,6 @@ export default function VideoYoutube({
   titulo,
   prioridad = false,
   vertical = false,
-  portada,
 }: {
   youtubeId: string;
   titulo: string;
@@ -26,8 +25,6 @@ export default function VideoYoutube({
   prioridad?: boolean;
   /** true para un Short: el reproductor pasa a formato vertical. */
   vertical?: boolean;
-  /** Imagen propia en lugar de la miniatura de YouTube (p. ej. la de un caso). */
-  portada?: string;
 }) {
   const [reproduciendo, setReproduciendo] = useState(false);
 
@@ -58,7 +55,7 @@ export default function VideoYoutube({
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={portada ?? `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`}
+        src={`https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`}
         alt=""
         loading={prioridad ? "eager" : "lazy"}
         fetchPriority={prioridad ? "high" : "auto"}

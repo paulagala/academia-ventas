@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import TextoConEnlaces, { textoPlano } from "../../components/TextoConEnlaces";
-import VideoYoutube from "../../components/VideoYoutube";
-import { videosPublicados } from "../../videos/videos";
-import { CASOS, getCaso, portada } from "../casos";
+import VideoTestimonio from "../../components/VideoTestimonio";
+import { duracionLegible, videosPublicados } from "../../videos/videos";
+import { CASOS, getCaso, portada, retrato } from "../casos";
 
 // Todas las páginas de caso se generan en el build: son contenido fijo.
 export function generateStaticParams() {
@@ -138,12 +138,12 @@ export default async function CasoPage({ params }: { params: Promise<{ slug: str
           </dl>
 
           <div className="mt-10 grid gap-8 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] items-start">
-            <VideoYoutube
+            <VideoTestimonio
               youtubeId={caso.youtubeId}
-              titulo={`Testimonio de ${caso.persona}, ${caso.cargo}`}
-              vertical={caso.vertical}
-              portada={portada(caso)}
-              prioridad
+              cita={caso.cita}
+              autor={`${caso.persona}, ${caso.cargo}`}
+              retrato={retrato(caso)}
+              duracion={duracionLegible(caso.duracion)}
             />
             <div className="bg-surface border border-border rounded-[var(--radius-card)] p-6">
               <h2 className="text-lg text-primary mb-4">Este caso es para ti si…</h2>

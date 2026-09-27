@@ -44,16 +44,22 @@ export type Caso = {
 export const CASOS: Caso[] = datos as Caso[];
 
 /**
- * Portada del vídeo: un fotograma elegido a mano del vídeo original, en
- * public/casos/{slug}.jpg (720×1280, vertical, sin subtítulos).
+ * Fotograma del vídeo original, en public/casos/{slug}.jpg (720×1280,
+ * vertical, sin subtítulos). Es la imagen que ven Google y las redes al
+ * compartir; en la web solo se enseña su recorte redondo (ver `retrato`).
  *
  * No se usa la miniatura de YouTube porque en los Shorts sale apaisada, con el
- * vídeo encajonado entre dos franjas borrosas y un gesto a medio decir.
+ * vídeo encajonado entre dos franjas borrosas.
  * Para un caso nuevo: saca el fotograma con
  *   ffmpeg -ss <segundo> -i video.mp4 -frames:v 1 -vf scale=720:1280 -q:v 4 public/casos/<slug>.jpg
  */
 export function portada(caso: Caso): string {
   return `/casos/${caso.slug}.jpg`;
+}
+
+/** Retrato cuadrado (240×240) recortado de la portada, para el círculo del testimonio. */
+export function retrato(caso: Caso): string {
+  return `/casos/${caso.slug}-retrato.jpg`;
 }
 
 export function getCaso(slug: string): Caso | undefined {

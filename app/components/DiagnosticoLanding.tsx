@@ -3,7 +3,7 @@ import Link from "next/link";
 import CalReserva from "./CalReserva";
 import Faq from "./Faq";
 import VideoTestimonio from "./VideoTestimonio";
-import { getCaso, portada } from "../casos/casos";
+import { getCaso, retrato } from "../casos/casos";
 import {
   CANAL_YOUTUBE,
   duracionLegible,
@@ -529,33 +529,26 @@ function Prueba() {
                 <p className="text-sm text-[#2B231F] leading-relaxed">{c.resultado}</p>
               </div>
 
-              {(() => {
-                const caso = getCaso(c.caso);
-                if (!caso?.youtubeId) return null;
-                return (
-                  <VideoTestimonio
-                    youtubeId={caso.youtubeId}
-                    empresa={c.empresa}
-                    persona={c.autor.split(/[ ,]/)[0]}
-                    portada={portada(caso)}
-                    duracion={duracionLegible(caso.duracion)}
-                  />
-                );
-              })()}
-
-              {c.caso && (
+              {/* El vídeo va al fondo de la tarjeta (mt-auto) para que los tres
+                  queden a la misma altura aunque los textos midan distinto. */}
+              <div className="mt-auto pt-2 flex flex-col gap-4">
+                {(() => {
+                  const caso = getCaso(c.caso);
+                  if (!caso?.youtubeId) return null;
+                  return (
+                    <VideoTestimonio
+                      youtubeId={caso.youtubeId}
+                      cita={c.cita}
+                      autor={c.autor}
+                      retrato={retrato(caso)}
+                      duracion={duracionLegible(caso.duracion)}
+                    />
+                  );
+                })()}
                 <Link href={`/casos/${c.caso}`} className={`text-sm font-semibold text-[#791E2A] hover:underline ${FOCUS}`}>
                   Leer el caso completo →
                 </Link>
-              )}
-
-              {/* La cita solo se publica cuando existe de verdad (ver el array de casos) */}
-              {c.cita && (
-                <figure className="mt-auto pt-2 m-0 text-sm text-[#5A4F48] leading-relaxed">
-                  <blockquote className="m-0 italic text-[#2B231F]">«{c.cita}»</blockquote>
-                  {c.autor && <figcaption className="mt-1 not-italic">{c.autor}</figcaption>}
-                </figure>
-              )}
+              </div>
             </div>
           ))}
         </div>
