@@ -13,10 +13,10 @@ export default function PoliticaPrivacidad() {
           <p>El responsable del tratamiento es Galador, con email de contacto: paula@galador.es.</p>
 
           <h2 className="text-lg font-semibold text-text mt-4 font-[family-name:var(--font-dm-serif)]">2. Datos que recogemos</h2>
-          <p>Recogemos los datos que nos proporcionas voluntariamente en el formulario de diagnóstico: nombre, email, teléfono (opcional), empresa, facturación mensual aproximada, si tienes equipo comercial y la descripción de tu situación. No recogemos datos de navegación con fines publicitarios.</p>
+          <p>Recogemos los datos que nos proporcionas voluntariamente en el formulario de diagnóstico: nombre, email, teléfono (opcional), empresa, facturación mensual aproximada, si tienes equipo comercial y la descripción de tu situación. En la calculadora comercial, tu nombre, empresa, email, teléfono (opcional) y las respuestas que das sobre tu negocio. No recogemos datos de navegación con fines publicitarios.</p>
 
           <h2 className="text-lg font-semibold text-text mt-4 font-[family-name:var(--font-dm-serif)]">3. Finalidad</h2>
-          <p>Usamos tus datos para valorar tu caso, responder a tu solicitud de diagnóstico y, si trabajamos juntos, gestionar la relación. Para enviar el formulario usamos Resend (envío de correo) y la web está alojada en Vercel, que tratan los datos solo para prestarnos ese servicio.</p>
+          <p>Usamos tus datos para valorar tu caso, responder a tu solicitud de diagnóstico, enviarte el informe de la calculadora y, si trabajamos juntos, gestionar la relación. Para enviar el formulario usamos Resend (envío de correo) y la web está alojada en Vercel, que tratan los datos solo para prestarnos ese servicio.</p>
 
           <h2 className="text-lg font-semibold text-text mt-4 font-[family-name:var(--font-dm-serif)]">4. Base legal</h2>
           <p>El tratamiento se basa en tu consentimiento, que puedes retirar en cualquier momento escribiendo a paula@galador.es.</p>

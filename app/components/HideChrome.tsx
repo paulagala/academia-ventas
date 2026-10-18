@@ -13,6 +13,7 @@ const HIDE_PREFIX = [
   "/ventas-para-",
   "/ventas-por-sector",
   "/webinar/ventas-consultivas",
+  "/calculadora-comercial",
 ];
 
 export default function HideChrome({ children }: { children: React.ReactNode }) {
