@@ -44,7 +44,19 @@ export const SUPUESTOS = {
   sinRampaExtra: 2, // 2 meses más hasta rendir
   sinHoras: 5, // horas a la semana del dueño encima del comercial
   conHoras: 2,
+  // Becario en prácticas: rinde menos, tarda más y necesita más de ti.
+  becarioReuniones: 0.7,
+  becarioRampaExtra: 1,
+  becarioHorasExtra: 2,
 };
+
+// Perfiles que se pueden contratar. Coste total para la empresa al mes.
+// Becario: ayuda al estudio de unos 700 € más la cotización obligatoria desde 2024.
+export const PERFILES = [
+  { id: "becario", titulo: "Becario en prácticas", importe: 800, detalle: "Ayuda al estudio de unos 700 € más Seguridad Social. Rinde menos y necesita más de ti" },
+  { id: "junior", titulo: "Junior", importe: 3100, detalle: "24.000 € fijos + 4.500 € de variable al año" },
+  { id: "senior", titulo: "Con experiencia", importe: 3900, detalle: "30.000 € fijos + 6.000 € de variable al año" },
+] as const;
 
 export const SEMANAS = 4.33;
 export const HORAS_REUNION = 1.5; // la reunión, su preparación y su seguimiento
@@ -65,6 +77,7 @@ export type Entrada = {
   capacidadTotal: number; // reuniones/mes que pueden atender en total (modo otro)
   hora: number; // € que vale una hora del dueño
   coste: number; // € al mes que cuesta el comercial a la empresa
+  becario: boolean;
 };
 
 export const ENTRADA_INICIAL: Entrada = {
@@ -79,6 +92,7 @@ export const ENTRADA_INICIAL: Entrada = {
   capacidadTotal: 0,
   hora: 50,
   coste: 3100,
+  becario: false,
 };
 
 const acotar = (v: unknown, min: number, max: number, defecto: number) => {
@@ -103,6 +117,7 @@ export function normalizar(raw: unknown): Entrada {
     capacidadTotal: acotar(r.capacidadTotal, 0, 1000, 0),
     hora: acotar(r.hora, 0, 2000, 50),
     coste: acotar(r.coste, 0, 50_000, 3100),
+    becario: r.becario === true,
   };
 }
 
@@ -136,11 +151,13 @@ type Base = {
 };
 
 function escenario(e: Entrada, b: Base, conSistema: boolean): Escenario {
-  const pedidas = conSistema ? b.reuniones : b.reuniones * SUPUESTOS.sinReuniones;
+  const perfil = e.becario ? SUPUESTOS.becarioReuniones : 1;
+  const pedidas = (conSistema ? b.reuniones : b.reuniones * SUPUESTOS.sinReuniones) * perfil;
   const reuniones = Math.min(pedidas, b.capacidad);
   const cierre = conSistema ? e.cierre : e.cierre * SUPUESTOS.sinCierre;
-  const rampa = conSistema ? b.rampa : Math.min(12, b.rampa + SUPUESTOS.sinRampaExtra);
-  const horas = conSistema ? SUPUESTOS.conHoras : SUPUESTOS.sinHoras;
+  const rampaExtra = (conSistema ? 0 : SUPUESTOS.sinRampaExtra) + (e.becario ? SUPUESTOS.becarioRampaExtra : 0);
+  const rampa = Math.min(12, b.rampa + rampaExtra);
+  const horas = (conSistema ? SUPUESTOS.conHoras : SUPUESTOS.sinHoras) + (e.becario ? SUPUESTOS.becarioHorasExtra : 0);
   const coste = e.coste + HERRAMIENTAS + horas * SEMANAS * e.hora;
 
   // Mes a mes: reuniones según la rampa, ventas que llegan `ciclo` meses después.
@@ -162,7 +179,7 @@ function escenario(e: Entrada, b: Base, conSistema: boolean): Escenario {
   const sobra = Number.isFinite(equilibrio) && equilibrio > 0 ? ventasMes / equilibrio : 0;
   const estado: Estado = !Number.isFinite(equilibrio)
     ? "faltan"
-    : sobra < 1
+    : sobra < 1 || payback === null
       ? "mal"
       : payback && payback <= 12 && sobra >= 1.5
         ? "bien"
@@ -191,6 +208,7 @@ export type Resultado = {
   veredicto: Veredicto;
   palanca: string;
   aviso: string | null;
+  notaBecario: string | null;
 };
 
 export function calcular(e: Entrada): Resultado {
@@ -223,8 +241,17 @@ export function calcular(e: Entrada): Resultado {
     veredicto: veredicto(sin, con, diferencia),
     palanca: palanca(con, b.margenVenta),
     aviso: aviso(e, reuniones, capacidad),
+    notaBecario: e.becario
+      ? "Con un becario contamos un 30 % menos de reuniones, un mes más hasta rendir y 2 horas tuyas más a la semana. Y unas prácticas suelen durar entre 6 y 12 meses: si se va al acabar, vuelves a empezar la rampa con otra persona."
+      : null,
   };
 }
+
+// Lo que dice la franja de la diferencia: si con sistema también pierde, es pérdida evitada.
+export const textoDiferencia = (r: Resultado) =>
+  r.con.anio < 0
+    ? "es lo que pierdes de más el primer año si lo contratas sin sistema."
+    : "es lo que te juegas el primer año entre hacerlo con sistema o sin él.";
 
 const recupera = (r: Escenario) =>
   r.payback ? `recuperas lo invertido en el mes ${r.payback}` : "tardarías más de tres años en recuperar lo invertido";
@@ -243,7 +270,7 @@ function veredicto(sin: Escenario, con: Escenario, diferencia: number): Veredict
       chip: "No te sale",
       titular: ["Con estos números, ", "no te sale", "."],
       explica:
-        "Ni con un comercial bien formado cubres lo que cuesta, contando tu tiempo. Antes de llenar la agenda, hay que mejorar lo que pasa en la reunión.",
+        "Ni con un comercial bien formado te compensa: contando tu tiempo, no recuperas lo invertido en tres años. Antes de llenar la agenda, hay que mejorar lo que pasa en la reunión.",
     };
   if (sin.estado === "mal")
     return {

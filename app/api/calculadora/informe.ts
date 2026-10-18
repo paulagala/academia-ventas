@@ -10,6 +10,8 @@ import {
   eurConSigno,
   horasTxt,
   mesTxt,
+  PERFILES,
+  textoDiferencia,
   type Escenario,
   type Resultado,
 } from "../../calculadora-comercial/calculo";
@@ -60,7 +62,8 @@ function respuestas(r: Resultado): Array<[string, string]> {
     filas.push(["Horas que dedicas a buscar citas", `${dec(e.prospeccion)} a la semana`]);
   }
   filas.push(["Lo que vale tu hora", eur(e.hora)]);
-  filas.push(["Coste del comercial", `${eur(e.coste)} al mes, más ${eur(HERRAMIENTAS)} de herramientas`]);
+  const perfil = e.becario ? `${PERFILES[0].titulo}: ` : "";
+  filas.push(["Coste del comercial", `${perfil}${eur(e.coste)} al mes, más ${eur(HERRAMIENTAS)} de herramientas`]);
   return filas;
 }
 
@@ -169,7 +172,10 @@ export function informeHtml(contacto: Contacto, r: Resultado): string {
     <h1 style="margin:0 0 16px;font-family:${SERIF};font-weight:normal;font-size:32px;line-height:1.15;color:${C.texto};">${escapar(v.titular[0])}<span style="color:${C.burdeos};">${escapar(v.titular[1])}</span>${escapar(v.titular[2])}</h1>
     ${p(`Hola, ${escapar(primerNombre(contacto.nombre))}:`)}
     ${p(`Con los números que me has dado, esto es lo que pasaría si en ${empresa} contratas a alguien que te consiga citas. ${escapar(v.explica)}`)}
-    ${r.aviso ? p(escapar(r.aviso), `padding:12px 14px;border-left:3px solid ${C.burdeos};background:${C.crema};`) : ""}
+    ${[r.aviso, r.notaBecario]
+      .filter((t): t is string => !!t)
+      .map((t) => p(escapar(t), `padding:12px 14px;border-left:3px solid ${C.burdeos};background:${C.crema};`))
+      .join("")}
   `);
 
   const juego = `<tr><td style="padding:0 32px 0;background:${C.superficie};">
@@ -181,7 +187,7 @@ export function informeHtml(contacto: Contacto, r: Resultado): string {
   <tr><td style="padding:16px 32px 28px;background:${C.superficie};">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td style="padding:20px 24px;background:${C.burdeos};">
       <span style="font-family:${SERIF};font-size:34px;color:${C.superficie};">${eur(Math.max(0, r.diferencia))}</span>
-      <span style="font-family:${SANS};font-size:16px;color:${C.superficie};">&nbsp; es lo que te juegas el primer año entre hacerlo con sistema o sin él.</span>
+      <span style="font-family:${SANS};font-size:16px;color:${C.superficie};">&nbsp; ${textoDiferencia(r)}</span>
     </td></tr></table>
   </td></tr>`;
 
@@ -222,10 +228,11 @@ export function informeTexto(contacto: Contacto, r: Resultado): string {
     v.titular.join(""),
     v.explica,
     r.aviso ?? "",
+    r.notaBecario ?? "",
     "",
     `Sin sistema: ${eurConSigno(r.sin.anio)} el primer año (${recuperaTxt(r.sin)}).`,
     `Con sistema: ${eurConSigno(r.con.anio)} el primer año (${recuperaTxt(r.con)}).`,
-    `Lo que te juegas el primer año: ${eur(Math.max(0, r.diferencia))}.`,
+    `${eur(Math.max(0, r.diferencia))} ${textoDiferencia(r)}`,
     "",
     "LO QUE TE AHORRAS CON SISTEMA",
     ...ahorros(r).map((t) => `- ${t}`),

@@ -6,6 +6,7 @@ import Logo from "../components/Logo";
 import {
   CAL_URL,
   ENTRADA_INICIAL,
+  PERFILES,
   SECTORES,
   calcular,
   dec,
@@ -14,14 +15,15 @@ import {
   horasTxt,
   reunionesQueCaben,
   SEMANAS,
+  textoDiferencia,
   type Entrada,
   type Escenario,
   type Resultado,
 } from "./calculo";
 
-// Calculadora comercial: una pregunta por pantalla, el resultado en grande y,
-// para recibir el informe completo por correo, nombre, empresa y email.
-// El informe lo monta y lo envía /api/calculadora.
+// Calculadora comercial: una pregunta por pantalla; al terminar, nombre,
+// empresa y email (el lead) y entonces el resultado en grande. El informe por
+// correo lo monta y lo envía /api/calculadora.
 
 type PasoId =
   | "modo"
@@ -36,7 +38,7 @@ type PasoId =
   | "hora"
   | "coste";
 
-type Fase = "intro" | "preguntas" | "resultado";
+type Fase = "intro" | "preguntas" | "contacto" | "resultado";
 
 // Lo que la persona escribe, tal cual (texto), para que pueda borrar y corregir.
 type Textos = Record<"ticket" | "cierre" | "margen" | "prospeccion" | "actual" | "capacidad" | "hora" | "coste", string>;
@@ -52,10 +54,8 @@ const TEXTOS_INICIALES: Textos = {
   coste: "",
 };
 
-const COSTES = [
-  { id: "junior", titulo: "Junior", importe: 3100, detalle: "24.000 € fijos + 4.500 € de variable al año" },
-  { id: "senior", titulo: "Con experiencia", importe: 3900, detalle: "30.000 € fijos + 6.000 € de variable al año" },
-] as const;
+type Contacto = { nombre: string; empresa: string; email: string; telefono: string; consentimiento: boolean; fax: string };
+type Envio = "idle" | "enviando" | "ok" | "fallo";
 
 const num = (t: string) => {
   const v = parseFloat(t.replace(",", "."));
@@ -68,8 +68,13 @@ export default function Calculadora() {
   const [sector, setSector] = useState("");
   const [ciclo, setCiclo] = useState<number | null>(null);
   const [textos, setTextos] = useState<Textos>(TEXTOS_INICIALES);
-  const [costeOpcion, setCosteOpcion] = useState<"junior" | "senior" | "propio" | "">("");
+  const [costeOpcion, setCosteOpcion] = useState<"becario" | "junior" | "senior" | "propio" | "">("");
   const [indice, setIndice] = useState(0);
+  const [contacto, setContacto] = useState<Contacto>({ nombre: "", empresa: "", email: "", telefono: "", consentimiento: false, fax: "" });
+  const [envio, setEnvio] = useState<Envio>("idle");
+  const [enviadoCon, setEnviadoCon] = useState(""); // las respuestas del último informe enviado
+  const [error, setError] = useState("");
+  const [errores, setErrores] = useState<Record<string, string>>({});
 
   const pasos: PasoId[] = useMemo(
     () => [
@@ -88,7 +93,7 @@ export default function Calculadora() {
   const paso = pasos[Math.min(indice, pasos.length - 1)];
 
   const costeMes =
-    costeOpcion === "propio" ? num(textos.coste) : COSTES.find((c) => c.id === costeOpcion)?.importe ?? 3100;
+    costeOpcion === "propio" ? num(textos.coste) : PERFILES.find((c) => c.id === costeOpcion)?.importe ?? 3100;
 
   const entrada: Entrada = {
     ...ENTRADA_INICIAL,
@@ -103,6 +108,7 @@ export default function Calculadora() {
     capacidadTotal: num(textos.capacidad),
     hora: num(textos.hora),
     coste: costeMes,
+    becario: costeOpcion === "becario",
   };
 
   const valido: Record<PasoId, boolean> = {
@@ -123,9 +129,45 @@ export default function Calculadora() {
   const siguiente = () => {
     if (!valido[paso]) return;
     if (indice >= pasos.length - 1) {
-      setFase("resultado");
+      // Quien ya dejó sus datos va directo al resultado.
+      setFase(envio === "ok" || envio === "fallo" ? "resultado" : "contacto");
       window.scrollTo({ top: 0 });
     } else setIndice(indice + 1);
+  };
+
+  const enviar = async () => {
+    const locales: Record<string, string> = {};
+    if (!contacto.nombre.trim()) locales.nombre = "Dime cómo te llamas.";
+    if (!contacto.empresa.trim()) locales.empresa = "El informe va a nombre de tu empresa.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(contacto.email.trim())) locales.email = "Revisa el email: ahí te llega el informe.";
+    if (!contacto.consentimiento) locales.consentimiento = "Necesito tu permiso para enviártelo.";
+    setErrores(locales);
+    if (Object.keys(locales).length) return;
+
+    setEnvio("enviando");
+    setError("");
+    let estado: Envio = "fallo";
+    try {
+      const res = await fetch("/api/calculadora", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ entrada, contacto }),
+      });
+      if (res.status === 400) {
+        const datos = await res.json().catch(() => ({}));
+        setErrores(datos.errores ?? {});
+        setError(datos.error ?? "Revisa los campos marcados.");
+        setEnvio("idle");
+        return;
+      }
+      if (res.ok) estado = "ok";
+    } catch {
+      // Sin conexión: le enseñamos el resultado igualmente y le avisamos.
+    }
+    setEnvio(estado);
+    setEnviadoCon(JSON.stringify(entrada));
+    setFase("resultado");
+    window.scrollTo({ top: 0 });
   };
   const atras = () => (indice === 0 ? setFase("intro") : setIndice(indice - 1));
   // En las preguntas de opciones, elegir ya es contestar.
@@ -286,7 +328,7 @@ export default function Calculadora() {
                 <Opciones
                   valor={costeOpcion}
                   opciones={[
-                    ...COSTES.map((c) => ({ id: c.id, titulo: `${c.titulo} · ${eur(c.importe)} al mes`, detalle: c.detalle })),
+                    ...PERFILES.map((c) => ({ id: c.id, titulo: `${c.titulo} · ${eur(c.importe)} al mes`, detalle: c.detalle })),
                     { id: "propio", titulo: "Tengo mi propia cifra" },
                   ]}
                   onElegir={(id) => setCosteOpcion(id as typeof costeOpcion)}
@@ -319,9 +361,25 @@ export default function Calculadora() {
         </section>
       )}
 
+      {fase === "contacto" && (
+        <Captura
+          contacto={contacto}
+          setContacto={setContacto}
+          errores={errores}
+          error={error}
+          enviando={envio === "enviando"}
+          onEnviar={enviar}
+          onAtras={() => setFase("preguntas")}
+        />
+      )}
+
       {fase === "resultado" && (
         <ResultadoVista
           resultado={calcular(entrada)}
+          contacto={contacto}
+          envio={envio}
+          desactualizado={enviadoCon !== JSON.stringify(entrada)}
+          onReenviar={enviar}
           onCambiar={() => {
             setIndice(0);
             setFase("preguntas");
@@ -343,7 +401,8 @@ function Intro({ onEmpezar }: { onEmpezar: () => void }) {
       </h1>
       <p className="mt-6 text-lg sm:text-xl text-text-muted max-w-[60ch]">
         En ventas se le llama SDR. Contesta unas preguntas rápidas sobre tu negocio y te digo si te sale, cuánto pierdes si lo
-        contratas sin sistema y en qué mes recuperas lo invertido.
+        contratas sin sistema y en qué mes recuperas lo invertido. Al final te pido tu email para enseñarte el resultado y enviarte
+        el informe completo.
       </p>
       <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
         <button
@@ -484,53 +543,150 @@ function Nota({ children }: { children: React.ReactNode }) {
 
 // ── Resultado ──
 
-type Contacto = { nombre: string; empresa: string; email: string; telefono: string; consentimiento: boolean; fax: string };
+// Antes del resultado: los datos de contacto. Un adelanto borroso deja claro que ya está calculado.
+function Captura({
+  contacto,
+  setContacto,
+  errores,
+  error,
+  enviando,
+  onEnviar,
+  onAtras,
+}: {
+  contacto: Contacto;
+  setContacto: (c: Contacto) => void;
+  errores: Record<string, string>;
+  error: string;
+  enviando: boolean;
+  onEnviar: () => void;
+  onAtras: () => void;
+}) {
+  return (
+    <section className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-16 grid gap-8">
+      <div className="grid gap-3">
+        <p className="text-sm font-semibold uppercase tracking-[0.13em] text-muted">Tu resultado está listo</p>
+        <h1 className="text-3xl sm:text-5xl leading-[1.1] text-primary font-[family-name:var(--font-dm-serif)] text-balance">
+          ¿A nombre de qué empresa preparo tu informe?
+        </h1>
+        <p className="text-lg text-text-muted max-w-[60ch]">
+          Te enseño ahora si te sale, cuánto te juegas el primer año y en qué mes recuperas lo invertido. Y te mando el informe completo
+          por correo para que lo tengas a mano.
+        </p>
+      </div>
 
-function ResultadoVista({ resultado: r, onCambiar }: { resultado: Resultado; onCambiar: () => void }) {
-  const [contacto, setContacto] = useState<Contacto>({ nombre: "", empresa: "", email: "", telefono: "", consentimiento: false, fax: "" });
-  const [envio, setEnvio] = useState<"idle" | "enviando" | "ok" | "error">("idle");
-  const [error, setError] = useState("");
-  const [errores, setErrores] = useState<Record<string, string>>({});
+      <div className="grid sm:grid-cols-2 gap-4 select-none" aria-hidden="true">
+        {["Sin sistema", "Con sistema"].map((t) => (
+          <div key={t} className="bg-surface border border-border rounded-[var(--radius-card)] p-6 grid gap-2">
+            <span className="text-xs font-semibold uppercase tracking-[0.13em] text-muted">{t}</span>
+            <span className="text-4xl sm:text-5xl font-[family-name:var(--font-dm-serif)] text-accent blur-[10px]">00.000 €</span>
+            <span className="text-text-muted blur-[5px]">el primer año · recuperas en el mes 0</span>
+          </div>
+        ))}
+      </div>
+
+      <form
+        noValidate
+        onSubmit={(e) => {
+          e.preventDefault();
+          onEnviar();
+        }}
+        className="bg-surface border border-border rounded-[var(--radius-card)] shadow-[var(--shadow-soft)] p-6 sm:p-8 grid gap-5"
+      >
+        <div className="grid sm:grid-cols-2 gap-4">
+          <Campo id="nombre" etiqueta="Nombre" valor={contacto.nombre} error={errores.nombre} autoComplete="given-name" onCambio={(x) => setContacto({ ...contacto, nombre: x })} />
+          <Campo id="empresa" etiqueta="Empresa" valor={contacto.empresa} error={errores.empresa} autoComplete="organization" onCambio={(x) => setContacto({ ...contacto, empresa: x })} />
+          <Campo id="email" etiqueta="Email" tipo="email" valor={contacto.email} error={errores.email} autoComplete="email" onCambio={(x) => setContacto({ ...contacto, email: x })} />
+          <Campo id="telefono" etiqueta="Teléfono (opcional)" tipo="tel" valor={contacto.telefono} autoComplete="tel" onCambio={(x) => setContacto({ ...contacto, telefono: x })} />
+        </div>
+        {/* Honeypot: invisible para personas, irresistible para bots. */}
+        <input
+          type="text"
+          name="fax"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="absolute -left-[9999px] h-0 w-0 opacity-0"
+          value={contacto.fax}
+          onChange={(e) => setContacto({ ...contacto, fax: e.target.value })}
+        />
+        <label className="flex items-start gap-3 text-sm text-text-muted">
+          <input
+            type="checkbox"
+            checked={contacto.consentimiento}
+            onChange={(e) => setContacto({ ...contacto, consentimiento: e.target.checked })}
+            className="mt-1 h-4 w-4 accent-[var(--color-accent)]"
+          />
+          <span>
+            Acepto la{" "}
+            <Link href="/politica-privacidad" target="_blank" className="text-accent underline underline-offset-2">
+              política de privacidad
+            </Link>{" "}
+            y que Galador me escriba sobre este informe.
+            {errores.consentimiento && <span className="block text-accent mt-1">{errores.consentimiento}</span>}
+          </span>
+        </label>
+        {error && (
+          <p className="text-accent" role="alert">
+            {error}
+          </p>
+        )}
+        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+          <button
+            type="button"
+            onClick={onAtras}
+            className="text-text-muted font-medium px-2 py-3 hover:text-text focus-visible:outline-2 focus-visible:outline-accent rounded-[var(--radius-button)]"
+          >
+            ← Atrás
+          </button>
+          <button
+            type="submit"
+            disabled={enviando}
+            className="bg-accent text-surface font-medium text-lg px-8 py-4 rounded-[var(--radius-button)] hover:bg-accent-hover transition disabled:opacity-60"
+          >
+            {enviando ? "Preparando tu informe…" : "Ver mi resultado"}
+          </button>
+        </div>
+      </form>
+    </section>
+  );
+}
+
+function ResultadoVista({
+  resultado: r,
+  contacto,
+  envio,
+  desactualizado,
+  onReenviar,
+  onCambiar,
+}: {
+  resultado: Resultado;
+  contacto: Contacto;
+  envio: Envio;
+  desactualizado: boolean;
+  onReenviar: () => void;
+  onCambiar: () => void;
+}) {
   const v = r.veredicto;
   const sinSale = r.sin.anio >= 0;
-
-  const enviar = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const locales: Record<string, string> = {};
-    if (!contacto.nombre.trim()) locales.nombre = "Dime cómo te llamas.";
-    if (!contacto.empresa.trim()) locales.empresa = "El informe va a nombre de tu empresa.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(contacto.email.trim())) locales.email = "Revisa el email: ahí te llega el informe.";
-    if (!contacto.consentimiento) locales.consentimiento = "Necesito tu permiso para enviártelo.";
-    setErrores(locales);
-    if (Object.keys(locales).length) return;
-
-    setEnvio("enviando");
-    setError("");
-    try {
-      const res = await fetch("/api/calculadora", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ entrada: r.entrada, contacto }),
-      });
-      const datos = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        setErrores(datos.errores ?? {});
-        setError(datos.error ?? "No hemos podido enviar el informe. Inténtalo de nuevo.");
-        setEnvio("error");
-        return;
-      }
-      setEnvio("ok");
-    } catch {
-      setError("No hemos podido enviar el informe. Revisa tu conexión e inténtalo de nuevo.");
-      setEnvio("error");
-    }
-  };
-
   const chipColor =
     v.estado === "bien" ? "bg-secondary-dark text-surface" : v.estado === "justo" ? "bg-surface-muted text-text" : "bg-accent text-surface";
 
   return (
     <section className="max-w-4xl mx-auto px-4 sm:px-6 py-10 sm:py-16 grid gap-8">
+      <p className="text-[15px] text-text-muted border-l-2 border-secondary pl-4">
+        {envio === "fallo" ? (
+          <>
+            No hemos podido enviarte el informe por correo. Escríbeme a <strong className="text-text font-medium">paula@galador.es</strong> y te
+            lo mando.
+          </>
+        ) : (
+          <>
+            {contacto.nombre.trim().split(" ")[0]}, te he enviado el informe de {contacto.empresa.trim()} a{" "}
+            <strong className="text-text font-medium">{contacto.email.trim()}</strong>. Si no lo ves, mira en promociones o en spam.
+          </>
+        )}
+      </p>
+
       {/* Veredicto */}
       <div className="grid gap-4">
         <span className={`justify-self-start text-xs font-semibold uppercase tracking-[0.13em] px-3 py-1.5 rounded-full ${chipColor}`}>{v.chip}</span>
@@ -541,6 +697,7 @@ function ResultadoVista({ resultado: r, onCambiar }: { resultado: Resultado; onC
         </h1>
         <p className="text-lg text-text-muted max-w-[62ch]">{v.explica}</p>
         {r.aviso && <p className="max-w-[62ch] border-l-2 border-accent bg-surface px-4 py-3 text-text">{r.aviso}</p>}
+        {r.notaBecario && <p className="max-w-[62ch] border-l-2 border-accent bg-surface px-4 py-3 text-text">{r.notaBecario}</p>}
       </div>
 
       {/* Lo que pierdes y lo que ganas */}
@@ -560,7 +717,7 @@ function ResultadoVista({ resultado: r, onCambiar }: { resultado: Resultado; onC
       </div>
       <div className="bg-accent text-surface rounded-[var(--radius-card)] px-6 py-6 sm:px-8 flex flex-wrap items-baseline gap-x-5 gap-y-1">
         <span className="text-4xl sm:text-5xl font-[family-name:var(--font-dm-serif)] tabular-nums">{eur(Math.max(0, r.diferencia))}</span>
-        <span className="text-lg text-surface/90 flex-1 min-w-[18ch]">es lo que te juegas el primer año entre hacerlo con sistema o sin él.</span>
+        <span className="text-lg text-surface/90 flex-1 min-w-[18ch]">{textoDiferencia(r)}</span>
       </div>
 
       {/* Lo que te ahorras */}
@@ -591,87 +748,33 @@ function ResultadoVista({ resultado: r, onCambiar }: { resultado: Resultado; onC
         <Grafico sin={r.sin} con={r.con} />
       </div>
 
-      {/* Informe por correo */}
-      <div className="bg-surface border border-border rounded-[var(--radius-card)] shadow-[var(--shadow-soft)] p-6 sm:p-8">
-        {envio === "ok" ? (
-          <div className="grid gap-4">
-            <h2 className="text-3xl text-primary font-[family-name:var(--font-dm-serif)]">Listo, {contacto.nombre.trim().split(" ")[0]}.</h2>
-            <p className="text-lg text-text-muted max-w-[60ch]">
-              Te he enviado el informe de {contacto.empresa.trim()} a <strong className="text-text font-medium">{contacto.email.trim()}</strong>.
-              Si en unos minutos no lo ves, mira en promociones o en spam.
-            </p>
-            <div className="mt-2 rounded-[var(--radius-card)] bg-background p-6 grid gap-3">
-              <h3 className="text-2xl text-primary font-[family-name:var(--font-dm-serif)]">¿Lo revisamos con tu caso real?</h3>
-              <p className="text-text-muted max-w-[60ch]">
-                En el análisis comercial miro tus números, tus llamadas y tu proceso, y te digo qué cambiaría antes de contratar a nadie.
-              </p>
-              <a
-                href={CAL_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="justify-self-start bg-accent text-surface font-medium px-7 py-3.5 rounded-[var(--radius-button)] hover:bg-accent-hover transition"
-              >
-                Reservar mi análisis comercial
-              </a>
-            </div>
-          </div>
-        ) : (
-          <form onSubmit={enviar} noValidate className="grid gap-5">
-            <div className="grid gap-2">
-              <h2 className="text-3xl text-primary font-[family-name:var(--font-dm-serif)] text-balance">Recibe el informe completo de tu empresa</h2>
-              <p className="text-text-muted max-w-[60ch]">
-                Con tus números, la comparación completa sin sistema y con sistema, la palanca que más te conviene mover y de dónde sale
-                cada cifra.
-              </p>
-            </div>
-            <div className="grid sm:grid-cols-2 gap-4">
-              <Campo id="nombre" etiqueta="Nombre" valor={contacto.nombre} error={errores.nombre} autoComplete="given-name" onCambio={(x) => setContacto({ ...contacto, nombre: x })} />
-              <Campo id="empresa" etiqueta="Empresa" valor={contacto.empresa} error={errores.empresa} autoComplete="organization" onCambio={(x) => setContacto({ ...contacto, empresa: x })} />
-              <Campo id="email" etiqueta="Email" tipo="email" valor={contacto.email} error={errores.email} autoComplete="email" onCambio={(x) => setContacto({ ...contacto, email: x })} />
-              <Campo id="telefono" etiqueta="Teléfono (opcional)" tipo="tel" valor={contacto.telefono} autoComplete="tel" onCambio={(x) => setContacto({ ...contacto, telefono: x })} />
-            </div>
-            {/* Honeypot: invisible para personas, irresistible para bots. */}
-            <input
-              type="text"
-              name="fax"
-              tabIndex={-1}
-              autoComplete="off"
-              aria-hidden="true"
-              className="absolute -left-[9999px] h-0 w-0 opacity-0"
-              value={contacto.fax}
-              onChange={(e) => setContacto({ ...contacto, fax: e.target.value })}
-            />
-            <label className="flex items-start gap-3 text-sm text-text-muted">
-              <input
-                type="checkbox"
-                checked={contacto.consentimiento}
-                onChange={(e) => setContacto({ ...contacto, consentimiento: e.target.checked })}
-                className="mt-1 h-4 w-4 accent-[var(--color-accent)]"
-              />
-              <span>
-                Acepto la{" "}
-                <Link href="/politica-privacidad" target="_blank" className="text-accent underline underline-offset-2">
-                  política de privacidad
-                </Link>{" "}
-                y que Galador me escriba sobre este informe.
-                {errores.consentimiento && <span className="block text-accent mt-1">{errores.consentimiento}</span>}
-              </span>
-            </label>
-            {error && <p className="text-accent" role="alert">{error}</p>}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-              <button
-                type="submit"
-                disabled={envio === "enviando"}
-                className="bg-accent text-surface font-medium text-lg px-8 py-4 rounded-[var(--radius-button)] hover:bg-accent-hover transition disabled:opacity-60"
-              >
-                {envio === "enviando" ? "Enviando…" : "Enviarme el informe"}
-              </button>
-              <button type="button" onClick={onCambiar} className="text-text-muted underline underline-offset-2 hover:text-text">
-                Cambiar mis respuestas
-              </button>
-            </div>
-          </form>
-        )}
+      {/* Siguiente paso */}
+      <div className="bg-surface border border-border rounded-[var(--radius-card)] shadow-[var(--shadow-soft)] p-6 sm:p-8 grid gap-4">
+        <h2 className="text-3xl text-primary font-[family-name:var(--font-dm-serif)] text-balance">
+          ¿Lo revisamos con el caso real de {contacto.empresa.trim() || "tu empresa"}?
+        </h2>
+        <p className="text-lg text-text-muted max-w-[60ch]">
+          Esta cuenta es una estimación. En el análisis comercial miro tus números reales, tus llamadas y tu proceso, y te digo qué
+          cambiaría antes de contratar a nadie: a quién buscar, qué guion darle y qué medir cada semana.
+        </p>
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+          <a
+            href={CAL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-accent text-surface font-medium text-lg px-8 py-4 rounded-[var(--radius-button)] hover:bg-accent-hover transition"
+          >
+            Reservar mi análisis comercial
+          </a>
+          <button type="button" onClick={onCambiar} className="text-text-muted underline underline-offset-2 hover:text-text">
+            Cambiar mis respuestas
+          </button>
+          {desactualizado && envio !== "enviando" && (
+            <button type="button" onClick={onReenviar} className="text-accent font-medium underline underline-offset-2">
+              Enviarme el informe con estas respuestas
+            </button>
+          )}
+        </div>
       </div>
 
       <footer className="text-sm text-text-muted grid gap-2 max-w-[70ch]">
@@ -682,7 +785,8 @@ function ResultadoVista({ resultado: r, onCambiar }: { resultado: Resultado; onC
         </p>
         <p>
           Sin sistema contamos un 30 % menos de reuniones que cuentan, un cierre un 20 % peor, 2 meses más hasta rendir y 5 horas tuyas a
-          la semana encima del comercial, frente a 2 con sistema. Son supuestos de Galador, no un estudio. Es una estimación con tus
+          la semana encima del comercial, frente a 2 con sistema. Con un becario, además, un 30 % menos de reuniones, un mes más hasta
+          rendir y 2 horas tuyas más a la semana. Son supuestos de Galador, no un estudio. Es una estimación con tus
           números: no cuenta impuestos, financiación ni el coste de sustituir al comercial si se va.
         </p>
       </footer>
