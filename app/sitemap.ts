@@ -23,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/consultoria-comercial", priority: 0.8, changeFrequency: "monthly" },
     { path: "/sistema-de-ventas", priority: 0.8, changeFrequency: "monthly" },
     { path: "/entrenamiento-comercial", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/como-montar-un-departamento-comercial", priority: 0.8, changeFrequency: "monthly" },
     { path: "/ventas-por-sector", priority: 0.7, changeFrequency: "monthly" },
     // Una página por sector publicado (app/ventas-por-sector/sectores.ts).
     ...SECTORES.map((s) => ({
