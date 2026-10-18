@@ -25,6 +25,9 @@ export default function Navbar() {
           <Link href="/videos" className="hidden sm:inline-flex items-center min-h-11 hover:text-primary transition">
             Vídeos
           </Link>
+          <Link href="/articulos" className="hidden sm:inline-flex items-center min-h-11 hover:text-primary transition">
+            Artículos
+          </Link>
           <Link
             href="/#formulario"
             className="inline-flex items-center min-h-11 bg-accent text-surface px-5 rounded-[var(--radius-button)] font-semibold hover:bg-accent-hover transition"

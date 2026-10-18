@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { CASOS } from "./casos/casos";
 import { videosPublicados } from "./videos/videos";
+import { ARTICULOS } from "./articulos/articulos";
 import { SECTORES } from "./ventas-por-sector/sectores";
 
 // Dominio canónico CON www: https://galador.es responde 308 hacia
@@ -23,7 +24,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/consultoria-comercial", priority: 0.8, changeFrequency: "monthly" },
     { path: "/sistema-de-ventas", priority: 0.8, changeFrequency: "monthly" },
     { path: "/entrenamiento-comercial", priority: 0.8, changeFrequency: "monthly" },
-    { path: "/como-montar-un-departamento-comercial", priority: 0.8, changeFrequency: "monthly" },
     { path: "/ventas-por-sector", priority: 0.7, changeFrequency: "monthly" },
     // Una página por sector publicado (app/ventas-por-sector/sectores.ts).
     ...SECTORES.map((s) => ({
@@ -33,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     // El índice cambia cada vez que se publica un vídeo nuevo.
     { path: "/videos", priority: 0.7, changeFrequency: "weekly" },
+    { path: "/articulos", priority: 0.7, changeFrequency: "weekly" },
     { path: "/aviso-legal", priority: 0.1, changeFrequency: "yearly" },
     { path: "/politica-privacidad", priority: 0.1, changeFrequency: "yearly" },
   ];
@@ -54,6 +55,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  // Una entrada por artículo sin vídeo (app/articulos/articulos.json).
+  const articulos = ARTICULOS.map((a) => ({
+    url: `${BASE}/articulos/${a.slug}`,
+    lastModified: new Date(`${a.fecha}T12:00:00Z`),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
   const casos = [
     { url: `${BASE}/casos`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.7 },
     ...CASOS.map((c) => ({
@@ -64,5 +73,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ];
 
-  return [...fijas, ...casos, ...videos];
+  return [...fijas, ...casos, ...articulos, ...videos];
 }

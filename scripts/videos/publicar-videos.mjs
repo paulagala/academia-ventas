@@ -243,6 +243,12 @@ async function escribirArticulo(video, textoTranscripcion, publicados) {
       titulo: `Caso de éxito: ${c.titulo}`,
       resumen: c.resumen,
     })),
+    ...JSON.parse(fs.readFileSync(path.join(RAIZ, "app/articulos/articulos.json"), "utf8")).map((a) => ({
+      ruta: `/articulos/${a.slug}`,
+      titulo: a.titulo,
+      resumen: a.descripcion,
+      tema: a.tema,
+    })),
     ...LANDINGS,
   ];
   const temas = [...new Set(publicados.map((v) => v.tema))];

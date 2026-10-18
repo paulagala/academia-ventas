@@ -37,6 +37,7 @@ export default function Footer() {
               <FooterLink href="/ventas-por-sector">Por sector</FooterLink>
               <FooterLink href="/casos">Casos de éxito</FooterLink>
               <FooterLink href="/videos">Vídeos</FooterLink>
+              <FooterLink href="/articulos">Artículos</FooterLink>
             </ul>
           </div>
           <div>
